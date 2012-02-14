@@ -1,0 +1,11 @@
+<?php
+if (defined("IN_APPS") === false) exit("Access Dead");
+
+$config['common'] = array(
+	'application_mode'   => 'development', 				 // development or production
+	'enable_debug'       => true,
+	'enable_log'         => true,
+	'cookies_life_time'  => time() + (1 * 24 * 60 * 60), // 1 day
+	'cookies_secret_key' => '=== YOUR SECRET KEY ===',
+);
+?>
