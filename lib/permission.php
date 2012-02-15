@@ -35,7 +35,7 @@ class Permission {
 		if (self::is_admin() === false) {
 			$_SESSION['username'] = "";
 			$_SESSION['error'] = "請重新登入!";
-			header("Location: ./");
+			header("Location: ".$app->urlFor("index"));
 			exit;
 		}
 	}
