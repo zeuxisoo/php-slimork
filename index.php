@@ -81,13 +81,17 @@ while (sizeof($directories)) {
 	}
 }
 
-// Setup helper variable for template
+// Define helper variable
 $headers = $app->request()->headers();
 $seo_uri = $app->request()->getResourceUri();
 $root_uri = $app->request()->getRootUri();
 $protocol = isset($_SERVER['HTTPS']) === true ? 'https' : 'http';
 $site_url = $protocol.'://'.$headers['host'].$root_uri;
 
+// Set helper variable for control flow
+$app->config('site_url', $site_url);
+
+// Set helper variable for template
 $app->view()->setData('site_url', $site_url);
 
 // Boot application
