@@ -2,11 +2,11 @@
 /**
  * Slim - a micro PHP 5 framework
  *
- * @author      Josh Lockhart <info@slimframework.com>
+ * @author      Josh Lockhart <info@joshlockhart.com>
  * @copyright   2011 Josh Lockhart
  * @link        http://www.slimframework.com
  * @license     http://www.slimframework.com/license
- * @version     1.5.2
+ * @version     1.5.0
  *
  * MIT LICENSE
  *
@@ -31,11 +31,10 @@
  */
 
 /**
- * Log
+ * Log Adapter
  *
- * This is the primary logger for a Slim application. You may provide
- * a Log Writer in conjunction with this Log to write to various output
- * destinations (e.g. a file). This class provides this interface:
+ * This is an adapter for your own custom Logger. This adapter assumes
+ * your custom Logger provides the following public instance methods:
  *
  * debug( mixed $object )
  * info( mixed $object )
@@ -43,59 +42,31 @@
  * error( mixed $object )
  * fatal( mixed $object )
  *
- * This class assumes only that your Log Writer has a public `write()` method
- * that accepts any object as its one and only argument. The Log Writer
- * class may write or send its argument anywhere: a file, STDERR,
- * a remote web API, etc. The possibilities are endless.
+ * This class assumes nothing else about your custom Logger, so you are free
+ * to use Apache's Log4PHP logger or any other log class that, at the
+ * very least, implements the five public instance methods shown above.
  *
  * @package Slim
- * @author  Josh Lockhart
- * @since   1.0.0
+ * @author  Josh Lockhart <info@joshlockhart.com>
+ * @since   Version 1.0
  */
 class Slim_Log {
-    /**
-     * @var array
-     */
-    static protected $levels = array(
-        0 => 'FATAL',
-        1 => 'ERROR',
-        2 => 'WARN',
-        3 => 'INFO',
-        4 => 'DEBUG'
-    );
 
     /**
-     * @var mixed
+     * @var mixed An object that implements expected Logger interface
      */
-    protected $writer;
+    protected $logger;
 
     /**
-     * @var bool
+     * @var bool Enable logging?
      */
     protected $enabled;
 
     /**
-     * @var int
-     */
-    protected $level;
-
-    /**
      * Constructor
-     * @param   mixed   $writer
-     * @return  void
      */
-    public function __construct( $writer ) {
-        $this->writer = $writer;
+    public function __construct() {
         $this->enabled = true;
-        $this->level = 4;
-    }
-
-    /**
-     * Is logging enabled?
-     * @return bool
-     */
-    public function getEnabled() {
-        return $this->enabled;
     }
 
     /**
@@ -112,44 +83,6 @@ class Slim_Log {
     }
 
     /**
-     * Set level
-     * @param   int $level
-     * @return  void
-     * @throws  InvalidArgumentException
-     */
-    public function setLevel( $level ) {
-        if ( !isset(self::$levels[$level]) ) {
-            throw new InvalidArgumentException('Invalid log level');
-        }
-        $this->level = $level;
-    }
-
-    /**
-     * Get level
-     * @return int
-     */
-    public function getLevel() {
-        return $this->level;
-    }
-
-    /**
-     * Set writer
-     * @param   mixed $writer
-     * @return  void
-     */
-    public function setWriter( $writer ) {
-        $this->writer = $writer;
-    }
-
-    /**
-     * Get writer
-     * @return mixed
-     */
-    public function getWriter() {
-        return $this->writer;
-    }
-
-    /**
      * Is logging enabled?
      * @return bool
      */
@@ -163,7 +96,7 @@ class Slim_Log {
      * @return  mixed|false     What the Logger returns, or false if Logger not set or not enabled
      */
     public function debug( $object ) {
-        return $this->log($object, 4);
+        return isset($this->logger) && $this->isEnabled() ? $this->logger->debug($object) : false;
     }
 
     /**
@@ -172,7 +105,7 @@ class Slim_Log {
      * @return  mixed|false     What the Logger returns, or false if Logger not set or not enabled
      */
     public function info( $object ) {
-        return $this->log($object, 3);
+        return isset($this->logger) && $this->isEnabled() ? $this->logger->info($object) : false;
     }
 
     /**
@@ -181,7 +114,7 @@ class Slim_Log {
      * @return  mixed|false     What the Logger returns, or false if Logger not set or not enabled
      */
     public function warn( $object ) {
-        return $this->log($object, 2);
+        return isset($this->logger) && $this->isEnabled() ? $this->logger->warn($object) : false;
     }
 
     /**
@@ -190,7 +123,7 @@ class Slim_Log {
      * @return  mixed|false     What the Logger returns, or false if Logger not set or not enabled
      */
     public function error( $object ) {
-        return $this->log($object, 1);
+        return isset($this->logger) && $this->isEnabled() ? $this->logger->error($object) : false;
     }
 
     /**
@@ -199,20 +132,24 @@ class Slim_Log {
      * @return  mixed|false     What the Logger returns, or false if Logger not set or not enabled
      */
     public function fatal( $object ) {
-        return $this->log($object, 0);
+        return isset($this->logger) && $this->isEnabled() ? $this->logger->fatal($object) : false;
     }
 
     /**
-     * Log message
-     * @param   mixed   The object to log
-     * @param   int     The message level
-     * @return  int|false
+     * Set Logger
+     * @param   mixed   $logger
+     * @return  void
      */
-    protected function log( $object, $level ) {
-        if ( $this->enabled && $this->writer && $level <= $this->level ) {
-            return $this->writer->write($object);
-        } else {
-            return false;
-        }
+    public function setLogger( $logger ) {
+        $this->logger = $logger;
     }
+
+    /**
+     * Get Logger
+     * @return mixed
+     */
+    public function getLogger() {
+        return $this->logger;
+    }
+
 }

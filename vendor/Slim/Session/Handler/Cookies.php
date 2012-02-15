@@ -2,11 +2,9 @@
 /**
  * Slim - a micro PHP 5 framework
  *
- * @author      Josh Lockhart <info@slimframework.com>
- * @copyright   2011 Josh Lockhart
+ * @author      Josh Lockhart
  * @link        http://www.slimframework.com
- * @license     http://www.slimframework.com/license
- * @version     1.5.2
+ * @copyright   2011 Josh Lockhart
  *
  * MIT LICENSE
  *
@@ -31,40 +29,43 @@
  */
 
 /**
- * Log File Writer
+ * Session Cookie Handler
  *
- * This class is used by Slim_Log to write log messages to a valid, writable
- * resource handle (e.g. a file or STDERR).
+ * This class is used as an adapter for PHP's $_SESSION handling.
+ * Session data will be written to and read from signed, encrypted
+ * cookies. If the current PHP installation does not have the `mcrypt`
+ * extension, session data will be written to signed but unencrypted
+ * cookies; however, the session cookies will still be secure and will
+ * become invalid if manually edited after set by PHP.
  *
  * @package Slim
- * @author  Josh Lockhart
- * @since   1.5.2
+ * @author Josh Lockhart
+ * @since Version 1.3
  */
-class Slim_LogFileWriter {
-    /**
-     * @var resource
-     */
-    protected $resource;
+class Slim_Session_Handler_Cookies extends Slim_Session_Handler {
 
-    /**
-     * Constructor
-     * @param   resource    $resource
-     * @return  void
-     * @throws  InvalidArgumentException
-     */
-    public function __construct( $resource ) {
-        if ( !is_resource($resource) ) {
-            throw new InvalidArgumentException('Cannot create LogFileWriter. Invalid resource handle.');
-        }
-        $this->resource = $resource;
+    public function open( $savePath, $sessionName ) {
+        return true;
     }
 
-    /**
-     * Write message
-     * @param   mixed       $message
-     * @return  int|false
-     */
-    public function write( $message ) {
-        return fwrite($this->resource, (string)$message . PHP_EOL);
+    public function close() {
+        return true; //Not used
     }
+
+    public function read( $id ) {
+        return $this->app->getEncryptedCookie($id);
+    }
+
+    public function write( $id, $sessionData ) {
+        $this->app->setEncryptedCookie($id, $sessionData, 0);
+    }
+
+    public function destroy( $id ) {
+        $this->app->deleteCookie($id);
+    }
+
+    public function gc( $maxLifetime ) {
+        return true; //Not used
+    }
+
 }
