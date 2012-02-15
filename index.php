@@ -64,6 +64,7 @@ $app = new Slim(array(
 	'log.path'           => LOG_ROOT,
 	'cookies.lifetime'   => $config['common']['cookies_life_time'],
 	'cookies.secret_key' => $config['common']['cookies_secret_key'],
+	'session.flash_key'  => $config['common']['session.flash_key'],
 ));
 
 // Auto import all routers, models, views file
