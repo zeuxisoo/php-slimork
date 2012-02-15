@@ -7,6 +7,5 @@ $config['common'] = array(
 	'enable_log'         => true,
 	'cookies_life_time'  => time() + (1 * 24 * 60 * 60), // 1 day
 	'cookies_secret_key' => '=== YOUR SECRET KEY ===',
-	'session.flash_key'  => '=== YOUR SECRET KEY ===',
 );
 ?>
