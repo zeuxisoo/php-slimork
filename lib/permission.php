@@ -32,6 +32,8 @@ class Permission {
 	}
 
 	public static function need_admin() {
+		global $app;
+
 		if (self::is_admin() === false) {
 			$_SESSION['username'] = "";
 			$_SESSION['error'] = "請重新登入!";
