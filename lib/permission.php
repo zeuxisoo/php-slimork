@@ -23,6 +23,8 @@ class Permission {
 		if (isset($admin_auth) === true && empty($admin_auth) === false) {
 			list($admin_username, $admin_password, $admin_auth_key) = explode("\t", self::make_auth($admin_auth, "DECODE"));
 
+			$_SESSION['username'] = $admin_username;
+
 			return sha1($admin_username.$admin_password.$config['common']['cookies_secret_key']) === $admin_auth_key;
 		}
 
@@ -31,6 +33,7 @@ class Permission {
 
 	public static function need_admin() {
 		if (self::is_admin() === false) {
+			$_SESSION['username'] = "";
 			$_SESSION['error'] = "請重新登入!";
 			header("Location: ./");
 			exit;
