@@ -113,7 +113,7 @@ class Paginate {
 
 		foreach($range AS $one) {
 			if ( $one == $this->page_no ) {
-				$buffer .= "<li class=\"active\">{$one}</li>";
+				$buffer .= "<li class=\"active\"><a href='".$this->get_url($this->page_string, $one)."'>{$one}</a></li>";
 			} else {
 				$buffer .= "<li><a href='".$this->get_url($this->page_string, $one)."'>{$one}</a></li>";
 			}
