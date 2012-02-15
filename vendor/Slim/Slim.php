@@ -6,7 +6,7 @@
  * @copyright   2011 Josh Lockhart
  * @link        http://www.slimframework.com
  * @license     http://www.slimframework.com/license
- * @version     1.6.0
+ * @version     1.5.2
  *
  * MIT LICENSE
  *
@@ -30,6 +30,30 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+//This determines which errors are reported by PHP. By default, all
+//errors (including E_STRICT) are reported.
+error_reporting(E_ALL | E_STRICT);
+
+if ( !defined('MCRYPT_RIJNDAEL_256') ) {
+    define('MCRYPT_RIJNDAEL_256', 0);
+}
+if ( !defined('MCRYPT_MODE_CBC') ) {
+    define('MCRYPT_MODE_CBC', 0);
+}
+
+//This tells PHP to auto-load classes using Slim's autoloader; this will
+//only auto-load a class file located in the same directory as Slim.php
+//whose file name (excluding the final dot and extension) is the same
+//as its class name (case-sensitive). For example, "View.php" will be
+//loaded when Slim uses the "View" class for the first time.
+spl_autoload_register(array('Slim', 'autoload'));
+
+//PHP 5.3 will complain if you don't set a timezone. If you do not
+//specify your own timezone before requiring Slim, this tells PHP to use UTC.
+if ( @date_default_timezone_set(date_default_timezone_get()) === false ) {
+    date_default_timezone_set('UTC');
+}
+
 /**
  * Slim
  * @package Slim
@@ -37,11 +61,6 @@
  * @since   1.0.0
  */
 class Slim {
-    /**
-     * @const string
-     */
-    const VERSION = '1.6.0';
-
     /**
      * @var array[Slim]
      */
@@ -132,14 +151,11 @@ class Slim {
      */
     public function __construct( $userSettings = array() ) {
         //Setup Slim application
-        $this->settings = array_merge(self::getDefaultSettings(), $userSettings);
-        if ( $this->config('install_autoloader') ) {
-            spl_autoload_register(array('Slim', 'autoload'));
-        }
         $this->environment = Slim_Environment::getInstance();
         $this->request = new Slim_Http_Request($this->environment);
         $this->response = new Slim_Http_Response();
         $this->router = new Slim_Router($this->request, $this->response);
+        $this->settings = array_merge(self::getDefaultSettings(), $userSettings);
         $this->middleware = array($this);
 
         //Determine application mode
@@ -162,6 +178,9 @@ class Slim {
         $log->setEnabled($this->config('log.enabled'));
         $log->setLevel($this->config('log.level'));
         $this->environment['slim.log'] = $log;
+
+        //Set global error handler
+        set_error_handler(array('Slim', 'handleErrors'));
     }
 
     /**
@@ -199,8 +218,7 @@ class Slim {
      */
     public static function getDefaultSettings() {
         return array(
-            //Application
-            'install_autoloader' => true,
+            //Mode
             'mode' => 'development',
             //Debugging
             'debug' => true,
@@ -1040,62 +1058,6 @@ class Slim {
         }
     }
 
-    /***** STREAMING *****/
-
-    /**
-     * Stream file
-     *
-     * This method will immediately begin streaming the specified file
-     * to the HTTP client and exit the Slim application. By default,
-     * the file delivered to the HTTP client will use the basename
-     * of the specified file; you may override the file name
-     * using the second argument.
-     *
-     * @param   string  $path       The relative or absolute path to the file
-     * @param   array   $userOptions
-     * @return  void
-     */
-    public function streamFile( $path, $userOptions = array() ) {
-        $defaults = array('name' => basename($path));
-        $options = array_merge($defaults, $userOptions);
-        $this->response = new Slim_Http_Stream(new Slim_Stream_File($path, $options), $options);
-        $this->stop();
-    }
-
-    /**
-     * Stream data
-     *
-     * This method will immediately begin streaming the specified data
-     * to the HTTP client and exit the Slim application. You are encouraged
-     * to specify the name of the file delivered to the HTTP client using
-     * the second argument.
-     *
-     * @param   string  $data
-     * @param   array   $userOptions
-     * @return  void
-     */
-    public function streamData( $data, $userOptions = array() ) {
-        $this->response = new Slim_Http_Stream(new Slim_Stream_Data($data, $userOptions), $userOptions);
-        $this->stop();
-    }
-
-    /**
-     * Stream process output
-     *
-     * This method will immediately begin streaming the process output
-     * to the HTTP client and exit the Slim application. You are encouraged
-     * to specify the name of the file delivered to the HTTP client using
-     * the second argument. This method WILL NOT escape shell arguments for you.
-     *
-     * @param   string  $process       The process command. Escape shell arguments!
-     * @param   array   $userOptions
-     * @return  void
-     */
-    public function streamProcess( $process, $userOptions = array() ) {
-        $this->response = new Slim_Http_Stream(new Slim_Stream_Process($process, $userOptions), $userOptions);
-        $this->stop();
-    }
-
     /***** APPLICATION MIDDLEWARE *****/
 
     /**
@@ -1137,8 +1099,6 @@ class Slim {
      * @return void
      */
     public function run() {
-        set_error_handler(array('Slim', 'handleErrors'));
-
         //Apply final outer middleware layers
         $this->add('Slim_Middleware_Flash');
         $this->add('Slim_Middleware_MethodOverride');
@@ -1166,13 +1126,7 @@ class Slim {
         }
 
         //Send body
-        if ( is_string($body) ) {
-            echo $body;
-        } else {
-            $body->process();
-        }
-
-        restore_error_handler();
+        echo $body;
     }
 
     /**
