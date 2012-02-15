@@ -81,6 +81,15 @@ while (sizeof($directories)) {
 	}
 }
 
+// Setup helper variable for template
+$headers = $app->request()->headers();
+$seo_uri = $app->request()->getResourceUri();
+$root_uri = $app->request()->getRootUri();
+$protocol = isset($_SERVER['HTTPS']) === true ? 'https' : 'http';
+$site_url = $protocol.'://'.$headers['host'].$root_uri;
+
+$app->view()->setData('site_url', $site_url);
+
 // Boot application
 $app->run();
 ?>
