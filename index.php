@@ -10,6 +10,7 @@ define('CONFIG_ROOT', dirname(__FILE__).'/config');
 define('LIB_ROOT', dirname(__FILE__).'/lib');
 define('LOG_ROOT', dirname(__FILE__).'/log');
 define('VENDOR_ROOT', dirname(__FILE__).'/vendor');
+define('HELPERS_ROOT', APP_ROOT.'/helpers');
 define('ROUTERS_ROOT', APP_ROOT.'/routes');
 define('MODELS_ROOT', APP_ROOT.'/models');
 define('VIEWS_ROOT', APP_ROOT.'/views');
@@ -67,7 +68,7 @@ $app = new Slim(array(
 ));
 
 // Auto import all routers, models, views file
-$directories = array(MODELS_ROOT, VIEWS_ROOT, ROUTERS_ROOT);
+$directories = array(HELPERS_ROOT, MODELS_ROOT, VIEWS_ROOT, ROUTERS_ROOT);
 
 while (sizeof($directories)) {
 	$directory = array_pop($directories);
