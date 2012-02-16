@@ -68,7 +68,7 @@ $app = new Slim(array(
 ));
 
 // Auto import all routers, models, views file
-$directories = array(HELPERS_ROOT, MODELS_ROOT, VIEWS_ROOT, ROUTERS_ROOT);
+$directories = array(ROUTERS_ROOT, MODELS_ROOT, VIEWS_ROOT, HELPERS_ROOT);
 
 while (sizeof($directories)) {
 	$directory = array_pop($directories);
