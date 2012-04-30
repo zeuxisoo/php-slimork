@@ -8,6 +8,7 @@ define('WWW_ROOT', dirname(__FILE__));
 define('APP_ROOT', dirname(__FILE__).'/app');
 define('CACHE_ROOT', dirname(__FILE__).'/cache');
 define('CONFIG_ROOT', dirname(__FILE__).'/config');
+define('HOOK_ROOT', dirname(__FILE__).'/hook');
 define('LIB_ROOT', dirname(__FILE__).'/lib');
 define('LOG_ROOT', dirname(__FILE__).'/log');
 define('VENDOR_ROOT', dirname(__FILE__).'/vendor');
@@ -68,8 +69,8 @@ $app = new Slim(array(
 	'cookies.secret_key' => $config['common']['cookies_secret_key'],
 ));
 
-// Auto import all routers, models, views file
-$directories = array(ROUTERS_ROOT, MODELS_ROOT, VIEWS_ROOT, HELPERS_ROOT);
+// Auto import all hook, routers, models, views file
+$directories = array(HOOK_ROOT, ROUTERS_ROOT, MODELS_ROOT, VIEWS_ROOT, HELPERS_ROOT);
 
 while (sizeof($directories)) {
 	$directory = array_pop($directories);
