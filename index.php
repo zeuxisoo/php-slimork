@@ -26,7 +26,6 @@ require_once CONFIG_ROOT.'/database.php';
 
 // Import vendor files
 require_once VENDOR_ROOT.'/Slim/Slim.php';
-require_once VENDOR_ROOT.'/Slim-Extras/Views/HaangaView.php';
 require_once VENDOR_ROOT.'/idiorm.php';
 require_once VENDOR_ROOT.'/pairs.php';
 
@@ -45,6 +44,8 @@ function auto_load($class_name) {
 	}
 }
 
+\Slim\Slim::registerAutoloader();
+
 // Configure database
 ORM::configure($config['database']['dsn']);
 
@@ -58,9 +59,9 @@ if (substr(strtolower($config['database']['dsn']), 0, 5) === 'mysql') {
 }
 
 // Initial slim framework
-$app = new Slim(array(
+$app = new \Slim\Slim(array(
 	'mode'               => $config['common']['application_mode'],
-	'view'               => new HaangaView(VENDOR_ROOT.'/Haanga', VIEWS_ROOT, CACHE_ROOT.'/views'),
+	'view'               => new \Slim\Extras\Views\Haanga(VENDOR_ROOT.'/Haanga', VIEWS_ROOT, CACHE_ROOT.'/views'),
 	'templates.path'     => VIEWS_ROOT,
 	'debug'              => $config['common']['enable_debug'],
 	'log.enable'         => $config['common']['enable_log'],
@@ -89,7 +90,7 @@ $headers = $app->request()->headers();
 $seo_uri = $app->request()->getResourceUri();
 $root_uri = $app->request()->getRootUri();
 $protocol = isset($_SERVER['HTTPS']) === true ? 'https' : 'http';
-$site_url = $protocol.'://'.$headers['host'].$root_uri;
+$site_url = $protocol.'://'.$headers['HOST'].$root_uri;
 
 // Set helper variable for control flow
 $app->config('site_url', $site_url);

@@ -2,12 +2,9 @@
 /**
  * Slim - a micro PHP 5 framework
  *
- * @author      Josh Lockhart <info@slimframework.com>
- * @copyright   2011 Josh Lockhart
+ * @author      Josh Lockhart
  * @link        http://www.slimframework.com
- * @license     http://www.slimframework.com/license
- * @version     2.0.0
- * @package     Slim
+ * @copyright   2011 Josh Lockhart
  *
  * MIT LICENSE
  *
@@ -30,21 +27,50 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-namespace Slim\Exception;
+namespace Slim\Extras\Views;
 
 /**
- * Pass Exception
+ * BlitzView
  *
- * This Exception will cause the Router::dispatch method
- * to skip the current matching route and continue to the next
- * matching route. If no subsequent routes are found, a
- * HTTP 404 Not Found response will be sent to the client.
+ * The BlitzView provides native support for the Blitz templating system
+ * for PHP. Blitz is written as C and compiled to a PHP extension. Which means
+ * it is FAST. You can learn more about Blitz at:
  *
- * @package Slim
- * @author  Josh Lockhart
- * @since   1.0.0
+ * <http://alexeyrybak.com/blitz/blitz_en.html>
+ *
+ * The xBlitz extended blitz class provides better block handling
+ * (load assoc arrays correctly, one level)
+ *
+ * @author Tobias O. <https://github.com/tobsn>
  */
-class Pass extends \Exception
+class xBlitz extends \Blitz
 {
+    function xblock($k,$a)
+    {
+        foreach ($a as $v) {
+            $this->block('/' . $k, $v, true);
+        }
+    }
+}
 
+class Blitz extends \Slim\View
+{
+    private $blitzEnvironment = null;
+
+    public function render($template)
+    {
+        $env = $this->getEnvironment($template);
+
+        return $env->parse($this->getData());
+    }
+
+    private function getEnvironment($template)
+    {
+        if (!$this->blitzEnvironment) {
+            ini_set('blitz.path', $this->getTemplatesDirectory() . '/');
+            $this->blitzEnvironment = new xBlitz($template);
+        }
+
+        return $this->blitzEnvironment;
+    }
 }
