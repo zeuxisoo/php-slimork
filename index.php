@@ -1,5 +1,6 @@
 <?php
 error_reporting(E_ALL);
+session_start();
 date_default_timezone_set("Asia/Hong_Kong");
 define('IN_APPS', true);
 
