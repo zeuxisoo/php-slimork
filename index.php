@@ -97,6 +97,7 @@ $site_url = $protocol.'://'.$headers['HOST'].$root_uri;
 $app->config('site_url', $site_url);
 
 // Set helper variable for template
+$app->view()->setData('config',   $config);
 $app->view()->setData('site_url', $site_url);
 
 // Boot application
