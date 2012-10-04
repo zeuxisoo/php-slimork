@@ -160,7 +160,7 @@ class Paginate {
 					$buffer .= '</li>';
 				}else{
 					$buffer .= '<li class="next disabled">';
-					$buffer .= '	<a href="javascript:void(0)">&larr; Older</a>';
+					$buffer .= '	<a href="javascript:void(0)">Older &rarr;</a>';
 					$buffer .= '</li>';
 				}
 
