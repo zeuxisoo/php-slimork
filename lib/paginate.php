@@ -3,6 +3,9 @@ if (defined("IN_APPS") === false) exit("Access Dead");
 
 class Paginate {
 
+	const TYPE_DEFAULT   = 0;
+	const TYPE_BACK_NEXT = 1;
+
 	public $row_count	= 0;
 	public $page_no		= 1;
 	public $page_size	= 18;
@@ -75,57 +78,101 @@ class Paginate {
 		);
 	}
 
-	public function build_page_bar() {
-		$r = $this->calculate_page_data();
-		$buffer = null;
-		$index = '&laquo;';
-		$pre = '&lsaquo;';
-		$next = '&rsaquo;';
-		$end = '&raquo;';
+	/*
+	 * $options:
+	 *	- type: TYPE_DEFAULT | TYPE_NEXT_BACK
+	 *	- include_div_tag: boolean
+	 */
+	public function build_page_bar($options = array()) {
+		$buffer = "";
 
-		if ($this->page_count <= 7) {
-			$range = range(1, $this->page_count);
-		} else {
-			$min = $this->page_no - 3;
-			$max = $this->page_no + 3;
+		$options = array_merge(array(
+			'type' => static::TYPE_DEFAULT,
+			'include_div_tag' => true,
+		), $options);
 
-			if ($min < 1) {
-				$max += (3-$min);
-				$min = 1;
-			}
+		switch($options['type']) {
+			case static::TYPE_DEFAULT:
+				$r = $this->calculate_page_data();
+				$index = '&laquo;';
+				$pre = '&lsaquo;';
+				$next = '&rsaquo;';
+				$end = '&raquo;';
 
-			if ( $max > $this->page_count ) {
-				$min -= $max - $this->page_count;
-				$max = $this->page_count;
-			}
+				if ($this->page_count <= 7) {
+					$range = range(1, $this->page_count);
+				} else {
+					$min = $this->page_no - 3;
+					$max = $this->page_no + 3;
 
-			$min = $min > 1 ? $min : 1;
-			$range = range($min, $max);
+					if ($min < 1) {
+						$max += (3-$min);
+						$min = 1;
+					}
+
+					if ( $max > $this->page_count ) {
+						$min -= $max - $this->page_count;
+						$max = $this->page_count;
+					}
+
+					$min = $min > 1 ? $min : 1;
+					$range = range($min, $max);
+				}
+
+				$buffer .= '<ul>';
+
+				if ($this->page_no > 1) {
+					$buffer .= "<li><a href='".$this->get_url($this->page_string, 1)."'>{$index}</a></li>";
+					$buffer .=" <li><a href='".$this->get_url($this->page_string, $this->page_no-1)."'>{$pre}</a></li>";
+				}
+
+				foreach($range AS $one) {
+					if ( $one == $this->page_no ) {
+						$buffer .= "<li class=\"active\"><a href='".$this->get_url($this->page_string, $one)."'>{$one}</a></li>";
+					} else {
+						$buffer .= "<li><a href='".$this->get_url($this->page_string, $one)."'>{$one}</a></li>";
+					}
+				}
+
+				if ($this->page_no < $this->page_count) {
+					$buffer .= "<li><a href='".$this->get_url($this->page_string, $this->page_no+1)."'>{$next}</a></li>";
+					$buffer .= "<li><a href='".$this->get_url($this->page_string, $this->page_count)."'>{$end}</a></li>";
+				}
+
+				$buffer .= '</ul>';
+				break;
+			case static::TYPE_BACK_NEXT:
+				$buffer .= '<ul class="pager">';
+
+				if ($this->page_no > 1) {
+					$buffer .= '<li class="previous">';
+					$buffer .= '	<a href="'.$this->get_url($this->page_string, $this->page_no-1).'">&larr; Newer</a>';
+					$buffer .= '</li>';
+				}else{
+					$buffer .= '<li class="previous disabled">';
+					$buffer .= '	<a href="javascript:void(0)">&larr; Newer</a>';
+					$buffer .= '</li>';
+				}
+
+				if ($this->page_no < $this->page_count) {
+					$buffer .= '<li class="next">';
+					$buffer .= '	<a href="'.$this->get_url($this->page_string, $this->page_no+1).'">Older &rarr;</a>';
+					$buffer .= '</li>';
+				}else{
+					$buffer .= '<li class="next disabled">';
+					$buffer .= '	<a href="javascript:void(0)">&larr; Older</a>';
+					$buffer .= '</li>';
+				}
+
+				$buffer .= '</ul>';
+				break;
 		}
 
-		$buffer .= '<div class="pagination">';
-		$buffer .= '<ul>';
-
-		if ($this->page_no > 1) {
-			$buffer .= "<li><a href='".$this->get_url($this->page_string, 1)."'>{$index}</a></li>";
-			$buffer .=" <li><a href='".$this->get_url($this->page_string, $this->page_no-1)."'>{$pre}</a></li>";
+		if ($options['include_div_tag'] === true) {
+			$buffer = '<div class="pagination">'.$buffer.'</div>';
 		}
 
-		foreach($range AS $one) {
-			if ( $one == $this->page_no ) {
-				$buffer .= "<li class=\"active\"><a href='".$this->get_url($this->page_string, $one)."'>{$one}</a></li>";
-			} else {
-				$buffer .= "<li><a href='".$this->get_url($this->page_string, $one)."'>{$one}</a></li>";
-			}
-		}
-
-		if ($this->page_no < $this->page_count) {
-			$buffer .= "<li><a href='".$this->get_url($this->page_string, $this->page_no+1)."'>{$next}</a></li>";
-			$buffer .= "<li><a href='".$this->get_url($this->page_string, $this->page_count)."'>{$end}</a></li>";
-		}
-
-		return $buffer . '</ul></div>';
-
+		return $buffer;
 	}
 }
 ?>
