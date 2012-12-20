@@ -17,6 +17,7 @@ define('HELPERS_ROOT', APP_ROOT.'/helpers');
 define('ROUTERS_ROOT', APP_ROOT.'/routes');
 define('MODELS_ROOT', APP_ROOT.'/models');
 define('VIEWS_ROOT', APP_ROOT.'/views');
+define('ROUTERS_MIDDLEWARES_ROOT', ROUTERS_ROOT.'/middlewares');
 
 // Initial global variable
 $config = array();
@@ -72,7 +73,7 @@ $app = new \Slim\Slim(array(
 ));
 
 // Auto import all hook, routers, models, views file
-$directories = array(HOOK_ROOT, HELPERS_ROOT, ROUTERS_ROOT, MODELS_ROOT, VIEWS_ROOT);
+$directories = array(HOOK_ROOT, HELPERS_ROOT, ROUTERS_MIDDLEWARES_ROOT, ROUTERS_ROOT, MODELS_ROOT, VIEWS_ROOT);
 
 while (sizeof($directories)) {
 	$directory = array_pop($directories);
