@@ -72,7 +72,7 @@ $app = new \Slim\Slim(array(
 ));
 
 // Auto import all hook, routers, models, views file
-$directories = array(HOOK_ROOT, ROUTERS_ROOT, MODELS_ROOT, VIEWS_ROOT, HELPERS_ROOT);
+$directories = array(HOOK_ROOT, HELPERS_ROOT, ROUTERS_ROOT, MODELS_ROOT, VIEWS_ROOT);
 
 while (sizeof($directories)) {
 	$directory = array_pop($directories);
