@@ -60,10 +60,24 @@ if (substr(strtolower($config['database']['dsn']), 0, 5) === 'mysql') {
 	ORM::configure('driver_options', array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
 }
 
+// Switch view engine
+switch(strtolower($config['common']['view_engine'])) {
+	case 'haanga':
+		$view_engine = new \Slim\Extras\Views\Haanga(VENDOR_ROOT.'/Haanga', VIEWS_ROOT, CACHE_ROOT.'/views');
+		break;
+	default:
+		$view_engine = new \Slim\Extras\Views\Twig();
+
+		\Slim\Extras\Views\Twig::$twigExtensions = array(
+			'Twig_Extensions_Slim'
+		);
+		break;
+}
+
 // Initial slim framework
 $app = new \Slim\Slim(array(
 	'mode'               => $config['common']['application_mode'],
-	'view'               => new \Slim\Extras\Views\Haanga(VENDOR_ROOT.'/Haanga', VIEWS_ROOT, CACHE_ROOT.'/views'),
+	'view'               => $view_engine,
 	'templates.path'     => VIEWS_ROOT,
 	'debug'              => $config['common']['enable_debug'],
 	'log.enable'         => $config['common']['enable_log'],

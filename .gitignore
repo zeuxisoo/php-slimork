@@ -3,3 +3,5 @@
 cache
 log
 config/*.php
+app/routes/*
+app/views/*
