@@ -6,18 +6,23 @@ define('IN_APPS', true);
 
 // Define constant
 define('WWW_ROOT', dirname(__FILE__));
-define('APP_ROOT', dirname(__FILE__).'/app');
-define('CACHE_ROOT', dirname(__FILE__).'/cache');
-define('CONFIG_ROOT', dirname(__FILE__).'/config');
-define('HOOK_ROOT', dirname(__FILE__).'/hook');
-define('LIB_ROOT', dirname(__FILE__).'/lib');
-define('LOG_ROOT', dirname(__FILE__).'/log');
-define('VENDOR_ROOT', dirname(__FILE__).'/vendor');
+define('APP_ROOT', WWW_ROOT.'/app');
+define('CACHE_ROOT', WWW_ROOT.'/cache');
+define('CONFIG_ROOT', WWW_ROOT.'/config');
+define('HOOK_ROOT', WWW_ROOT.'/hook');
+define('LIB_ROOT', WWW_ROOT.'/lib');
+define('LOG_ROOT', WWW_ROOT.'/log');
+define('PUBLIC_ROOT', WWW_ROOT.'/public');
+define('VENDOR_ROOT', WWW_ROOT.'/vendor');
 define('HELPERS_ROOT', APP_ROOT.'/helpers');
 define('ROUTERS_ROOT', APP_ROOT.'/routes');
 define('MODELS_ROOT', APP_ROOT.'/models');
 define('VIEWS_ROOT', APP_ROOT.'/views');
 define('ROUTERS_MIDDLEWARES_ROOT', ROUTERS_ROOT.'/middlewares');
+
+// Import the class
+use Slim\Slim;
+use Slim\Extras\Views;
 
 // Initial global variable
 $config = array();
@@ -46,7 +51,7 @@ function auto_load($class_name) {
 	}
 }
 
-\Slim\Slim::registerAutoloader();
+Slim::registerAutoloader();
 
 // Configure database
 ORM::configure($config['database']['dsn']);
@@ -63,12 +68,12 @@ if (substr(strtolower($config['database']['dsn']), 0, 5) === 'mysql') {
 // Switch view engine
 switch(strtolower($config['common']['view_engine'])) {
 	case 'haanga':
-		$view_engine = new \Slim\Extras\Views\Haanga(VENDOR_ROOT.'/Haanga', VIEWS_ROOT, CACHE_ROOT.'/views');
+		$view_engine = new Views\Haanga(VENDOR_ROOT.'/Haanga', VIEWS_ROOT, CACHE_ROOT.'/views');
 		break;
 	default:
-		$view_engine = new \Slim\Extras\Views\Twig();
+		$view_engine = new Views\Twig();
 
-		\Slim\Extras\Views\Twig::$twigExtensions = array(
+		Views\Twig::$twigExtensions = array(
 			'Twig_Extensions_Slim'
 		);
 		break;
