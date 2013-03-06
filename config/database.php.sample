@@ -5,5 +5,6 @@ $config['database'] = array(
 	'dsn'      => 'mysql:host=localhost;dbname=test_simplecrm',
 	'username' => '',
 	'password' => '',
+	'prefix'   => '',
 );
 ?>

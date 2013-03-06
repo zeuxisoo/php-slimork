@@ -65,6 +65,10 @@ if (substr(strtolower($config['database']['dsn']), 0, 5) === 'mysql') {
 	ORM::configure('driver_options', array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
 }
 
+if (empty($config['database']['prefix']) === false) {
+	Model::$auto_prefix_models = '\\'.$config['database']['prefix'].'\\';
+}
+
 // Switch view engine
 switch(strtolower($config['common']['view_engine'])) {
 	case 'haanga':
