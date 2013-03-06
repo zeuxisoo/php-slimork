@@ -23,6 +23,7 @@ define('ROUTERS_MIDDLEWARES_ROOT', ROUTERS_ROOT.'/middlewares');
 // Import the class
 use Slim\Slim;
 use Slim\Extras\Views;
+use Slim\Extras\Middleware\CsrfGuard;
 
 // Initial global variable
 $config = array();
@@ -75,11 +76,20 @@ switch(strtolower($config['common']['view_engine'])) {
 		$view_engine = new Views\Haanga(VENDOR_ROOT.'/Haanga', VIEWS_ROOT, CACHE_ROOT.'/views');
 		break;
 	default:
-		$view_engine = new Views\Twig();
-
+		Views\Twig::$twigTemplateDirs = array(VIEWS_ROOT);
+		Views\Twig::$twigOptions = array(
+			'charset' => 'utf-8',
+			'cache' => realpath(CACHE_ROOT.'/views'),
+			'auto_reload' => true,
+			'strict_variables' => false,
+			'autoescape' => true
+		);
 		Views\Twig::$twigExtensions = array(
 			'Twig_Extensions_Slim'
 		);
+
+		$view_engine = new Views\Twig();
+		$view_engine->getEnvironment()->addGlobal("session", $_SESSION);
 		break;
 }
 
@@ -94,6 +104,7 @@ $app = new \Slim\Slim(array(
 	'cookies.lifetime'   => $config['common']['cookies_life_time'],
 	'cookies.secret_key' => $config['common']['cookies_secret_key'],
 ));
+$app->add(new CsrfGuard());
 
 // Auto import all hook, routers, models, views file
 $directories = array(HOOK_ROOT, HELPERS_ROOT, ROUTERS_ROOT, ROUTERS_MIDDLEWARES_ROOT, MODELS_ROOT, VIEWS_ROOT);
