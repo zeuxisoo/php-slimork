@@ -34,7 +34,7 @@ require_once CONFIG_ROOT.'/database.php';
 // Import vendor files
 require_once VENDOR_ROOT.'/Slim/Slim.php';
 require_once VENDOR_ROOT.'/idiorm.php';
-require_once VENDOR_ROOT.'/pairs.php';
+require_once VENDOR_ROOT.'/paris.php';
 
 // Define auto load workflow
 spl_autoload_register("auto_load");
