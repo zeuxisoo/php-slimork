@@ -13,7 +13,7 @@
         "phpunit/phpunit-selenium": "1.2.12"
     },
     "autoload": {
-        "classmap": ["app/", "hook/", "lib/"]
+        "classmap": ["app/", "hook/", "lib/", "test/"]
     },
     "license": "BSD 2-Clause",
     "authors": [
