@@ -1,5 +1,8 @@
 ### Install
 
+	curl -sS https://getcomposer.org/installer | php
+	php composer.phar install
+
 	chmod 777 cache/views
 	chmod 777 log
 	mv config/common.php.sample config/common.php
