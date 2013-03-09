@@ -20,6 +20,9 @@ define('MODELS_ROOT', APP_ROOT.'/models');
 define('VIEWS_ROOT', APP_ROOT.'/views');
 define('ROUTERS_MIDDLEWARES_ROOT', ROUTERS_ROOT.'/middlewares');
 
+// Using the composer autloader
+require VENDOR_ROOT.'/autoload.php';
+
 // Import the class
 use Slim\Slim;
 use Slim\Extras\Views;
@@ -31,28 +34,6 @@ $config = array();
 // Import config file
 require_once CONFIG_ROOT.'/common.php';
 require_once CONFIG_ROOT.'/database.php';
-
-// Import vendor files
-require_once VENDOR_ROOT.'/Slim/Slim.php';
-require_once VENDOR_ROOT.'/idiorm.php';
-require_once VENDOR_ROOT.'/paris.php';
-
-// Define auto load workflow
-spl_autoload_register("auto_load");
-
-function auto_load($class_name) {
-	global $config;
-
-	foreach(array('lib') as $folder) {
-		$file_path = WWW_ROOT.'/'.$folder.'/'.strtolower($class_name).'.php';
-
-		if (file_exists($file_path) === true && is_file($file_path) === true) {
-			require_once $file_path;
-		}
-	}
-}
-
-Slim::registerAutoloader();
 
 // Configure database
 ORM::configure($config['database']['dsn']);
