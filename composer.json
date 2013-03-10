@@ -10,7 +10,7 @@
         "crodas/Haanga": "dev-master"
     },
     "require-dev": {
-        "phpunit/phpunit-selenium": "1.2.12"
+        "Codeception/Codeception": "1.5.5"
     },
     "autoload": {
         "classmap": ["app/", "hook/", "lib/", "test/"]
