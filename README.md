@@ -80,9 +80,9 @@
 		    }
 		}
 
-		php vendor/bin/codecept run
-		php vendor/bin/codecept run -steps
-		php vendor/bin/codecept run acceptance signup
+	php vendor/bin/codecept run
+	php vendor/bin/codecept run -steps
+	php vendor/bin/codecept run acceptance signup
 
 ### License
 
