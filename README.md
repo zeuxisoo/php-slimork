@@ -8,6 +8,35 @@
 	mv config/common.php.sample config/common.php
 	mv config/database.php.sample config/database.php
 
+### Locale
+
+- support locale format `YAML` or `PHP Array`
+
+	vim locale/en_US.php
+
+		<?php
+		return array(
+			'Hello %name%' => 'PHP Bonjour %name%',
+		);
+
+	vim locale/en_US.yaml
+
+		'Hello %name%': YAML Bonjour %name%
+
+- In program
+
+	echo $translator->trans('Hello %name%', array("%name%" => "World"));
+
+- In Twig Tempalte
+
+	{{ "Hello %name%" | trans({ '%name%': "World" }) }}
+
+	OR
+
+	{% trans with {'%name%': 'World'} %}
+		Hello %name%
+	{% endtrans %}
+
 ### Testing
 
 	php composer.phar update
