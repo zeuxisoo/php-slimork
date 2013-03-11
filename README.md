@@ -1,7 +1,11 @@
 ### Install
 
+Install composer
+
 	curl -sS https://getcomposer.org/installer | php
 	php composer.phar install
+
+Set permission
 
 	chmod 777 cache/views
 	chmod 777 log
@@ -10,7 +14,7 @@
 
 ### Locale
 
-- support locale format `YAML` or `PHP Array`
+support locale format `YAML` or `PHP Array`
 
 	vim locale/en_US.php
 
@@ -23,11 +27,11 @@
 
 		'Hello %name%': YAML Bonjour %name%
 
-- In program
+In program
 
 	echo $translator->trans('Hello %name%', array("%name%" => "World"));
 
-- In Twig Tempalte
+In Twig Tempalte
 
 	{{ "Hello %name%" | trans({ '%name%': "World" }) }}
 
@@ -39,10 +43,13 @@
 
 ### Testing
 
+Update the vendor and initial testing
+
 	php composer.phar update
 	php vendor/bin/codecept bootstrap
 
-	# Acceptance
+Make sample acceptance
+
 	php vendor/bin/codecept generate:cept acceptance signup/SubmitExistsAccount
 	vim tests/acceptance.suite.xml
 
@@ -64,7 +71,8 @@
 		));
 		$I->see('Error! The email address already exists', '.alert-error');
 
-	# Unit
+Make sample unit
+
 	vim tests/unit.suite.yml
 
 		class_name: CodeGuy
@@ -108,6 +116,8 @@
 		        $this->codeGuy->see('Error! The email address already exists', '.alert-error');
 		    }
 		}
+
+Run testcase
 
 	php vendor/bin/codecept run
 	php vendor/bin/codecept run -steps
