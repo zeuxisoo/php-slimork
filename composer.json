@@ -13,7 +13,7 @@
         "Codeception/Codeception": "1.5.5"
     },
     "autoload": {
-        "classmap": ["app/", "hook/", "lib/", "test/"]
+        "classmap": ["app/", "hook/", "lib/"]
     },
     "license": "BSD 2-Clause",
     "authors": [
