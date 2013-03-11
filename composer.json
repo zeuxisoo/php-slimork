@@ -7,7 +7,10 @@
         "j4mie/idiorm": "v1.3.0",
         "j4mie/paris": "v1.3.0",
         "twig/twig": "v1.12.2",
-        "crodas/Haanga": "dev-master"
+        "crodas/Haanga": "dev-master",
+        "symfony/translation": "2.3.x-dev",
+        "symfony/config": "2.3.x-dev",
+        "symfony/twig-bridge": "2.3.x-dev"
     },
     "require-dev": {
         "Codeception/Codeception": "1.5.5"

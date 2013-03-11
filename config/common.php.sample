@@ -8,5 +8,8 @@ $config['common'] = array(
 	'cookies_life_time'  => time() + (1 * 24 * 60 * 60), // 1 day
 	'cookies_secret_key' => '=== YOUR SECRET KEY ===',
 	'view_engine'        => 'twig',                      // twig, haanga
+	'enable_locale'      => false,
+	'default_locale'     => 'en_US',
+	'fallback_locale'    => array('en_US'),
 );
 ?>

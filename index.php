@@ -11,6 +11,7 @@ define('CACHE_ROOT', WWW_ROOT.'/cache');
 define('CONFIG_ROOT', WWW_ROOT.'/config');
 define('HOOK_ROOT', WWW_ROOT.'/hook');
 define('LIB_ROOT', WWW_ROOT.'/lib');
+define('LOCALE_ROOT', WWW_ROOT.'/locale');
 define('LOG_ROOT', WWW_ROOT.'/log');
 define('PUBLIC_ROOT', WWW_ROOT.'/public');
 define('VENDOR_ROOT', WWW_ROOT.'/vendor');
@@ -27,6 +28,11 @@ require VENDOR_ROOT.'/autoload.php';
 use Slim\Slim;
 use Slim\Extras\Views;
 use Slim\Extras\Middleware\CsrfGuard;
+use Symfony\Component\Translation\Translator;
+use Symfony\Component\Translation\MessageSelector;
+use Symfony\Component\Translation\Loader\ArrayLoader;
+use Symfony\Component\Translation\Loader\YamlFileLoader;
+use Symfony\Bridge\Twig\Extension\TranslationExtension;
 
 // Initial global variable
 $config = array();
@@ -51,6 +57,27 @@ if (empty($config['database']['prefix']) === false) {
 	Model::$auto_prefix_models = '\\'.$config['database']['prefix'].'\\';
 }
 
+// Load the locale file
+if ($config['common']['enable_locale'] === true) {
+	$translator = new Translator($config['common']['default_locale'], new MessageSelector());
+	$translator->setFallbackLocale($config['common']['fallback_locale']);
+	$translator->addLoader('array', new ArrayLoader());
+	$translator->addLoader('yaml', new YamlFileLoader());
+
+	foreach(glob(LOCALE_ROOT."/*") as $locale_resource) {
+		if (preg_match('/.(php|yaml)$/', $locale_resource) == true) {
+			$path_info = pathinfo($locale_resource);
+
+			$extension = $path_info['extension'];
+			$resource  = $locale_resource;
+			if (strtolower($path_info['extension']) == 'php') {
+				$extension = "array";
+				$resource  = require($resource);
+			}
+		}
+	}
+}
+
 // Switch view engine
 switch(strtolower($config['common']['view_engine'])) {
 	case 'haanga':
@@ -66,8 +93,12 @@ switch(strtolower($config['common']['view_engine'])) {
 			'autoescape' => true
 		);
 		Views\Twig::$twigExtensions = array(
-			'Twig_Extensions_Slim'
+			'Twig_Extensions_Slim',
 		);
+
+		if ($config['common']['enable_locale'] === true) {
+			array_push(Views\Twig::$twigExtensions, new TranslationExtension($translator));
+		}
 
 		$view_engine = new Views\Twig();
 		$view_engine->getEnvironment()->addGlobal("session", $_SESSION);
