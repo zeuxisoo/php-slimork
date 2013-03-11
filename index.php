@@ -64,15 +64,26 @@ if ($config['common']['enable_locale'] === true) {
 	$translator->addLoader('array', new ArrayLoader());
 	$translator->addLoader('yaml', new YamlFileLoader());
 
-	foreach(glob(LOCALE_ROOT."/*") as $locale_resource) {
-		if (preg_match('/.(php|yaml)$/', $locale_resource) == true) {
-			$path_info = pathinfo($locale_resource);
+	$directories = array(LOCALE_ROOT);
 
-			$extension = $path_info['extension'];
-			$resource  = $locale_resource;
-			if (strtolower($path_info['extension']) == 'php') {
-				$extension = "array";
-				$resource  = require($resource);
+	while(sizeof($directories)) {
+		$directory = array_pop($directories);
+
+		foreach(glob($directory."/*") as $file_path) {
+			if (is_dir($file_path) === true) {
+				array_push($directories, $file_path);
+			}else if (is_file($file_path) === true && preg_match('/.(php|yaml)$/', $file_path) == true) {
+				$path_info = pathinfo($file_path);
+
+				$extension = $path_info['extension'];
+				$resource  = $file_path;
+
+				if (strtolower($path_info['extension']) == 'php') {
+					$extension = "array";
+					$resource  = require($resource);
+				}
+
+				$translator->addResource($extension, $resource, $path_info['filename']);
 			}
 		}
 	}
