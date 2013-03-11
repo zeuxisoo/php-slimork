@@ -75,7 +75,7 @@ switch(strtolower($config['common']['view_engine'])) {
 }
 
 // Initial slim framework
-$app = new \Slim\Slim(array(
+$app = new Slim(array(
 	'mode'               => $config['common']['application_mode'],
 	'view'               => $view_engine,
 	'templates.path'     => VIEWS_ROOT,
