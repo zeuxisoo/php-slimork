@@ -6,14 +6,14 @@
         "slim/extras": "2.0.3",
         "j4mie/idiorm": "v1.3.0",
         "j4mie/paris": "v1.3.0",
-        "twig/twig": "v1.12.2",
+        "twig/twig": "v1.13.0",
         "crodas/Haanga": "dev-master",
-        "symfony/translation": "2.3.x-dev",
-        "symfony/config": "2.3.x-dev",
-        "symfony/twig-bridge": "2.3.x-dev"
+        "symfony/config": "v2.1.10",
+        "symfony/translation": "v2.1.10",
+        "symfony/twig-bridge": "v2.1.10"
     },
     "require-dev": {
-        "Codeception/Codeception": "1.5.5"
+        "Codeception/Codeception": "1.6.1.1"
     },
     "autoload": {
         "classmap": ["app/", "hook/", "lib/"]
