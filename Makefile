@@ -2,7 +2,7 @@ help:
 	@echo "make install"
 
 install:
-	curl -sS https://getcomposer.org/installer | php
+	curl -sS https://getcomposer.org/installer | php -d detect_unicode=Off
 	php composer.phar install
 
 	chmod 777 cache/views
