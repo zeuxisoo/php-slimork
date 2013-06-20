@@ -161,4 +161,3 @@ $app->view()->setData('site_url', $site_url);
 
 // Boot application
 $app->run();
-?>

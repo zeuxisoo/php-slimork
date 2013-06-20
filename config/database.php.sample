@@ -7,4 +7,3 @@ $config['database'] = array(
 	'password' => '',
 	'prefix'   => '',
 );
-?>

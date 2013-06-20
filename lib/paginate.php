@@ -175,4 +175,3 @@ class Paginate {
 		return $buffer;
 	}
 }
-?>

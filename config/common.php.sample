@@ -12,4 +12,3 @@ $config['common'] = array(
 	'default_locale'     => 'en_US',
 	'fallback_locale'    => array('en_US'),
 );
-?>
