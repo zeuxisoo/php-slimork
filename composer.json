@@ -1,5 +1,5 @@
 {
-    "name": "zeuxis/simplework",
+    "name": "zeuxisoo/slim-simplework",
     "require": {
         "php": ">=5.3.2",
         "slim/slim": "2.3.0",
