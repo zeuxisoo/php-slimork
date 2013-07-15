@@ -7,7 +7,7 @@ Install composer
 
 Create project
 
-	php composer.phar create-project zeuxisoo/slim-simplework abc -s dev
+	php composer.phar create-project zeuxisoo/slim-simplework [my-app-name] -s dev
 
 Set permission
 
