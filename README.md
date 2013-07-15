@@ -5,12 +5,20 @@ Install composer
 	curl -sS https://getcomposer.org/installer | php
 	php composer.phar install
 
+Create project
+
+	php composer.phar create-project zeuxisoo/slim-simplework abc -s dev
+
 Set permission
 
 	chmod 777 cache/views
 	chmod 777 log
 	mv config/common.php.sample config/common.php
 	mv config/database.php.sample config/database.php
+
+OR download from ZIP and type the following command:
+
+	make install
 
 ### Locale
 
