@@ -1,5 +1,7 @@
 {
     "name": "zeuxisoo/slim-simplework",
+    "description": "PHP Slim Framework skeleton application",
+    "homepage": "https://github.com/zeuxisoo/php-slim-simplework",
     "require": {
         "php": ">=5.3.2",
         "slim/slim": "2.3.0",
