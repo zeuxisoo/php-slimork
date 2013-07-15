@@ -26,7 +26,7 @@ require VENDOR_ROOT.'/autoload.php';
 
 // Import the class
 use Slim\Slim;
-use Slim\Extras\Views;
+use Slim\Views;
 use Slim\Extras\Middleware\CsrfGuard;
 use Symfony\Component\Translation\Translator;
 use Symfony\Component\Translation\MessageSelector;
@@ -89,37 +89,10 @@ if ($config['common']['enable_locale'] === true) {
 	}
 }
 
-// Switch view engine
-switch(strtolower($config['common']['view_engine'])) {
-	case 'haanga':
-		$view_engine = new Views\Haanga(VENDOR_ROOT.'/Haanga', VIEWS_ROOT, CACHE_ROOT.'/views');
-		break;
-	default:
-		Views\Twig::$twigTemplateDirs = array(VIEWS_ROOT);
-		Views\Twig::$twigOptions = array(
-			'charset' => 'utf-8',
-			'cache' => realpath(CACHE_ROOT.'/views'),
-			'auto_reload' => true,
-			'strict_variables' => false,
-			'autoescape' => true
-		);
-		Views\Twig::$twigExtensions = array(
-			'Twig_Extensions_Slim',
-		);
-
-		if ($config['common']['enable_locale'] === true) {
-			array_push(Views\Twig::$twigExtensions, new TranslationExtension($translator));
-		}
-
-		$view_engine = new Views\Twig();
-		$view_engine->getEnvironment()->addGlobal("session", $_SESSION);
-		break;
-}
-
 // Initial slim framework
 $app = new Slim(array(
 	'mode'               => $config['common']['application_mode'],
-	'view'               => $view_engine,
+	'view'               => new Views\Twig(),
 	'templates.path'     => VIEWS_ROOT,
 	'debug'              => $config['common']['enable_debug'],
 	'log.enable'         => $config['common']['enable_log'],
@@ -128,6 +101,26 @@ $app = new Slim(array(
 	'cookies.secret_key' => $config['common']['cookies_secret_key'],
 ));
 $app->add(new CsrfGuard());
+
+// Twig view settings
+$view = $app->view();
+$view->twigTemplateDirs = array(VIEWS_ROOT);
+$view->parserOptions = array(
+	'charset'          => 'utf-8',
+	'cache'            => realpath(CACHE_ROOT.'/views'),
+	'auto_reload'      => true,
+	'strict_variables' => false,
+	'autoescape'       => true
+);
+$view->parserExtensions = array(
+	new Views\TwigExtension(),
+);
+
+if ($config['common']['enable_locale'] === true) {
+	array_push($view->parserExtensions, new TranslationExtension($translator));
+}
+
+$view->getEnvironment()->addGlobal("session", $_SESSION);
 
 // Auto import all hook, routers, models, views file
 $directories = array(HOOK_ROOT, HELPERS_ROOT, ROUTERS_ROOT, ROUTERS_MIDDLEWARES_ROOT, MODELS_ROOT, VIEWS_ROOT);
