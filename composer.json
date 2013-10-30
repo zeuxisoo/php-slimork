@@ -4,18 +4,17 @@
     "homepage": "https://github.com/zeuxisoo/php-slim-simplework",
     "require": {
         "php": ">=5.3.2",
-        "slim/slim": "2.3.0",
+        "slim/slim": "2.3.*",
         "slim/views": "0.1.*",
         "slim/extras": "2.0.3",
-        "j4mie/idiorm": "v1.3.0",
-        "j4mie/paris": "v1.3.0",
-        "twig/twig": "v1.13.0",
-        "symfony/config": "v2.1.10",
-        "symfony/translation": "v2.1.10",
-        "symfony/twig-bridge": "v2.1.10"
+        "j4mie/paris": "v1.4.1",
+        "twig/twig": "v1.14.2",
+        "symfony/config": "v2.3.6",
+        "symfony/translation": "v2.3.6",
+        "symfony/twig-bridge": "v2.3.6"
     },
     "require-dev": {
-        "Codeception/Codeception": "1.6.1.1"
+        "Codeception/Codeception": "1.7.1"
     },
     "autoload": {
         "classmap": ["app/", "hook/", "lib/"]
