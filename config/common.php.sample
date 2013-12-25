@@ -8,7 +8,7 @@ $config['common'] = array(
 	'cookies_life_time'  => time() + (1 * 24 * 60 * 60), // 1 day
 	'cookies_secret_key' => '=== YOUR SECRET KEY ===',
 	'view_engine'        => 'twig',                      // twig
-	'enable_locale'      => false,
+	'enable_locale'      => true,
 	'default_locale'     => 'en_US',
 	'fallback_locale'    => array('en_US'),
 );
