@@ -1,0 +1,9 @@
+{{ "Hello %name%" | trans({ '%name%': "World" }) }}
+
+<p>
+{% trans with {'%name%': 'World'} %}
+    It is work, %name%
+{% endtrans %}
+</p>
+
+<a href="{{ urlFor('index') }}">Back</a>
