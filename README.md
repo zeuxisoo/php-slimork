@@ -37,7 +37,7 @@ support locale format `YAML` or `PHP Array`
 
 In program
 
-	echo $translator->trans('Hello %name%', array("%name%" => "World"));
+	echo $app->locale->trans('Hello %name%', array("%name%" => "World"));
 
 In Twig Tempalte
 
