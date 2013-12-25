@@ -57,38 +57,6 @@ if (empty($config['database']['prefix']) === false) {
 	Model::$auto_prefix_models = '\\'.$config['database']['prefix'].'\\';
 }
 
-// Load the locale file
-if ($config['common']['enable_locale'] === true) {
-	$translator = new Translator($config['common']['default_locale'], new MessageSelector());
-	$translator->setFallbackLocale($config['common']['fallback_locale']);
-	$translator->addLoader('array', new ArrayLoader());
-	$translator->addLoader('yaml', new YamlFileLoader());
-
-	$directories = array(LOCALE_ROOT);
-
-	while(sizeof($directories)) {
-		$directory = array_pop($directories);
-
-		foreach(glob($directory."/*") as $file_path) {
-			if (is_dir($file_path) === true) {
-				array_push($directories, $file_path);
-			}else if (is_file($file_path) === true && preg_match('/.(php|yaml)$/', $file_path) == true) {
-				$path_info = pathinfo($file_path);
-
-				$extension = $path_info['extension'];
-				$resource  = $file_path;
-
-				if (strtolower($path_info['extension']) == 'php') {
-					$extension = "array";
-					$resource  = require($resource);
-				}
-
-				$translator->addResource($extension, $resource, $path_info['filename']);
-			}
-		}
-	}
-}
-
 // Initial slim framework
 $app = new Slim(array(
 	'mode'               => $config['common']['application_mode'],
@@ -116,10 +84,46 @@ $view->parserExtensions = array(
 	new Views\TwigExtension(),
 );
 
+// Load the locale file
 if ($config['common']['enable_locale'] === true) {
-	array_push($view->parserExtensions, new TranslationExtension($translator));
+	$app->container->singleton('locale', function() use ($config) {
+		$translator = new Translator($config['common']['default_locale'], new MessageSelector());
+		$translator->setFallbackLocale($config['common']['fallback_locale']);
+		$translator->addLoader('array', new ArrayLoader());
+		$translator->addLoader('yaml', new YamlFileLoader());
+
+		$directories = array(LOCALE_ROOT);
+
+		while(sizeof($directories)) {
+			$directory = array_pop($directories);
+
+			foreach(glob($directory."/*") as $file_path) {
+				if (is_dir($file_path) === true) {
+					array_push($directories, $file_path);
+				}else if (is_file($file_path) === true && preg_match('/.(php|yaml)$/', $file_path) == true) {
+					$path_info = pathinfo($file_path);
+
+					$extension = $path_info['extension'];
+					$resource  = $file_path;
+
+					if (strtolower($path_info['extension']) == 'php') {
+						$extension = "array";
+						$resource  = require($resource);
+					}
+
+					$translator->addResource($extension, $resource, $path_info['filename']);
+				}
+			}
+		}
+
+    	return $translator;
+	});
+
+	// Register locale extension to TWIG
+	array_push($view->parserExtensions, new TranslationExtension($app->locale));
 }
 
+// Register global session to TWIG
 $view->getEnvironment()->addGlobal("session", $_SESSION);
 
 // Auto import all hook, routers, models, views file
