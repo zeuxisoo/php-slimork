@@ -1,6 +1,9 @@
 .*~
 .DS_Store
-cache
-log
-config/*.php
+
+/cache/
+/log/
 /vendor/
+
+config/*.php
+composer.phar
