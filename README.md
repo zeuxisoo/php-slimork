@@ -13,8 +13,8 @@ Set permission
 
 	chmod 777 cache/views
 	chmod 777 log
-	mv config/common.php.sample config/common.php
-	mv config/database.php.sample config/database.php
+	cp -Rf config/common.php.sample config/common.php
+	cp -Rf config/database.php.sample config/database.php
 
 OR download from ZIP and type the following command:
 
