@@ -3,15 +3,15 @@
     "description": "PHP Slim Framework skeleton application",
     "homepage": "https://github.com/zeuxisoo/php-slim-simplework",
     "require": {
-        "php": ">=5.3.2",
-        "slim/slim": "2.4.*",
+        "php": ">=5.3.9",
+        "slim/slim": "2.6.*",
         "slim/views": "0.1.*",
-        "slim/extras": "2.0.3",
-        "j4mie/paris": "v1.4.2",
-        "twig/twig": "v1.15.0",
-        "symfony/config": "v2.4.0",
-        "symfony/translation": "v2.4.0",
-        "symfony/twig-bridge": "v2.4.0"
+        "slim/extras": "2.0.*",
+        "j4mie/paris": "1.5.*",
+        "twig/twig": "1.18.*",
+        "symfony/config": "2.7.2",
+        "symfony/translation": "2.7.2",
+        "symfony/twig-bridge": "2.7.2"
     },
     "require-dev": {
         "Codeception/Codeception": "1.7.1"
