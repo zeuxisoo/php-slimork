@@ -126,20 +126,8 @@ if ($config['common']['enable_locale'] === true) {
 // Register global session to TWIG
 $view->getEnvironment()->addGlobal("session", $_SESSION);
 
-// Auto import all hook, routers, models, views file
-$directories = array(HOOK_ROOT, HELPERS_ROOT, ROUTERS_ROOT, ROUTERS_MIDDLEWARES_ROOT, MODELS_ROOT, VIEWS_ROOT);
-
-while (sizeof($directories)) {
-	$directory = array_pop($directories);
-
-	foreach(glob($directory."/*") as $file_path) {
-		if (is_dir($file_path) === true) {
-			array_push($directories, $file_path);
-		}elseif (is_file($file_path) === true && preg_match("/\.(php|inc)$/", $file_path) == true) {
-			require_once $file_path;
-		}
-	}
-}
+// Load the routes
+require_once APP_ROOT.'/routes.php';
 
 // Define helper variable
 $headers = $app->request()->headers();

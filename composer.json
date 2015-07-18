@@ -17,7 +17,16 @@
         "Codeception/Codeception": "1.7.1"
     },
     "autoload": {
-        "classmap": ["app/", "hook/", "lib/"]
+        "psr-4": {
+            "App\\": "app/"
+        },
+        "classmap": [
+            "hook/",
+            "lib/"
+        ]
+    },
+    "config": {
+        "preferred-install": "dist"
     },
     "license": "BSD 2-Clause",
     "authors": [
