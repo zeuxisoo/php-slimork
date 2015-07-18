@@ -36,7 +36,7 @@ class Permission {
 
 		if (self::is_admin() === false) {
 			$_SESSION['username'] = "";
-			$_SESSION['error'] = "請重新登入!";
+			$_SESSION['error'] = "Please sign in first";
 			header("Location: ".$app->config('site_url'));
 			exit;
 		}

@@ -7,19 +7,17 @@ define('IN_APPS', true);
 // Define constant
 define('WWW_ROOT', dirname(__FILE__));
 define('APP_ROOT', WWW_ROOT.'/app');
-define('CACHE_ROOT', WWW_ROOT.'/cache');
+define('STORAGE_ROOT', WWW_ROOT.'/storage');
 define('CONFIG_ROOT', WWW_ROOT.'/config');
 define('HOOK_ROOT', WWW_ROOT.'/hook');
 define('LIB_ROOT', WWW_ROOT.'/lib');
-define('LOCALE_ROOT', WWW_ROOT.'/locale');
-define('LOG_ROOT', WWW_ROOT.'/log');
 define('PUBLIC_ROOT', WWW_ROOT.'/public');
 define('VENDOR_ROOT', WWW_ROOT.'/vendor');
-define('HELPERS_ROOT', APP_ROOT.'/helpers');
-define('ROUTERS_ROOT', APP_ROOT.'/routes');
-define('MODELS_ROOT', APP_ROOT.'/models');
-define('VIEWS_ROOT', APP_ROOT.'/views');
-define('ROUTERS_MIDDLEWARES_ROOT', ROUTERS_ROOT.'/middlewares');
+
+define('RESOURCE_ROOT', WWW_ROOT.'/resource');
+define('VIEW_ROOT', RESOURCE_ROOT.'/view');
+define('LOCALE_ROOT', RESOURCE_ROOT.'/locale');
+define('LOG_ROOT', RESOURCE_ROOT.'/log');
 
 // Using the composer autloader
 require VENDOR_ROOT.'/autoload.php';
@@ -61,7 +59,7 @@ if (empty($config['database']['prefix']) === false) {
 $app = new Slim(array(
 	'mode'               => $config['common']['application_mode'],
 	'view'               => new Views\Twig(),
-	'templates.path'     => VIEWS_ROOT,
+	'templates.path'     => VIEW_ROOT,
 	'debug'              => $config['common']['enable_debug'],
 	'log.enable'         => $config['common']['enable_log'],
 	'log.path'           => LOG_ROOT,
@@ -72,10 +70,10 @@ $app->add(new CsrfGuard());
 
 // Twig view settings
 $view = $app->view();
-$view->twigTemplateDirs = array(VIEWS_ROOT);
+$view->twigTemplateDirs = array(VIEW_ROOT);
 $view->parserOptions = array(
 	'charset'          => 'utf-8',
-	'cache'            => realpath(CACHE_ROOT.'/views'),
+	'cache'            => realpath(STORAGE_ROOT.'/view'),
 	'auto_reload'      => true,
 	'strict_variables' => false,
 	'autoescape'       => true
