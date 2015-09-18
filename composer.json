@@ -11,7 +11,8 @@
         "twig/twig": "1.18.*",
         "symfony/config": "2.6.11",
         "symfony/translation": "2.6.11",
-        "symfony/twig-bridge": "2.6.11"
+        "symfony/twig-bridge": "2.6.11",
+        "symfony/yaml": "2.6.11"
     },
     "require-dev": {
         "Codeception/Codeception": "1.7.1"
