@@ -9,7 +9,6 @@ define('WWW_ROOT', dirname(__FILE__));
 define('APP_ROOT', WWW_ROOT.'/app');
 define('STORAGE_ROOT', WWW_ROOT.'/storage');
 define('CONFIG_ROOT', WWW_ROOT.'/config');
-define('HOOK_ROOT', WWW_ROOT.'/hook');
 define('LIB_ROOT', WWW_ROOT.'/lib');
 define('PUBLIC_ROOT', WWW_ROOT.'/public');
 define('VENDOR_ROOT', WWW_ROOT.'/vendor');
@@ -126,6 +125,7 @@ $view->getEnvironment()->addGlobal("session", $_SESSION);
 
 // Load the routes
 require_once APP_ROOT.'/routes.php';
+require_once APP_ROOT.'/hooks.php';
 
 // Define helper variable
 $headers = $app->request()->headers();
