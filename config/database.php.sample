@@ -2,8 +2,8 @@
 if (defined("IN_APPS") === false) exit("Access Dead");
 
 $config['database'] = array(
-	'dsn'      => 'mysql:host=localhost;dbname=test_simplecrm',
-	'username' => '',
-	'password' => '',
-	'prefix'   => '',
+    'dsn'      => 'mysql:host=localhost;dbname=test_simplecrm',
+    'username' => '',
+    'password' => '',
+    'prefix'   => '',
 );

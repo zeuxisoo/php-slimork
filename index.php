@@ -43,28 +43,28 @@ require_once CONFIG_ROOT.'/database.php';
 ORM::configure($config['database']['dsn']);
 
 if (empty($config['database']['username']) === false) {
-	ORM::configure('username', $config['database']['username']);
-	ORM::configure('password', $config['database']['password']);
+    ORM::configure('username', $config['database']['username']);
+    ORM::configure('password', $config['database']['password']);
 }
 
 if (substr(strtolower($config['database']['dsn']), 0, 5) === 'mysql') {
-	ORM::configure('driver_options', array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
+    ORM::configure('driver_options', array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
 }
 
 if (empty($config['database']['prefix']) === false) {
-	Model::$auto_prefix_models = '\\'.$config['database']['prefix'].'\\';
+    Model::$auto_prefix_models = '\\'.$config['database']['prefix'].'\\';
 }
 
 // Initial slim framework
 $app = new Slim(array(
-	'mode'               => $config['common']['application_mode'],
-	'view'               => new Views\Twig(),
-	'templates.path'     => VIEW_ROOT,
-	'debug'              => $config['common']['enable_debug'],
-	'log.enable'         => $config['common']['enable_log'],
-	'log.path'           => LOG_ROOT,
-	'cookies.lifetime'   => $config['common']['cookies_life_time'],
-	'cookies.secret_key' => $config['common']['cookies_secret_key'],
+    'mode'               => $config['common']['application_mode'],
+    'view'               => new Views\Twig(),
+    'templates.path'     => VIEW_ROOT,
+    'debug'              => $config['common']['enable_debug'],
+    'log.enable'         => $config['common']['enable_log'],
+    'log.path'           => LOG_ROOT,
+    'cookies.lifetime'   => $config['common']['cookies_life_time'],
+    'cookies.secret_key' => $config['common']['cookies_secret_key'],
 ));
 $app->add(new CsrfGuard());
 
@@ -72,53 +72,53 @@ $app->add(new CsrfGuard());
 $view = $app->view();
 $view->twigTemplateDirs = array(VIEW_ROOT);
 $view->parserOptions = array(
-	'charset'          => 'utf-8',
-	'cache'            => realpath(STORAGE_ROOT.'/view'),
-	'auto_reload'      => true,
-	'strict_variables' => false,
-	'autoescape'       => true
+    'charset'          => 'utf-8',
+    'cache'            => realpath(STORAGE_ROOT.'/view'),
+    'auto_reload'      => true,
+    'strict_variables' => false,
+    'autoescape'       => true
 );
 $view->parserExtensions = array(
-	new Views\TwigExtension(),
+    new Views\TwigExtension(),
 );
 
 // Load the locale file
 if ($config['common']['enable_locale'] === true) {
-	$app->container->singleton('locale', function() use ($config) {
-		$translator = new Translator($config['common']['default_locale'], new MessageSelector());
-		$translator->setFallbackLocale($config['common']['fallback_locale']);
-		$translator->addLoader('array', new ArrayLoader());
-		$translator->addLoader('yaml', new YamlFileLoader());
+    $app->container->singleton('locale', function() use ($config) {
+        $translator = new Translator($config['common']['default_locale'], new MessageSelector());
+        $translator->setFallbackLocale($config['common']['fallback_locale']);
+        $translator->addLoader('array', new ArrayLoader());
+        $translator->addLoader('yaml', new YamlFileLoader());
 
-		$directories = array(LOCALE_ROOT);
+        $directories = array(LOCALE_ROOT);
 
-		while(sizeof($directories)) {
-			$directory = array_pop($directories);
+        while(sizeof($directories)) {
+            $directory = array_pop($directories);
 
-			foreach(glob($directory."/*") as $file_path) {
-				if (is_dir($file_path) === true) {
-					array_push($directories, $file_path);
-				}else if (is_file($file_path) === true && preg_match('/.(php|yaml)$/', $file_path) == true) {
-					$path_info = pathinfo($file_path);
+            foreach(glob($directory."/*") as $file_path) {
+                if (is_dir($file_path) === true) {
+                    array_push($directories, $file_path);
+                }else if (is_file($file_path) === true && preg_match('/.(php|yaml)$/', $file_path) == true) {
+                    $path_info = pathinfo($file_path);
 
-					$extension = $path_info['extension'];
-					$resource  = $file_path;
+                    $extension = $path_info['extension'];
+                    $resource  = $file_path;
 
-					if (strtolower($path_info['extension']) == 'php') {
-						$extension = "array";
-						$resource  = require($resource);
-					}
+                    if (strtolower($path_info['extension']) == 'php') {
+                        $extension = "array";
+                        $resource  = require($resource);
+                    }
 
-					$translator->addResource($extension, $resource, $path_info['filename']);
-				}
-			}
-		}
+                    $translator->addResource($extension, $resource, $path_info['filename']);
+                }
+            }
+        }
 
-    	return $translator;
-	});
+        return $translator;
+    });
 
-	// Register locale extension to TWIG
-	array_push($view->parserExtensions, new TranslationExtension($app->locale));
+    // Register locale extension to TWIG
+    array_push($view->parserExtensions, new TranslationExtension($app->locale));
 }
 
 // Register global session to TWIG
