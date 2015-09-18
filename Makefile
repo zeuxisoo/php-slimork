@@ -3,7 +3,7 @@ help:
 
 install:
 	curl -sS https://getcomposer.org/installer | php -d detect_unicode=Off
-	php composer.phar install
+	php composer.phar update --no-dev
 
 	chmod 777 cache/views
 	chmod 777 log
