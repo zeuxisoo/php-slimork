@@ -119,7 +119,7 @@ class Pagination {
                     $range = range($min, $max);
                 }
 
-                $buffer .= '<ul class="include_div_tag">';
+                $buffer .= '<ul class="pagination">';
 
                 if ($this->page_no > 1) {
                     $buffer .= "<li><a href='".$this->getUrl($this->page_string, 1)."'>{$index}</a></li>";
