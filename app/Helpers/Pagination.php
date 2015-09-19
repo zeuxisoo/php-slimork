@@ -88,7 +88,7 @@ class Pagination {
 
         $options = array_merge(array(
             'type' => static::TYPE_DEFAULT,
-            'include_div_tag' => true,
+            'include_div_tag' => false,
         ), $options);
 
         switch($options['type']) {
@@ -119,7 +119,7 @@ class Pagination {
                     $range = range($min, $max);
                 }
 
-                $buffer .= '<ul>';
+                $buffer .= '<ul class="include_div_tag">';
 
                 if ($this->page_no > 1) {
                     $buffer .= "<li><a href='".$this->getUrl($this->page_string, 1)."'>{$index}</a></li>";
