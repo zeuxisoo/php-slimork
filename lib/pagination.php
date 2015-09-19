@@ -1,7 +1,7 @@
 <?php
 if (defined("IN_APPS") === false) exit("Access Dead");
 
-class Paginate {
+class Pagination {
 
     const TYPE_DEFAULT   = 0;
     const TYPE_BACK_NEXT = 1;
