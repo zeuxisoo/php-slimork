@@ -1,5 +1,5 @@
 <?php
-if (defined("IN_APPS") === false) exit("Access Dead");
+namespace App\Helpers;
 
 class Pagination {
 
@@ -17,7 +17,7 @@ class Pagination {
     private $value_array = array();
 
     public function __construct($count = 0, $size = 20, $string = 'page') {
-        $this->default_query();
+        $this->defaultQuery();
         $this->page_string = $string;
         $this->page_size = abs($size);
         $this->row_count = abs($count);
@@ -30,13 +30,13 @@ class Pagination {
         $this->offset = ($this->page_no - 1) * $this->page_size;
     }
 
-    private function get_url($param, $value) {
+    private function getUrl($param, $value) {
         $value_array = $this->value_array;
         $value_array[$param] = $value;
         return $this->script . '?' . http_build_query($value_array);
     }
 
-    private function default_query() {
+    private function defaultQuery() {
         if (isset($_SERVER['SCRIPT_URI'])) {
             $script_uri = $_SERVER['SCRIPT_URI'];
         }else{
@@ -57,7 +57,7 @@ class Pagination {
         $this->script = $script;
     }
 
-    public function calculate_page_data($switch=1){
+    public function calculatePageData($switch=1){
         $from = $this->page_size * ($this->page_no-1) + 1;
         $from = $from > $this->row_count ? $this->row_count : $from;
         $to = $this->page_no * $this->page_size;
@@ -83,7 +83,7 @@ class Pagination {
      *  - type: TYPE_DEFAULT | TYPE_NEXT_BACK
      *  - include_div_tag: boolean
      */
-    public function build_page_bar($options = array()) {
+    public function buildPageBar($options = array()) {
         $buffer = "";
 
         $options = array_merge(array(
@@ -93,7 +93,7 @@ class Pagination {
 
         switch($options['type']) {
             case static::TYPE_DEFAULT:
-                $r = $this->calculate_page_data();
+                $r = $this->calculatePageData();
                 $index = '&laquo;';
                 $pre = '&lsaquo;';
                 $next = '&rsaquo;';
@@ -122,21 +122,21 @@ class Pagination {
                 $buffer .= '<ul>';
 
                 if ($this->page_no > 1) {
-                    $buffer .= "<li><a href='".$this->get_url($this->page_string, 1)."'>{$index}</a></li>";
-                    $buffer .=" <li><a href='".$this->get_url($this->page_string, $this->page_no-1)."'>{$pre}</a></li>";
+                    $buffer .= "<li><a href='".$this->getUrl($this->page_string, 1)."'>{$index}</a></li>";
+                    $buffer .=" <li><a href='".$this->getUrl($this->page_string, $this->page_no-1)."'>{$pre}</a></li>";
                 }
 
                 foreach($range AS $one) {
                     if ( $one == $this->page_no ) {
-                        $buffer .= "<li class=\"active\"><a href='".$this->get_url($this->page_string, $one)."'>{$one}</a></li>";
+                        $buffer .= "<li class=\"active\"><a href='".$this->getUrl($this->page_string, $one)."'>{$one}</a></li>";
                     } else {
-                        $buffer .= "<li><a href='".$this->get_url($this->page_string, $one)."'>{$one}</a></li>";
+                        $buffer .= "<li><a href='".$this->getUrl($this->page_string, $one)."'>{$one}</a></li>";
                     }
                 }
 
                 if ($this->page_no < $this->page_count) {
-                    $buffer .= "<li><a href='".$this->get_url($this->page_string, $this->page_no+1)."'>{$next}</a></li>";
-                    $buffer .= "<li><a href='".$this->get_url($this->page_string, $this->page_count)."'>{$end}</a></li>";
+                    $buffer .= "<li><a href='".$this->getUrl($this->page_string, $this->page_no+1)."'>{$next}</a></li>";
+                    $buffer .= "<li><a href='".$this->getUrl($this->page_string, $this->page_count)."'>{$end}</a></li>";
                 }
 
                 $buffer .= '</ul>';
@@ -146,7 +146,7 @@ class Pagination {
 
                 if ($this->page_no > 1) {
                     $buffer .= '<li class="previous">';
-                    $buffer .= '    <a href="'.$this->get_url($this->page_string, $this->page_no-1).'">&larr; Newer</a>';
+                    $buffer .= '    <a href="'.$this->getUrl($this->page_string, $this->page_no-1).'">&larr; Newer</a>';
                     $buffer .= '</li>';
                 }else{
                     $buffer .= '<li class="previous disabled">';
@@ -156,7 +156,7 @@ class Pagination {
 
                 if ($this->page_no < $this->page_count) {
                     $buffer .= '<li class="next">';
-                    $buffer .= '    <a href="'.$this->get_url($this->page_string, $this->page_no+1).'">Older &rarr;</a>';
+                    $buffer .= '    <a href="'.$this->getUrl($this->page_string, $this->page_no+1).'">Older &rarr;</a>';
                     $buffer .= '</li>';
                 }else{
                     $buffer .= '<li class="next disabled">';

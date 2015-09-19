@@ -9,7 +9,6 @@ define('WWW_ROOT', dirname(__FILE__));
 define('APP_ROOT', WWW_ROOT.'/app');
 define('STORAGE_ROOT', WWW_ROOT.'/storage');
 define('CONFIG_ROOT', WWW_ROOT.'/config');
-define('LIB_ROOT', WWW_ROOT.'/lib');
 define('PUBLIC_ROOT', WWW_ROOT.'/public');
 define('VENDOR_ROOT', WWW_ROOT.'/vendor');
 
