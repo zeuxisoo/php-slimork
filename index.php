@@ -134,11 +134,11 @@ $protocol = isset($_SERVER['HTTPS']) === true ? 'https' : 'http';
 $site_url = $protocol.'://'.$headers['HOST'].$root_uri;
 
 // Set helper variable for control flow
-$app->config('config',   $config);
+$app->config('settings', $config);
 $app->config('site_url', $site_url);
 
 // Set helper variable for template
-$app->view()->setData('config',   $config);
+$app->view()->setData('settings', $config);
 $app->view()->setData('site_url', $site_url);
 
 // Boot application
