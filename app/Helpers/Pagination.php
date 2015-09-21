@@ -128,4 +128,46 @@ class Pagination {
 
         return $page_view;
     }
+
+    public function jsonPageBar($options = array()) {
+        $app          = Slim::getInstance();
+        $current_page = $this->current_page;
+        $total_page   = $this->total_page;
+        $page_view    = "";
+
+        if ($this->total_page <= 7) {
+            $range = range(1, $total_page);
+        } else {
+            $min = $current_page - 3;
+            $max = $current_page + 3;
+
+            if ($min < 1) {
+                $max += (3 - $min);
+                $min  = 1;
+            }
+
+            if ($max > $total_page) {
+                $min -= $max - $total_page;
+                $max  = $total_page;
+            }
+
+            $min = $min > 1 ? $min : 1;
+            $range = range($min, $max);
+        }
+
+        $pages = array();
+        foreach($range AS $one) {
+            $pages[$one] = $this->getUrl($this->keyword, $one);
+        }
+
+        $urls = array(
+            'first'    => $this->getUrl($this->keyword, 1),
+            'previous' => $this->getUrl($this->keyword, $current_page - 1),
+            'pages'    => $pages,
+            'next'     => $this->getUrl($this->keyword, $current_page + 1),
+            'last'     => $this->getUrl($this->keyword, $total_page)
+        );
+
+        return json_encode(compact('urls', 'current_page', 'total_page'));
+    }
 }
