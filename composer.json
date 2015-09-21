@@ -22,7 +22,6 @@
             "App\\": "app/"
         },
         "classmap": [
-            "lib/"
         ]
     },
     "config": {
