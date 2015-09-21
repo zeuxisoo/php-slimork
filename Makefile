@@ -12,3 +12,6 @@ install:
 
 server:
 	php -S localhost:8080
+
+migrate:
+	./vendor/bin/phpmig migrate
