@@ -1,4 +1,6 @@
 <?php
+date_default_timezone_set('Asia/Hong_Kong');
+
 require_once dirname(__FILE__).'/vendor/autoload.php';
 
 use Pimple\Container;
