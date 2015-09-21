@@ -1,0 +1,22 @@
+<ul class="pagination">
+
+    {% if current_page > 1 %}
+        <li><a href="{{ urls.first }}">&laquo;</a></li>
+        <li><a href="{{ urls.previous }}">&lsaquo;</a></li>
+    {% endif %}
+
+
+    {% for page, url in urls.pages %}
+        {% if page == current_page %}
+            <li class="active"><a href="{{ url }}">{{ page }}</a></li>
+        {% else %}
+            <li><a href="{{ url }}">{{ page }}</a></li>
+        {% endif %}
+    {% endfor %}
+
+    {% if current_page < total_page %}
+        <li><a href="{{ urls.next }}">&rsaquo;</a></li>
+        <li><a href="{{ urls.last }}">&raquo;</a></li>
+    {% endif %}
+
+</ul>

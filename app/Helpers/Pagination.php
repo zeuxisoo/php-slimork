@@ -1,177 +1,131 @@
 <?php
 namespace App\Helpers;
 
+use Slim\Slim;
+
 class Pagination {
 
-    const TYPE_DEFAULT   = 0;
-    const TYPE_BACK_NEXT = 1;
+    const VIEW_DEFAULT       = 0;
+    const VIEW_PREVIOUS_NEXT = 1;
 
-    public $row_count   = 0;
-    public $page_no     = 1;
-    public $page_size   = 18;
-    public $page_count  = 0;
-    public $offset      = 0;
-    public $page_string = 'page';
+    public $total_records = 0;
+    public $current_page  = 1;
+    public $per_page      = 18;
+    public $total_page    = 0;
+    public $offset        = 0;
+    public $keyword       = 'page';
 
-    private $script = null;
-    private $value_array = array();
+    private $website_url   = null;
+    private $query_strings = array();
 
-    public function __construct($count = 0, $size = 20, $string = 'page') {
-        $this->defaultQuery();
-        $this->page_string = $string;
-        $this->page_size = abs($size);
-        $this->row_count = abs($count);
+    public function __construct($total_records = 0, $per_page = 20, $keyword = 'page') {
+        $this->parseQueryString();
 
-        $this->page_count = ceil($this->row_count / $this->page_size);
-        $this->page_count = $this->page_count <= 0 ? 1 : $this->page_count;
-        $this->page_no = isset($_GET[$this->page_string]) ? abs(intval($_GET[$this->page_string])) : 0;
-        $this->page_no = $this->page_no == 0 ? 1 : $this->page_no;
-        $this->page_no = $this->page_no > $this->page_count ? $this->page_count : $this->page_no;
-        $this->offset = ($this->page_no - 1) * $this->page_size;
+        $this->keyword       = $keyword;
+        $this->per_page      = abs($per_page);
+        $this->total_records = abs($total_records);
+
+        $this->total_page    = ceil($this->total_records / $this->per_page);
+        $this->total_page    = $this->total_page <= 0 ? 1 : $this->total_page;
+        $this->current_page  = isset($_GET[$this->keyword]) ? abs(intval($_GET[$this->keyword])) : 0;
+        $this->current_page  = $this->current_page == 0 ? 1 : $this->current_page;
+        $this->current_page  = $this->current_page > $this->total_page ? $this->total_page : $this->current_page;
+        $this->offset        = ($this->current_page - 1) * $this->per_page;
     }
 
     private function getUrl($param, $value) {
-        $value_array = $this->value_array;
-        $value_array[$param] = $value;
-        return $this->script . '?' . http_build_query($value_array);
+        $query_strings = $this->query_strings;
+        $query_strings[$param] = $value;
+
+        return $this->website_url.'?'.http_build_query($query_strings);
     }
 
-    private function defaultQuery() {
+    private function parseQueryString() {
         if (isset($_SERVER['SCRIPT_URI'])) {
             $script_uri = $_SERVER['SCRIPT_URI'];
         }else{
             $script_uri = $_SERVER['REQUEST_URI'];
         }
 
-        $query_position = strpos($script_uri,'?');
+        $query_position = strpos($script_uri, '?');
 
         if ($query_position > 0) {
-            $qstring = substr($script_uri, $query_position + 1);
-            parse_str($qstring, $value_array);
-            $script = substr($script_uri, 0, $query_position);
+            $query_string = substr($script_uri, $query_position + 1);
+
+            // String to String[key] = value
+            parse_str($query_string, $query_strings);
+
+            $website_url = substr($script_uri, 0, $query_position);
         } else {
-            $script = $script_uri;
-            $value_array = array();
+            $website_url   = $script_uri;
+            $query_strings = array();
         }
-        $this->value_array = empty($value_array) === true ? array() : $value_array;
-        $this->script = $script;
-    }
 
-    public function calculatePageData($switch=1){
-        $from = $this->page_size * ($this->page_no-1) + 1;
-        $from = $from > $this->row_count ? $this->row_count : $from;
-        $to = $this->page_no * $this->page_size;
-        $to = $to > $this->row_count ? $this->row_count : $to;
-        $size = $this->page_size;
-        $no = $this->page_no;
-        $max = $this->page_count;
-        $total = $this->row_count;
-
-        return array(
-            'offset' => $this->offset,
-            'from' => $from,
-            'to' => $to,
-            'size' => $size,
-            'no' => $no,
-            'max' => $max,
-            'total' => $total,
-        );
+        $this->query_strings = empty($query_strings) === true ? array() : $query_strings;
+        $this->website_url   = $website_url;
     }
 
     /*
      * $options:
-     *  - type: TYPE_DEFAULT | TYPE_NEXT_BACK
-     *  - include_div_tag: boolean
+     *  - view: VIEW_DEFAULT | TYPE_NEXT_BACK
      */
     public function buildPageBar($options = array()) {
-        $buffer = "";
-
         $options = array_merge(array(
-            'type' => static::TYPE_DEFAULT,
-            'include_div_tag' => false,
+            'view' => static::VIEW_DEFAULT,
         ), $options);
 
-        switch($options['type']) {
-            case static::TYPE_DEFAULT:
-                $r = $this->calculatePageData();
-                $index = '&laquo;';
-                $pre = '&lsaquo;';
-                $next = '&rsaquo;';
-                $end = '&raquo;';
+        $app          = Slim::getInstance();
+        $current_page = $this->current_page;
+        $total_page   = $this->total_page;
+        $page_view    = "";
 
-                if ($this->page_count <= 7) {
-                    $range = range(1, $this->page_count);
+        switch($options['view']) {
+            case static::VIEW_DEFAULT:
+                if ($this->total_page <= 7) {
+                    $range = range(1, $total_page);
                 } else {
-                    $min = $this->page_no - 3;
-                    $max = $this->page_no + 3;
+                    $min = $current_page - 3;
+                    $max = $current_page + 3;
 
                     if ($min < 1) {
-                        $max += (3-$min);
-                        $min = 1;
+                        $max += (3 - $min);
+                        $min  = 1;
                     }
 
-                    if ( $max > $this->page_count ) {
-                        $min -= $max - $this->page_count;
-                        $max = $this->page_count;
+                    if ($max > $total_page) {
+                        $min -= $max - $total_page;
+                        $max  = $total_page;
                     }
 
                     $min = $min > 1 ? $min : 1;
                     $range = range($min, $max);
                 }
 
-                $buffer .= '<ul class="pagination">';
-
-                if ($this->page_no > 1) {
-                    $buffer .= "<li><a href='".$this->getUrl($this->page_string, 1)."'>{$index}</a></li>";
-                    $buffer .=" <li><a href='".$this->getUrl($this->page_string, $this->page_no-1)."'>{$pre}</a></li>";
-                }
-
+                $pages = array();
                 foreach($range AS $one) {
-                    if ( $one == $this->page_no ) {
-                        $buffer .= "<li class=\"active\"><a href='".$this->getUrl($this->page_string, $one)."'>{$one}</a></li>";
-                    } else {
-                        $buffer .= "<li><a href='".$this->getUrl($this->page_string, $one)."'>{$one}</a></li>";
-                    }
+                    $pages[$one] = $this->getUrl($this->keyword, $one);
                 }
 
-                if ($this->page_no < $this->page_count) {
-                    $buffer .= "<li><a href='".$this->getUrl($this->page_string, $this->page_no+1)."'>{$next}</a></li>";
-                    $buffer .= "<li><a href='".$this->getUrl($this->page_string, $this->page_count)."'>{$end}</a></li>";
-                }
+                $urls = array(
+                    'first'    => $this->getUrl($this->keyword, 1),
+                    'previous' => $this->getUrl($this->keyword, $current_page - 1),
+                    'pages'    => $pages,
+                    'next'     => $this->getUrl($this->keyword, $current_page + 1),
+                    'last'     => $this->getUrl($this->keyword, $total_page)
+                );
 
-                $buffer .= '</ul>';
+                $page_view = $app->render('pagination/default.html', compact('urls', 'current_page', 'total_page'));
                 break;
-            case static::TYPE_BACK_NEXT:
-                $buffer .= '<ul class="pager">';
+            case static::VIEW_PREVIOUS_NEXT:
+                $urls = array(
+                    'previous' => $this->getUrl($this->keyword, $current_page - 1),
+                    'next'     => $this->getUrl($this->keyword, $current_page + 1)
+                );
 
-                if ($this->page_no > 1) {
-                    $buffer .= '<li class="previous">';
-                    $buffer .= '    <a href="'.$this->getUrl($this->page_string, $this->page_no-1).'">&larr; Newer</a>';
-                    $buffer .= '</li>';
-                }else{
-                    $buffer .= '<li class="previous disabled">';
-                    $buffer .= '    <a href="javascript:void(0)">&larr; Newer</a>';
-                    $buffer .= '</li>';
-                }
-
-                if ($this->page_no < $this->page_count) {
-                    $buffer .= '<li class="next">';
-                    $buffer .= '    <a href="'.$this->getUrl($this->page_string, $this->page_no+1).'">Older &rarr;</a>';
-                    $buffer .= '</li>';
-                }else{
-                    $buffer .= '<li class="next disabled">';
-                    $buffer .= '    <a href="javascript:void(0)">Older &rarr;</a>';
-                    $buffer .= '</li>';
-                }
-
-                $buffer .= '</ul>';
+                $page_view = $app->render('pagination/previous-next.html', compact('urls', 'current_page', 'total_page'));
                 break;
         }
 
-        if ($options['include_div_tag'] === true) {
-            $buffer = '<div class="pagination">'.$buffer.'</div>';
-        }
-
-        return $buffer;
+        return $page_view;
     }
 }

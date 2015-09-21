@@ -14,6 +14,12 @@ class HomeController extends BaseController {
 
         echo "<h3>Translator with view</h3>";
         echo "<a href='".$this->app->urlFor('view')."'>See view render</a>";
+
+        echo "<h3>Pagination</h3>";
+
+        $pagination = new \App\Helpers\Pagination(100, 2);
+        $pagination->buildPageBar();
+        $pagination->buildPageBar(array('view' => \App\Helpers\Pagination::VIEW_PREVIOUS_NEXT));
     }
 
     public function view() {
