@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "70426d7dc052db787223043451c8677c",
+    "hash": "633940055ded651d9d2fd0657c226dd6",
     "content-hash": "95854dca1e26d6b6611c7c61328c396d",
     "packages": [
         {
@@ -132,12 +132,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/codeguy/Slim-Extras.git",
-                "reference": "2.0.3"
+                "reference": "a022ed23dae94e164000acd891e3394d903f9623"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/codeguy/Slim-Extras/zipball/a022ed23dae94e164000acd891e3394d903f9623",
-                "reference": "2.0.3",
+                "reference": "a022ed23dae94e164000acd891e3394d903f9623",
                 "shasum": ""
             },
             "require": {
