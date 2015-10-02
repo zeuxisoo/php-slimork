@@ -29,6 +29,7 @@ use Symfony\Component\Translation\MessageSelector;
 use Symfony\Component\Translation\Loader\ArrayLoader;
 use Symfony\Component\Translation\Loader\YamlFileLoader;
 use Symfony\Bridge\Twig\Extension\TranslationExtension;
+use App\Helpers\View as ViewHelper;
 
 // Initial global variable
 $config = array();
@@ -78,6 +79,7 @@ $view->parserOptions = array(
 );
 $view->parserExtensions = array(
     new Views\TwigExtension(),
+    new ViewHelper()
 );
 
 // Load the locale file
