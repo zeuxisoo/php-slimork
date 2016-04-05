@@ -8,6 +8,7 @@ define('VENDOR_ROOT', BASE_ROOT.'/vendor');
 define('CONFIG_ROOT', BASE_ROOT.'/config');
 define('RESOURCE_ROOT', BASE_ROOT.'/resource');
 define('STORAGE_ROOT', BASE_ROOT.'/storage');
+define('APP_ROOT', BASE_ROOT.'/app');
 
 // Composer auto loader
 require_once VENDOR_ROOT.'/autoload.php';
@@ -38,10 +39,7 @@ foreach($config['app']['providers'] as $provider) {
     $provider->register();
 }
 
-$app->get('/', function ($request, $response, $args) {
-    $this->logger->addInfo('called index handler');
-
-    return $this->view->render($response, 'index.html');
-})->setName('index');
+// Slim routes
+require_once APP_ROOT.'/routes.php';
 
 $app->run();
