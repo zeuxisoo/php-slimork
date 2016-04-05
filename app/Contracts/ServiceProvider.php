@@ -1,5 +1,5 @@
 <?php
-namespace App\Constracts;
+namespace App\Contracts;
 
 use Interop\Container\ContainerInterface;
 

@@ -3,7 +3,7 @@ namespace App\Providers;
 
 use Slim\Views\Twig;
 use Slim\Views\TwigExtension;
-use App\Constracts\ServiceProvider;
+use App\Contracts\ServiceProvider;
 
 class ViewServiceProvider extends ServiceProvider {
 

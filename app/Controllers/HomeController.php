@@ -3,7 +3,7 @@ namespace App\Controllers;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
-use App\Constracts\Controller;
+use App\Contracts\Controller;
 
 class HomeController extends Controller {
 

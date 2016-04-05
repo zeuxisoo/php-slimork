@@ -3,7 +3,7 @@ namespace App\Providers;
 
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
-use App\Constracts\ServiceProvider;
+use App\Contracts\ServiceProvider;
 
 class LoggerServiceProvider extends ServiceProvider {
 
