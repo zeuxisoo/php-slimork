@@ -23,10 +23,6 @@ date_default_timezone_set($config['app']['timezone']);
 
 // Import class
 use Slim\App;
-use Slim\Views\Twig;
-use Slim\Views\TwigExtension;
-use Monolog\Logger;
-use Monolog\Handler\StreamHandler;
 
 // Setup slim
 $app = new App([
@@ -36,32 +32,11 @@ $app = new App([
 // Slim container
 $container = $app->getContainer();
 
-// Slim view
-$container['view'] = function($c) {
-    $base_path = rtrim(str_ireplace('index.php', '', $c['request']->getUri()->getBasePath()), '/');
-
-    $view = new Twig(RESOURCE_ROOT.'/view', [
-        'charset'          => 'utf-8',
-        'cache'            => STORAGE_ROOT.'/cache/view',
-        'auto_reload'      => true,
-        'strict_variables' => false,
-        'autoescape'       => true
-    ]);
-
-    $view->addExtension(new TwigExtension($c['router'], $base_path));
-
-    return $view;
-};
-
-// Slim logger
-$container['logger'] = function($c) {
-    $logger       = new Logger('SIMPLE_WORK');
-    $file_handler = new StreamHandler(STORAGE_ROOT.'/logs/'.date('Y-m-d').'.log');
-
-    $logger->pushHandler($file_handler);
-
-    return $logger;
-};
+// Slim service providers
+foreach($config['app']['providers'] as $provider) {
+    $provider = new $provider($container);
+    $provider->register();
+}
 
 $app->get('/', function ($request, $response, $args) {
     $this->logger->addInfo('called index handler');
