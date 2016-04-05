@@ -15,4 +15,11 @@ abstract class Controller {
         return $this->container->get($name);
     }
 
+    protected function render($view, array $arguments = []) {
+        $response = $this->response;
+        $response = $this->view->render($response, $view, $arguments);
+
+        return $response;
+    }
+
 }

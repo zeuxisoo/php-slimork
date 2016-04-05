@@ -8,9 +8,7 @@ use App\Constracts\Controller;
 class HomeController extends Controller {
 
     public function index(Request $request, Response $response, array $arguments) {
-        $this->logger->addInfo('called index handler');
-
-        return $this->view->render($response, 'index.html');
+        return $this->render('index.html');
     }
 
 }
