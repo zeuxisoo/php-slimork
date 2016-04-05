@@ -25,6 +25,8 @@ date_default_timezone_set($config['app']['timezone']);
 use Slim\App;
 use Slim\Views\Twig;
 use Slim\Views\TwigExtension;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
 
 // Setup slim
 $app = new App([
@@ -51,7 +53,19 @@ $container['view'] = function($c) {
     return $view;
 };
 
+// Slim logger
+$container['logger'] = function($c) {
+    $logger       = new Logger('SIMPLE_WORK');
+    $file_handler = new StreamHandler(STORAGE_ROOT.'/logs/'.date('Y-m-d').'.log');
+
+    $logger->pushHandler($file_handler);
+
+    return $logger;
+};
+
 $app->get('/', function ($request, $response, $args) {
+    $this->logger->addInfo('called index handler');
+
     return $this->view->render($response, 'index.html');
 })->setName('index');
 

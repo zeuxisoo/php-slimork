@@ -3,5 +3,6 @@
 
 /vendor
 /storage/cache/view
+/storage/logs
 
 composer.phar
