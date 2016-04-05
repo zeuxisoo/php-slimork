@@ -39,6 +39,11 @@ foreach($config['app']['providers'] as $provider) {
     $provider->register();
 }
 
+// Slim middlewares (application level)
+foreach($config['app']['middleware'] as $middleware) {
+    $app->add(new $middleware());
+}
+
 // Slim routes
 require_once APP_ROOT.'/routes.php';
 

@@ -6,6 +6,10 @@ return [
     'providers' => [
         App\Providers\ViewServiceProvider::class,
         App\Providers\LoggerServiceProvider::class,
+    ],
+
+    'middleware' => [
+        App\Middlewares\AppMiddleware::class,
     ]
 
 ];
