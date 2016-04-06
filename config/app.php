@@ -5,7 +5,7 @@ return [
         'default' => [
             'driver'    => 'sqlite',
             'host'      => 'localhost',
-            'database'  => STORAGE_ROOT.'/database.sqlite',
+            'database'  => dirname(__DIR__).'/storage/database.sqlite',
             'username'  => 'root',
             'password'  => '',
             'charset'   => 'utf8',
