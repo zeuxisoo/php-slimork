@@ -14,12 +14,16 @@ define('APP_ROOT', BASE_ROOT.'/app');
 require_once VENDOR_ROOT.'/autoload.php';
 
 // Application configs
-$settings = array_merge(
-    require CONFIG_ROOT.'/slim.php',
-    [
-        'app' => require CONFIG_ROOT.'/app.php',
-    ]
-);
+$settings = [];
+foreach(glob(CONFIG_ROOT."/*") as $file_path) {
+    $file_name = basename($file_path, ".php");
+
+    if ($file_name !== 'slim') {
+        $settings[$file_name] = require_once $file_path;
+    }
+}
+
+$settings = array_merge(require CONFIG_ROOT.'/slim.php', $settings);
 
 // Base configs
 date_default_timezone_set($settings['app']['timezone']);
