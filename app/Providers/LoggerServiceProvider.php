@@ -5,6 +5,14 @@ use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use App\Contracts\ServiceProvider;
 
+/**
+ * Usage
+ * =====
+ *
+ * Log:
+ *
+ *      $this->logger->addInfo('message');
+ */
 class LoggerServiceProvider extends ServiceProvider {
 
     public function register() {
