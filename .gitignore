@@ -5,4 +5,6 @@
 /storage/cache/view
 /storage/logs
 
+/storage/database.sqlite
+
 composer.phar

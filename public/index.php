@@ -14,33 +14,35 @@ define('APP_ROOT', BASE_ROOT.'/app');
 require_once VENDOR_ROOT.'/autoload.php';
 
 // Application configs
-$config = [
-    'app'  => require CONFIG_ROOT.'/app.php',
-    'slim' => require CONFIG_ROOT.'/slim.php',
-];
+$settings = array_merge(
+    require CONFIG_ROOT.'/slim.php',
+    [
+        'app' => require CONFIG_ROOT.'/app.php',
+    ]
+);
 
 // Base configs
-date_default_timezone_set($config['app']['timezone']);
+date_default_timezone_set($settings['app']['timezone']);
 
 // Import class
 use Slim\App;
 
 // Setup slim
 $app = new App([
-    'settings' => $config['slim']
+    'settings' => $settings
 ]);
 
 // Slim container
 $container = $app->getContainer();
 
 // Slim service providers
-foreach($config['app']['providers'] as $provider) {
+foreach($settings['app']['providers'] as $provider) {
     $provider = new $provider($container);
     $provider->register();
 }
 
 // Slim middlewares (application level)
-foreach($config['app']['middleware'] as $middleware) {
+foreach($settings['app']['middleware'] as $middleware) {
     $app->add(new $middleware());
 }
 
