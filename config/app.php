@@ -20,6 +20,7 @@ return [
         App\Providers\EloquentServiceProvider::class,
         App\Providers\ViewServiceProvider::class,
         App\Providers\LoggerServiceProvider::class,
+        App\Providers\HashServiceProvider::class,
     ],
 
     'middleware' => [
