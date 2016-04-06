@@ -5,6 +5,14 @@ use Slim\Views\Twig;
 use Slim\Views\TwigExtension;
 use App\Contracts\ServiceProvider;
 
+/**
+ * Usage
+ * =====
+ *
+ * View:
+ *
+ *      $this->view->render($response, 'view.html', compact('variable'));
+ */
 class ViewServiceProvider extends ServiceProvider {
 
     public function register() {
