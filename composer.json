@@ -5,7 +5,8 @@
         "monolog/monolog": "^1.18",
         "symfony/var-dumper": "^3.0",
         "illuminate/database": "^5.2",
-        "Illuminate/Pagination": "^5.2"
+        "Illuminate/Pagination": "^5.2",
+        "robmorgan/phinx": "^0.5.3"
     },
     "autoload": {
         "psr-4": {
