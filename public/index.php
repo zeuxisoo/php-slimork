@@ -36,12 +36,9 @@ $app = new App([
     'settings' => $settings
 ]);
 
-// Slim container
-$container = $app->getContainer();
-
 // Slim service providers
 foreach($settings['app']['providers'] as $provider) {
-    $provider = new $provider($container);
+    $provider = new $provider($app);
     $provider->register();
 }
 

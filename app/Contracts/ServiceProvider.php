@@ -1,14 +1,16 @@
 <?php
 namespace App\Contracts;
 
-use Interop\Container\ContainerInterface;
+use Slim\App;
 
 abstract class ServiceProvider {
 
+    protected $app;
     protected $container;
 
-    public function __construct(ContainerInterface $container) {
-        $this->container = $container;
+    public function __construct(App $app) {
+        $this->app       = $app;
+        $this->container = $app->getContainer();
     }
 
 }
