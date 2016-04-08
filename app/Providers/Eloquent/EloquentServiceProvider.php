@@ -1,5 +1,5 @@
 <?php
-namespace App\Providers;
+namespace App\Providers\Eloquent;
 
 use Illuminate\Database\Capsule\Manager as Capsule;
 use App\Contracts\ServiceProvider;

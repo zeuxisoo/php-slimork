@@ -1,5 +1,5 @@
 <?php
-namespace App\Providers;
+namespace App\Providers\View;
 
 use Slim\Views\Twig;
 use Slim\Views\TwigExtension;
