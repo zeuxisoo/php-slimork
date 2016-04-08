@@ -21,6 +21,7 @@ return [
         App\Providers\View\ViewServiceProvider::class,
         App\Providers\Logger\LoggerServiceProvider::class,
         App\Providers\Hash\HashServiceProvider::class,
+        App\Providers\Flash\FlashServiceProvider::class,
     ],
 
     'middleware' => [

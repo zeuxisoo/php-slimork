@@ -6,7 +6,8 @@
         "symfony/var-dumper": "^3.0",
         "illuminate/database": "^5.2",
         "Illuminate/Pagination": "^5.2",
-        "robmorgan/phinx": "^0.5.3"
+        "robmorgan/phinx": "^0.5.3",
+        "slim/flash": "^0.1.0"
     },
     "autoload": {
         "psr-4": {
