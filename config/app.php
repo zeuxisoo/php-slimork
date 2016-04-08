@@ -14,6 +14,12 @@ return [
         ]
     ],
 
+    'csrf' => [
+        'global'   => true,
+        'prefix'   => 'csrf',
+        'strength' => 16,
+    ],
+
     'timezone' => 'Asia/Hong_Kong',
 
     'providers' => [
@@ -22,10 +28,11 @@ return [
         App\Providers\Logger\LoggerServiceProvider::class,
         App\Providers\Hash\HashServiceProvider::class,
         App\Providers\Flash\FlashServiceProvider::class,
+        App\Providers\Csrf\CsrfServiceProvider::class,
     ],
 
     'middleware' => [
         App\Middlewares\AppMiddleware::class,
-    ]
+    ],
 
 ];
