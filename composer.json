@@ -8,7 +8,8 @@
         "Illuminate/Pagination": "^5.2",
         "robmorgan/phinx": "^0.5.3",
         "slim/flash": "^0.1.0",
-        "slim/csrf": "^0.6.0"
+        "slim/csrf": "^0.6.0",
+        "respect/validation": "^1.0"
     },
     "autoload": {
         "psr-4": {

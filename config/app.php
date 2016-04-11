@@ -29,6 +29,7 @@ return [
         App\Providers\Hash\HashServiceProvider::class,
         App\Providers\Flash\FlashServiceProvider::class,
         App\Providers\Csrf\CsrfServiceProvider::class,
+        App\Providers\Validation\ValidatorServiceProvider::class,
     ],
 
     'middleware' => [
