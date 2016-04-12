@@ -30,17 +30,19 @@ use App\Contracts\ServiceProvider;
 class EloquentServiceProvider extends ServiceProvider {
 
     public function register() {
-        $this->container['db'] = function($c) {
-            $settings = $c['settings'];
-            $capsule  = new Capsule;
+        // Setup capsule manager
+        $settings = $this->container->settings;
+        $capsule  = new Capsule;
 
-            foreach($settings['app']['db'] as $name => $database) {
-                $capsule->addConnection($database, $name);
-            }
+        foreach($settings['app']['db'] as $name => $database) {
+            $capsule->addConnection($database, $name);
+        }
 
-            $capsule->setAsGlobal();
-            $capsule->bootEloquent();
+        $capsule->setAsGlobal();
+        $capsule->bootEloquent();
 
+        // Setup db service provider
+        $this->container['db'] = function($c) use ($capsule) {
             return $capsule;
         };
     }
