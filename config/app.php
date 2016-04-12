@@ -30,6 +30,7 @@ return [
         App\Providers\Flash\FlashServiceProvider::class,
         App\Providers\Csrf\CsrfServiceProvider::class,
         App\Providers\Validation\ValidatorServiceProvider::class,
+        App\Providers\Fractal\FractalServiceProvider::class,
     ],
 
     'middleware' => [
