@@ -20,9 +20,19 @@ return [
         'strength' => 16,
     ],
 
+    'session' => [
+        'name'     => '_s',
+        'life_time' => 7200, // 2 hour
+        'path'     => '/',
+        'domain'   => null,
+        'secure'   => false,
+        'httponly' => true,
+    ],
+
     'timezone' => 'Asia/Hong_Kong',
 
     'providers' => [
+        App\Providers\Session\SessionServiceProvider::class,
         App\Providers\Eloquent\EloquentServiceProvider::class,
         App\Providers\View\ViewServiceProvider::class,
         App\Providers\Logger\LoggerServiceProvider::class,
@@ -34,6 +44,7 @@ return [
     ],
 
     'middleware' => [
+        App\Middlewares\SessionMiddleware::class,
         App\Middlewares\AppMiddleware::class,
     ],
 

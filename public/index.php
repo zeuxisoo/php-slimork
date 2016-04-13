@@ -1,6 +1,5 @@
 <?php
 error_reporting(E_ALL);
-session_start();
 
 // Define constant
 define('BASE_ROOT', dirname(__DIR__));
@@ -36,15 +35,15 @@ $app = new App([
     'settings' => $settings
 ]);
 
+// Slim middlewares (application level)
+foreach($settings['app']['middleware'] as $middleware) {
+    $app->add(new $middleware($app));
+}
+
 // Slim service providers
 foreach($settings['app']['providers'] as $provider) {
     $provider = new $provider($app);
     $provider->register();
-}
-
-// Slim middlewares (application level)
-foreach($settings['app']['middleware'] as $middleware) {
-    $app->add(new $middleware());
 }
 
 // Slim routes
