@@ -41,6 +41,7 @@ return [
         App\Providers\Csrf\CsrfServiceProvider::class,
         App\Providers\Validation\ValidatorServiceProvider::class,
         App\Providers\Fractal\FractalServiceProvider::class,
+        App\Providers\Cookie\CookieServiceProvider::class,
     ],
 
     'middleware' => [
