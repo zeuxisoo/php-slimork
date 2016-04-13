@@ -3,9 +3,11 @@ namespace App\Middlewares;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
-use App\Contracts\Middleware;
 
-class SessionMiddleware extends Middleware {
+class SessionMiddleware {
+
+    protected $app;
+    protected $container;
 
     protected $options = [
         'name'     => '_s',
@@ -17,11 +19,10 @@ class SessionMiddleware extends Middleware {
     ];
 
     public function __construct($app) {
-        parent::__construct($app);
+        $this->app       = $app;
+        $this->container = $app->getContainer();
 
-        $settings = $this->container->settings;
-
-        $this->options = array_merge($this->options, $settings['app']['session']);
+        $this->options = array_merge($this->options, $this->container->settings['app']['session']);
 
         // Start it without deferred to solve Csrf service throw exception _SESSION not init
         $this->start();
