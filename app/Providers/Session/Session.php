@@ -37,7 +37,7 @@ class Session {
     protected $session;
 
     public function __construct() {
-        $this->session = &$this->session;
+        $this->session = &$_SESSION;
     }
 
     public function set($key, $name) {
