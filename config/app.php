@@ -42,6 +42,7 @@ return [
         App\Providers\Validation\ValidatorServiceProvider::class,
         App\Providers\Fractal\FractalServiceProvider::class,
         App\Providers\Cookie\CookieServiceProvider::class,
+        App\Providers\Auth\AuthServiceProvider::class,
     ],
 
     'middleware' => [
