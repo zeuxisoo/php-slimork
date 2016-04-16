@@ -176,4 +176,8 @@ class Auth {
         $user->save();
     }
 
+    public function guest() {
+        return $this->user() === null;
+    }
+
 }
