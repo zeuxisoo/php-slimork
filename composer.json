@@ -1,4 +1,7 @@
 {
+    "name": "zeuxisoo/slim-simplework",
+    "description": "PHP Slim Framework skeleton application",
+    "homepage": "https://github.com/zeuxisoo/php-slim-simplework",
     "require": {
         "slim/slim": "^3.3",
         "slim/twig-view": "^2.1",
@@ -16,5 +19,15 @@
         "psr-4": {
             "App\\": "app/"
         }
-    }
+    },
+    "config": {
+        "preferred-install": "dist"
+    },
+    "license": "BSD-2-Clause",
+    "authors": [
+        {
+            "name": "Zeuxis Lo",
+            "email": "seekstudio@gmail.com"
+        }
+    ]
 }
