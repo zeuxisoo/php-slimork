@@ -39,6 +39,7 @@ use App\Helpers\StringHelper;
 class Jwt {
 
     protected $container;
+    protected $auth       = null;
 
     protected $options = [
         'secret'      => '',
@@ -52,6 +53,7 @@ class Jwt {
 
     public function __construct($container, $options) {
         $this->container = $container;
+        $this->auth      = $container['auth'];
         $this->options   = array_merge($this->options, $options);
 
         $this->payload = [
@@ -70,13 +72,11 @@ class Jwt {
     }
 
     public function attempt(array $credentials, array $custom_claims = []) {
-        $auth = $this->container['auth'];
-
-        if ($auth->once($credentials) === false) {
+        if ($this->auth->once($credentials) === false) {
             return false;
         }
 
-        return $this->fromUser($auth->user(), $custom_claims);
+        return $this->fromUser($this->auth->user(), $custom_claims);
     }
 
     public function fromUser($user, array $custom_claims = []) {
@@ -94,18 +94,21 @@ class Jwt {
             return null;
         }
 
-        $auth    = $this->container['auth'];
         $user_id = $this->token->sub;
 
-        if ($auth->findUserByCredentials(['id' => $user_id]) === null) {
+        if ($this->auth->onceUsingId($user_id) === null) {
             return false;
         }
 
-        return $auth->user();
+        return $this->user();
     }
 
     public function getToken() {
         return $this->token;
+    }
+
+    public function user() {
+        return $this->auth->user();
     }
 
     public function encode($user, array $custom_claims = []) {
