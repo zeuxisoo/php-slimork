@@ -27,18 +27,36 @@ use App\Models\User;
  *
  *      # Current user
  *      $this->auth->user();
+ *
+ *      # Login once without session and cookie
+ *      $this->auth->once([
+ *          'username' => 'username',
+ *          'password' => 'password'
+ *      ]);
  */
 class Auth {
 
     protected $container;
     protected $user;
+    protected $once_user;
 
     public function __construct($container) {
         $this->container = $container;
     }
 
+    // Just make login action without store session and cookie
+    public function once($credentials) {
+        if ($this->attempt($credentials, false, false) === true) {
+            $this->setUser($this->once_user);
+
+            return true;
+        }
+
+        return false;
+    }
+
     public function attempt($credentials, $remember = false, $login = true) {
-        $user = $this->findUserByCredentials($credentials);
+        $user = $this->once_user = $this->findUserByCredentials($credentials);
 
         if ($this->isValidCredentials($user, $credentials) === true) {
             if ($login) {
