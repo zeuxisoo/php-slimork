@@ -33,6 +33,9 @@ use App\Models\User;
  *          'username' => 'username',
  *          'password' => 'password'
  *      ]);
+ *
+ *      # Login once by id without session and cookie
+ *      $this->auth->onceUsingId(1);
  */
 class Auth {
 
@@ -55,8 +58,25 @@ class Auth {
         return false;
     }
 
+    public function onceUsingId($id) {
+        $user = $this->findUserById($id);
+
+        if ($user === null) {
+            return false;
+        }else{
+            $this->setUser($user);
+
+            return true;
+        }
+    }
+
+    public function findUserById($id) {
+        return (new User())->newQuery()->find($id);
+    }
+
+    // Normal login with session or cookie if remember is checked
     public function attempt($credentials, $remember = false, $login = true) {
-        $user = $this->once_user = $this->findUserByCredentials($credentials);
+        $this->once_user = $user = $this->findUserByCredentials($credentials);
 
         if ($this->isValidCredentials($user, $credentials) === true) {
             if ($login) {
