@@ -29,4 +29,10 @@ class StringHelper {
         return false;
     }
 
+    public static function randomAlphaNumeric($length = 16) {
+        $words = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+        return mb_substr(str_shuffle(str_repeat($words, $length)), 0, $length);
+    }
+
 }
