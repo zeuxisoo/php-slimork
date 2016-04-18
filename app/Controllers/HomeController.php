@@ -8,7 +8,7 @@ use App\Contracts\Controller;
 class HomeController extends Controller {
 
     public function index(Request $request, Response $response, array $arguments) {
-        return $this->render('index.html');
+        return $this->view('index.html');
     }
 
 }
