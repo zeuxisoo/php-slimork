@@ -22,7 +22,10 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/"
-        }
+        },
+        "files": [
+            "app/functions.php"
+        ]
     },
     "config": {
         "preferred-install": "dist"
