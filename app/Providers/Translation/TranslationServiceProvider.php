@@ -15,7 +15,7 @@ use Symfony\Bridge\Twig\Extension\TranslationExtension;
  *
  *      # In view
  *      {{ 'Hello World!' | trans }}
- *      {{ 'Hello World! My is %name%' | trans({'%name%': 'Cat'}) }}
+ *      {{ 'Hello World! My name is %name%' | trans({'%name%': 'Cat'}) }}
  */
 class TranslationServiceProvider extends ServiceProvider {
 

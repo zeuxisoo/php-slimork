@@ -4,6 +4,7 @@ namespace App\Providers\View;
 use Slim\Views\Twig;
 use Slim\Views\TwigExtension;
 use App\Contracts\ServiceProvider;
+use App\Helpers\ViewHelper;
 
 /**
  * Usage
@@ -28,6 +29,7 @@ class ViewServiceProvider extends ServiceProvider {
             ]);
 
             $view->addExtension(new TwigExtension($c['router'], $base_path));
+            $view->addExtension(new ViewHelper());
 
             return $view;
         };
