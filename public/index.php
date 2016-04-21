@@ -8,6 +8,7 @@ define('CONFIG_ROOT', BASE_ROOT.'/config');
 define('RESOURCE_ROOT', BASE_ROOT.'/resource');
 define('STORAGE_ROOT', BASE_ROOT.'/storage');
 define('APP_ROOT', BASE_ROOT.'/app');
+define('LANG_ROOT', RESOURCE_ROOT.'/lang');
 
 // Composer auto loader
 require_once VENDOR_ROOT.'/autoload.php';

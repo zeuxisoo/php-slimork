@@ -36,6 +36,11 @@ return [
         'ttl'         => 2880, // minutes, 2 days
     ],
 
+    'translation' => [
+        'default_locale'  => 'en_US',
+        'fallback_locale' => ['en_US'],
+    ],
+
     'timezone' => 'Asia/Hong_Kong',
 
     'providers' => [
@@ -51,6 +56,7 @@ return [
         App\Providers\Cookie\CookieServiceProvider::class,
         App\Providers\Auth\AuthServiceProvider::class,
         App\Providers\Jwt\JwtServiceProvider::class,
+        App\Providers\Translation\TranslationServiceProvider::class,
     ],
 
     'middleware' => [
