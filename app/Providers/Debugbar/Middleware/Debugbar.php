@@ -1,31 +1,12 @@
 <?php
-namespace App\Middlewares;
+namespace App\Providers\Debugbar\Middleware;
 
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Slim\Http\Response;
 use Slim\Http\Body;
 
-/**
- * Usage
- * =====
- *
- * Debugbar
- *
- *      # In config/app.php
- *      'providers' => [
- *          ...
- *          App\Providers\Debugbar\DebugbarServiceProvider::class,
- *          ...
- *      ],
- *
- *      'middleware' => [
- *          ...
- *          App\Middlewares\DebugbarMiddleware::class,
- *          ...
- *      ],
- */
-class DebugbarMiddleware {
+class Debugbar {
 
     protected $app;
     protected $container;
@@ -36,16 +17,17 @@ class DebugbarMiddleware {
     }
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, $next) {
-        $debug_bar      = $this->container->debugbar;
-        $debug_bar_head = $debug_bar->getJavascriptRenderer()->renderHead();
-        $debug_bar_body = $debug_bar->getJavascriptRenderer()->render();
-
+        // Trigger and get response first
         $response = $next($request, $response);
 
         // Stop append debug bar when request is debug bar resource url
-        if (preg_match("/\/_debugbar\/resources\/(css|js)/", $request->getUri()->getPath()) == true) {
+        if (preg_match("/\/_debugbar\/resources\/(stylesheets|javascript)/", $request->getUri()->getPath()) == true) {
             return $response;
         }
+
+        $debug_bar      = $this->container->debugbar;
+        $debug_bar_head = $debug_bar->getJavascriptRenderer()->renderHead();
+        $debug_bar_body = $debug_bar->getJavascriptRenderer()->render();
 
         // Append debug bar to current page
         $response = $this->appendDebugBar($response, $debug_bar_head, $debug_bar_body);

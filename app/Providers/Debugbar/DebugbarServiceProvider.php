@@ -2,54 +2,37 @@
 namespace App\Providers\Debugbar;
 
 use App\Contracts\ServiceProvider;
+use App\Providers\Debugbar\Middleware\Debugbar as DebugbarMiddleware;
 
+/**
+ * Usage
+ * =====
+ *
+ * Debugbar
+ *
+ *      # In config/app.php
+ *      'providers' => [
+ *          ...
+ *          App\Providers\Debugbar\DebugbarServiceProvider::class,
+ *          ...
+ *      ],
+ */
 class DebugbarServiceProvider extends ServiceProvider {
 
     public function register() {
-        // Setup debugbar
-        $debug_bar = new StandardDebugbar($this->app);
-        $renderer = $debug_bar->getJavascriptRenderer($this->baseUrl());
-
-        // Get router object from container
-        $router = $this->container->get('router');
-
-        // Add url mapping for debug bar resource
-        $router->map(['GET'], '/_debugbar/resources/{name}', function($request, $response, $args) use ($renderer) {
-            $name = $args['name'];
-
-            switch($name) {
-                case 'css':
-                    $css = $renderer->dumpCssAssets();
-
-                    $response = $response->withHeader('Content-Type', 'text/css')->write($css);
-                    break;
-                case 'js':
-                    $js = $renderer->dumpJsAssets();
-
-                    $response = $response->withHeader('Content-Type', 'text/javascript')->write($js);
-                    break;
-                default:
-                    throw new \RuntimeException('Can not match resource type');
-                    break;
-            }
-
-            return $response;
-        })->setName('debugbar.assets');
-
-        $this->container['debugbar'] = function() use ($debug_bar) {
-            return $debug_bar;
+        $this->container['debugbar'] = function() {
+            return new StandardDebugbar($this->app);
         };
     }
 
-    protected function baseUrl() {
-        $uri    = $this->container->request->getUri();
-        $path   = $uri->getPath();
-        $scheme = $uri->getScheme();
-        $domain = $uri->getHost();
-        $port   = $uri->getPort() == 80 || $uri->getPort() == null ? "" : ":".$uri->getPort();
-        $uri    = sprintf("%s://%s%s", $scheme, $domain, $port);
+    public function boot() {
+        $this->app->get('/_debugbar/resources/stylesheets', 'App\Providers\Debugbar\Controllers\AssetsController:css')->setName('debugbar.assets.css');
+        $this->app->get('/_debugbar/resources/javascript', 'App\Providers\Debugbar\Controllers\AssetsController:js')->setName('debugbar.assets.js');
 
-        return $uri;
+        $debugbar = $this->container['debugbar'];
+        $debugbar->boot();
+
+        $this->app->add(new DebugbarMiddleware($this->app));
     }
 
 }
