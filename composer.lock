@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d732993236ef94366b468c7d20d5443e",
+    "hash": "1d405cddf3e507c15f457634f3c76ccf",
     "content-hash": "23bd91ce9e20933f6ada49c8f413b0b6",
     "packages": [
         {
@@ -803,16 +803,16 @@
         },
         {
             "name": "respect/validation",
-            "version": "1.0.5",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Respect/Validation.git",
-                "reference": "294368294f9cd207f81474bab27d99875a19ac55"
+                "reference": "af0be2fbcd22e2199292983367d9dccdd471adde"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Respect/Validation/zipball/294368294f9cd207f81474bab27d99875a19ac55",
-                "reference": "294368294f9cd207f81474bab27d99875a19ac55",
+                "url": "https://api.github.com/repos/Respect/Validation/zipball/af0be2fbcd22e2199292983367d9dccdd471adde",
+                "reference": "af0be2fbcd22e2199292983367d9dccdd471adde",
                 "shasum": ""
             },
             "require": {
@@ -838,7 +838,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0-dev"
+                    "dev-master": "1.1-dev"
                 }
             },
             "autoload": {
@@ -857,13 +857,13 @@
                 }
             ],
             "description": "The most awesome validation engine ever created for PHP",
-            "homepage": "http://respect.li",
+            "homepage": "http://respect.github.io/Validation/",
             "keywords": [
                 "respect",
                 "validation",
                 "validator"
             ],
-            "time": "2016-03-31 17:39:15"
+            "time": "2016-04-24 01:11:23"
         },
         {
             "name": "robmorgan/phinx",
