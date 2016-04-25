@@ -18,7 +18,8 @@
         "nesbot/carbon": "^1.21",
         "symfony/translation": "^3.0",
         "symfony/twig-bridge": "^3.0",
-        "maximebf/debugbar": "^1.11"
+        "maximebf/debugbar": "^1.11",
+        "illuminate/events": "^5.2"
     },
     "autoload": {
         "psr-4": {

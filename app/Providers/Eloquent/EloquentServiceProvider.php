@@ -2,6 +2,7 @@
 namespace App\Providers\Eloquent;
 
 use Illuminate\Database\Capsule\Manager as Capsule;
+use Illuminate\Events\Dispatcher;
 use App\Contracts\ServiceProvider;
 
 /**
@@ -39,6 +40,7 @@ class EloquentServiceProvider extends ServiceProvider {
         }
 
         $capsule->setAsGlobal();
+        $capsule->setEventDispatcher(new Dispatcher());
         $capsule->bootEloquent();
 
         // Setup db service provider
