@@ -42,9 +42,16 @@ foreach($settings['app']['middleware'] as $middleware) {
 }
 
 // Slim service providers
+$providers = [];
 foreach($settings['app']['providers'] as $provider) {
     $provider = new $provider($app);
     $provider->register();
+
+    array_push($providers, $provider);
+}
+
+foreach($providers as $provider) {
+    $provider->boot();
 }
 
 // Slim routes

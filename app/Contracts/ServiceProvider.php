@@ -13,4 +13,10 @@ abstract class ServiceProvider {
         $this->container = $app->getContainer();
     }
 
+    public function boot() {
+
+    }
+
+    abstract function register();
+
 }
