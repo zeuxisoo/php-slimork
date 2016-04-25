@@ -18,7 +18,7 @@ use App\Contracts\ServiceProvider;
  *      $tags = $this->csrf->getTokenForMetaTags();
  *
  *      # View
- *      {{ $tags | raw }}
+ *      {{ tags | raw }}
  *
  * Custom
  *
@@ -37,28 +37,27 @@ use App\Contracts\ServiceProvider;
 class CsrfServiceProvider extends ServiceProvider {
 
     public function register() {
-        $container     = $this->container;
-        $csrf_settings = $container->settings['app']['csrf'];
+        $this->container['csrf'] = function() {
+            $settings = $this->container['settings']['app']['csrf'];
 
-        // Setup CSRF and container
-        $guard = new Csrf($csrf_settings['prefix']);
-        $guard->setStrength($csrf_settings['strength']);
+            $guard = new Csrf($settings['prefix']);
+            $guard->setStrength($settings['strength']);
 
-        if ($container->has('flash') === true) {
-            $guard->setFailureCallable(function(Request $request, Response $response, $next) use ($container) {
-                $container->flash->error('Failed CSRF check!');
+            return $guard;
+        };
+    }
+
+    public function boot() {
+        if ($this->container->has('flash') === true) {
+            $this->container['csrf']->setFailureCallable(function(Request $request, Response $response, $next) {
+                $this->container['session']->set('error', 'Failed CSRF check!');
 
                 return $response->withStatus(302)->withHeader('Location', '/');
             });
         }
 
-        $container['csrf'] = function() use ($guard) {
-            return $guard;
-        };
-
-        // Add to application level middleware if global is true
-        if ($container->settings['app']['csrf']['global'] === true) {
-            $this->app->add($guard);
+        if ($this->container['settings']['app']['csrf']['global'] === true) {
+            $this->app->add($this->container['csrf']);
         }
     }
 

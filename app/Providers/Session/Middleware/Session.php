@@ -1,10 +1,10 @@
 <?php
-namespace App\Middlewares;
+namespace App\Providers\Session\Middleware;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
-class SessionMiddleware {
+class Session {
 
     protected $app;
     protected $container;

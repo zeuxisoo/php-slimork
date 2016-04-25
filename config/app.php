@@ -60,7 +60,6 @@ return [
     ],
 
     'middleware' => [
-        App\Middlewares\SessionMiddleware::class,
         App\Middlewares\AppMiddleware::class,
     ],
 
