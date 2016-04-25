@@ -17,7 +17,8 @@
         "firebase/php-jwt": "^3.0",
         "nesbot/carbon": "^1.21",
         "symfony/translation": "^3.0",
-        "symfony/twig-bridge": "^3.0"
+        "symfony/twig-bridge": "^3.0",
+        "maximebf/debugbar": "^1.11"
     },
     "autoload": {
         "psr-4": {
