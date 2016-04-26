@@ -93,4 +93,8 @@ class Session {
         return empty($this->session[$key]) === true;
     }
 
+    public function all() {
+        return $this->session;
+    }
+
 }
