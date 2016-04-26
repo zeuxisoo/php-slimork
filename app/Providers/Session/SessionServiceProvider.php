@@ -6,8 +6,8 @@ use App\Contracts\ServiceProvider;
 class SessionServiceProvider extends ServiceProvider {
 
     public function register() {
-        $this->container['session'] = function() {
-            return new Session();
+        $this->container['session'] = function($c) {
+            return new Session($c);
         };
     }
 

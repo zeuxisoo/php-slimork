@@ -1,6 +1,8 @@
 <?php
 namespace App\Providers\Session;
 
+use Aura\Session\SessionFactory;
+
 /**
  * Usage
  * =====
@@ -35,26 +37,54 @@ namespace App\Providers\Session;
 class Session {
 
     protected $session;
+    protected $segment = "App\Providers\Session\Segment\Default";
 
-    public function __construct() {
-        $this->session = &$_SESSION;
+    protected $options = [
+        'name'     => 'PHPSESSID',
+        'lifetime' => 7200,
+        'path'     => null,
+        'domain'   => null,
+        'secure'   => false,
+        'httponly' => true,
+    ];
+
+    public function __construct($container) {
+        $settings = array_merge($this->options, $container['settings']['app']['session']);
+
+        $session = (new SessionFactory())->newInstance($_COOKIE);
+        $session->setCookieParams($settings);
+        $session->setName($settings['name']);
+
+        $this->session = $session;
+    }
+
+    public function instance() {
+        return $this->session;
+    }
+
+    public function segment($name = "") {
+        if (empty($name) === false) {
+            $this->segment = $name;
+        }
+
+        return $this->session->getSegment($this->segment);
     }
 
     public function set($key, $name) {
-        $this->session[$key] = $name;
+        $this->segment()->set($key, $name);
     }
 
     public function get($key, $default = null) {
-        return $this->has($key) ? $this->session[$key] : $default;
+        return $this->has($key) ? $this->segment()->get($key) : $default;
     }
 
     public function has($key) {
-        return array_key_exists($key, $this->session) === true;
+        return array_key_exists($key, $_SESSION[$this->segment]) === true;
     }
 
     public function remove($key) {
         if ($this->has($key) === true) {
-            unset($this->session[$key]);
+            unset($_SESSION[$this->segment][$key]);
         }
 
         return $this->get($key);
@@ -73,14 +103,14 @@ class Session {
     }
 
     public function push($key, $value) {
-        $this->session[$key][] = $value;
+        $_SESSION[$this->segment][$key][] = $value;
 
         return $this->get($key);
     }
 
     public function pull($key) {
         $items = $this->get($key);
-        $item  = is_array($items) === true ? array_pop($this->session[$key]) : null;
+        $item  = is_array($items) === true ? array_pop($_SESSION[$this->segment][$key]) : null;
 
         if ($this->isEmpty($key) === true) {
             $this->remove($key);
@@ -90,11 +120,12 @@ class Session {
     }
 
     public function isEmpty($key) {
-        return empty($this->session[$key]) === true;
+        return empty($this->segment()->get($key)) === true;
     }
 
-    public function all() {
-        return $this->session;
+    public function all($segment = "") {
+        return empty($segment) === true ? $_SESSION[$this->segment] : $_SESSION[$segment];
     }
+
 
 }

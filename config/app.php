@@ -22,8 +22,8 @@ return [
 
     'session' => [
         'name'     => '_s',
-        'life_time' => 7200, // 2 hour
-        'path'     => '/',
+        'lifetime' => 7200, // 2 hour
+        'path'     => null,
         'domain'   => null,
         'secure'   => false,
         'httponly' => true,
@@ -45,6 +45,7 @@ return [
 
     'providers' => [
         App\Providers\Session\SessionServiceProvider::class,
+        // App\Providers\Session\SessionServiceProvider::class,
         App\Providers\Eloquent\EloquentServiceProvider::class,
         App\Providers\View\ViewServiceProvider::class,
         App\Providers\Logger\LoggerServiceProvider::class,
