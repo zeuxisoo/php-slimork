@@ -63,4 +63,8 @@ return [
         App\Middlewares\AppMiddleware::class,
     ],
 
+    'commands' => [
+        App\Consoles\Commands\Serve::class,
+    ]
+
 ];

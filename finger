@@ -1,0 +1,19 @@
+<?php
+date_default_timezone_set('Asia/Hong_Kong');
+
+define('BASE_ROOT', __DIR__);
+define('VENDOR_ROOT', BASE_ROOT.'/vendor');
+define('CONFIG_ROOT', BASE_ROOT.'/config');
+
+require VENDOR_ROOT.'/autoload.php';
+
+use Symfony\Component\Console\Application as ConsoleApplication;
+
+$settings = require_once CONFIG_ROOT.'/app.php';
+$console  = new ConsoleApplication('SimpleWork Console', 'v0.1.0');
+
+foreach($settings['commands'] as $command) {
+    $console->add(new $command);
+}
+
+$console->run();
