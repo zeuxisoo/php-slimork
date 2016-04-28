@@ -16,7 +16,7 @@ use App\Contracts\ServiceProvider;
 class LoggerServiceProvider extends ServiceProvider {
 
     public function register() {
-        $this->container['logger'] = function($c) {
+        $this->container['logger'] = function() {
             $logger       = new Logger('SIMPLE_WORK');
             $file_handler = new StreamHandler(STORAGE_ROOT.'/logs/'.date('Y-m-d').'.log');
 

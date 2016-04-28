@@ -18,7 +18,7 @@ use App\Helpers\BcryptHelper;
 class HashServiceProvider extends ServiceProvider {
 
     public function register() {
-        $this->container['hash'] = function($c) {
+        $this->container['hash'] = function() {
             return new BcryptHelper();
         };
     }

@@ -44,7 +44,7 @@ class EloquentServiceProvider extends ServiceProvider {
         $capsule->bootEloquent();
 
         // Setup db service provider
-        $this->container['db'] = function($c) use ($capsule) {
+        $this->container['db'] = function() use ($capsule) {
             return $capsule;
         };
     }

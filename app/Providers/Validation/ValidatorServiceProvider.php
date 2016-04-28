@@ -49,8 +49,8 @@ use App\Contracts\ServiceProvider;
 class ValidatorServiceProvider extends ServiceProvider {
 
     public function register() {
-        $this->container['validator'] = function($c) {
-            return new Validator;
+        $this->container['validator'] = function() {
+            return new Validator();
         };
     }
 

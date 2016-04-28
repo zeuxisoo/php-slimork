@@ -45,7 +45,6 @@ return [
 
     'providers' => [
         App\Providers\Session\SessionServiceProvider::class,
-        // App\Providers\Session\SessionServiceProvider::class,
         App\Providers\Eloquent\EloquentServiceProvider::class,
         App\Providers\View\ViewServiceProvider::class,
         App\Providers\Logger\LoggerServiceProvider::class,

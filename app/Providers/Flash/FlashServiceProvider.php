@@ -39,7 +39,7 @@ use App\Contracts\ServiceProvider;
 class FlashServiceProvider extends ServiceProvider {
 
     public function register() {
-        $this->container['flash'] = function($c) {
+        $this->container['flash'] = function() {
             return new Flash();
         };
     }
