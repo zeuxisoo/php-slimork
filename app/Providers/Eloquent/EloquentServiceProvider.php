@@ -3,6 +3,7 @@ namespace App\Providers\Eloquent;
 
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Illuminate\Events\Dispatcher;
+use Illuminate\Pagination\Paginator;
 use App\Contracts\ServiceProvider;
 
 /**
@@ -47,6 +48,15 @@ class EloquentServiceProvider extends ServiceProvider {
         $this->container['db'] = function() use ($capsule) {
             return $capsule;
         };
+    }
+
+    public function boot() {
+        $request      = $this->container->request;
+        $current_page = $request->getParam('page');
+
+        Paginator::currentPageResolver(function() use ($current_page) {
+            return $current_page;
+        });
     }
 
 }
