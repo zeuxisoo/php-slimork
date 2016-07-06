@@ -52,7 +52,7 @@ class CsrfServiceProvider extends ServiceProvider {
             $this->container['csrf']->setFailureCallable(function(Request $request, Response $response, $next) {
                 $this->container['session']->set('error', 'Failed CSRF check!');
 
-                return $response->withStatus(302)->withHeader('Location', '/');
+                return $response->withStatus(400)->write('Failed CSRF check!');
             });
         }
 
