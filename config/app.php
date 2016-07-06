@@ -23,7 +23,7 @@ return [
     'session' => [
         'name'     => '_s',
         'lifetime' => 7200, // 2 hour
-        'path'     => null,
+        'path'     => '/',
         'domain'   => null,
         'secure'   => false,
         'httponly' => true,
