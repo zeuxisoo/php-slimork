@@ -1,0 +1,11 @@
+{% if has_flash('error') %}
+    <div class="alert alert-error alert-danger">
+        <strong>Error!</strong>&nbsp;{{ flash('error') }}
+    </div>
+{% endif %}
+
+{% if has_flash('success') %}
+    <div class="alert alert-success">
+        <strong>Success!</strong>&nbsp;{{ flash('success') }}
+    </div>
+{% endif %}

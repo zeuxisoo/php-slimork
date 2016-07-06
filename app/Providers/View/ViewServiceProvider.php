@@ -29,7 +29,7 @@ class ViewServiceProvider extends ServiceProvider {
             ]);
 
             $view->addExtension(new TwigExtension($c['router'], $base_path));
-            $view->addExtension(new ViewHelper());
+            $view->addExtension(new ViewHelper($c));
 
             return $view;
         };

@@ -7,6 +7,12 @@ use Twig_SimpleFilter;
 
 class ViewHelper extends Twig_Extension {
 
+    private $container;
+
+    public function __construct($container) {
+        $this->container = $container;
+    }
+
     public function getName() {
         return 'ViewHelper';
     }
@@ -14,6 +20,8 @@ class ViewHelper extends Twig_Extension {
     public function getFunctions() {
         return [
             new Twig_SimpleFunction('lang', [$this, 'lang']),
+            new Twig_SimpleFunction('has_flash', [$this, 'hasFlash']),
+            new Twig_SimpleFunction('flash', [$this, 'flash']),
         ];
     }
 
@@ -24,8 +32,6 @@ class ViewHelper extends Twig_Extension {
     }
 
     /**
-     * View
-     *
      * example:
      *
      *     {{ lang("Hello World!") }}
@@ -33,6 +39,23 @@ class ViewHelper extends Twig_Extension {
      */
     public function lang($message, $arguments = array(), $domain = null, $locale = null) {
         return lang($message, $arguments, $domain, $locale);
+    }
+
+    /**
+     * example:
+     *
+     *     {% if hasFlash('error') %}
+     *         <div class="alert alert-error alert-danger">
+     *             <strong>Error!</strong>&nbsp;{{ flash('error') }}
+     *         </div>
+     *     {% endif %}
+     */
+    public function hasFlash($type) {
+        return $this->container->flash->getMessage($type);
+    }
+
+    public function flash($type) {
+        return $this->container->flash->getTypeMessage($type);
     }
 
 }
