@@ -23,6 +23,7 @@ class ViewHelper extends Twig_Extension {
             new Twig_SimpleFunction('has_flash', [$this, 'hasFlash']),
             new Twig_SimpleFunction('flash', [$this, 'flash']),
             new Twig_SimpleFunction('auth_user', [$this, 'authUser']),
+            new Twig_SimpleFunction('csrf_tags', [$this, 'csrfTags']),
         ];
     }
 
@@ -68,6 +69,15 @@ class ViewHelper extends Twig_Extension {
      */
     public function authUser() {
         return $this->container->auth->user();
+    }
+
+    /**
+     * example:
+     *
+     *     {{ csrf_tags() }}
+     */
+    public function csrfTags() {
+        return $this->csrf->getTokenForHiddenInputTags();
     }
 
 }
