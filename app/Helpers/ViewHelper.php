@@ -77,7 +77,7 @@ class ViewHelper extends Twig_Extension {
      *     {{ csrf_tags() }}
      */
     public function csrfTags() {
-        return $this->csrf->getTokenForHiddenInputTags();
+        return $this->container->csrf->getTokenForHiddenInputTags();
     }
 
 }
