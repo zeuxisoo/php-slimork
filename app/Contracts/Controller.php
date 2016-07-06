@@ -42,4 +42,15 @@ abstract class Controller {
         return $this->response->withJSON($data);
     }
 
+    /**
+     * Usage
+     *
+     * Redirect:
+     *
+     *      $this->redirect($this->router->pathFor('name'));
+     */
+    protected function redirect($url) {
+        return $this->response->withStatus(302)->withHeader('Location', $url);
+    }
+
 }
