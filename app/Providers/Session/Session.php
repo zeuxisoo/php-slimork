@@ -79,7 +79,7 @@ class Session {
     }
 
     public function has($key) {
-        return array_key_exists($key, $_SESSION[$this->segment]) === true;
+        return empty($_SESSION[$this->segment]) === false && array_key_exists($key, $_SESSION[$this->segment]) === true;
     }
 
     public function remove($key) {
