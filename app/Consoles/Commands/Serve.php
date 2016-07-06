@@ -28,7 +28,7 @@ class Serve extends Command {
     }
 
     protected function execute(InputInterface $input, OutputInterface $output) {
-        $host = $input->getOption('host') ?: 'localhost';
+        $host = $input->getOption('host') ?: '127.0.0.1';
         $port = $input->getOption('port') ?: '8080';
 
         $binary = ProcessUtils::escapeArgument((new PhpExecutableFinder)->find(false));
