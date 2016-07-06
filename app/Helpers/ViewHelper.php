@@ -22,6 +22,7 @@ class ViewHelper extends Twig_Extension {
             new Twig_SimpleFunction('lang', [$this, 'lang']),
             new Twig_SimpleFunction('has_flash', [$this, 'hasFlash']),
             new Twig_SimpleFunction('flash', [$this, 'flash']),
+            new Twig_SimpleFunction('auth_user', [$this, 'authUser']),
         ];
     }
 
@@ -56,6 +57,17 @@ class ViewHelper extends Twig_Extension {
 
     public function flash($type) {
         return $this->container->flash->getTypeMessage($type);
+    }
+
+    /**
+     * example:
+     *
+     *     {% if (authUser()) %}
+     *          Sign out
+     *     {% endfor %}
+     */
+    public function authUser() {
+        return $this->container->auth->user();
     }
 
 }
