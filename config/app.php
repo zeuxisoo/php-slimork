@@ -21,7 +21,7 @@ return [
     ],
 
     'session' => [
-        'name'     => '_s',
+        'name'     => '_sw',
         'lifetime' => 7200, // 2 hour
         'path'     => '/',
         'domain'   => null,
