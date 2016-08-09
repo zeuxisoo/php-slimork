@@ -1,7 +1,7 @@
 <?php
 namespace App\Models;
 
-use App\Contracts\Model;
+use Simork\Contracts\Model;
 
 class User extends Model {
 

@@ -1,7 +1,7 @@
 <?php
 namespace App\Transformers;
 
-use App\Contracts\Transformer;
+use Simork\Contracts\Transformer;
 use App\Models\User;
 
 class UserTransformer extends Transformer {

@@ -1,5 +1,5 @@
 <?php
-use App\Providers\Translation\Translation;
+use Simork\Providers\Translation\Translation;
 
 function lang($message, $arguments = array(), $domain = null, $locale = null) {
     $settings   = require CONFIG_ROOT.'/app.php';

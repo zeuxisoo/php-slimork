@@ -44,19 +44,19 @@ return [
     'timezone' => 'Asia/Hong_Kong',
 
     'providers' => [
-        App\Providers\Session\SessionServiceProvider::class,
-        App\Providers\Eloquent\EloquentServiceProvider::class,
-        App\Providers\View\ViewServiceProvider::class,
-        App\Providers\Logger\LoggerServiceProvider::class,
-        App\Providers\Hash\HashServiceProvider::class,
-        App\Providers\Flash\FlashServiceProvider::class,
-        App\Providers\Csrf\CsrfServiceProvider::class,
-        App\Providers\Validation\ValidatorServiceProvider::class,
-        App\Providers\Fractal\FractalServiceProvider::class,
-        App\Providers\Cookie\CookieServiceProvider::class,
-        App\Providers\Auth\AuthServiceProvider::class,
-        App\Providers\Jwt\JwtServiceProvider::class,
-        App\Providers\Translation\TranslationServiceProvider::class,
+        Simork\Providers\Session\SessionServiceProvider::class,
+        Simork\Providers\Eloquent\EloquentServiceProvider::class,
+        Simork\Providers\View\ViewServiceProvider::class,
+        Simork\Providers\Logger\LoggerServiceProvider::class,
+        Simork\Providers\Hash\HashServiceProvider::class,
+        Simork\Providers\Flash\FlashServiceProvider::class,
+        Simork\Providers\Csrf\CsrfServiceProvider::class,
+        Simork\Providers\Validation\ValidatorServiceProvider::class,
+        Simork\Providers\Fractal\FractalServiceProvider::class,
+        Simork\Providers\Cookie\CookieServiceProvider::class,
+        Simork\Providers\Auth\AuthServiceProvider::class,
+        Simork\Providers\Jwt\JwtServiceProvider::class,
+        Simork\Providers\Translation\TranslationServiceProvider::class,
     ],
 
     'middleware' => [
@@ -64,7 +64,7 @@ return [
     ],
 
     'commands' => [
-        App\Consoles\Commands\Serve::class,
+        Simork\Consoles\Commands\Serve::class,
     ]
 
 ];

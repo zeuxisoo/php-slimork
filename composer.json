@@ -26,7 +26,8 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "Simork\\": "simork/"
         },
         "files": [
             "app/functions.php"
