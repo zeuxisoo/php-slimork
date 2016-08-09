@@ -1,5 +1,5 @@
 <?php
-use App\Contracts\Migration;
+use Simork\Contracts\Migration;
 
 class CreateUserTable extends Migration {
 
