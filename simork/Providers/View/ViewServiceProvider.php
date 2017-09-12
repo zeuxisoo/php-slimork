@@ -25,7 +25,7 @@ class ViewServiceProvider extends ServiceProvider {
                 'cache'            => STORAGE_ROOT.'/cache/view',
                 'auto_reload'      => true,
                 'strict_variables' => false,
-                'autoescape'       => true
+                'autoescape'       => 'html',
             ]);
 
             $view->addExtension(new TwigExtension($c['router'], $base_path));
