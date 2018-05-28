@@ -1,36 +1,17 @@
 {
     "name": "zeuxisoo/slim-simplework",
     "description": "PHP Slim Framework skeleton application",
-    "homepage": "https://github.com/zeuxisoo/php-slim-simplework",
+    "homepage": "https://github.com/zeuxisoo/php-slimork",
     "require": {
-        "slim/slim": "^3.8",
-        "slim/twig-view": "^2.2",
-        "monolog/monolog": "^1.23",
-        "symfony/var-dumper": "^3.3",
-        "illuminate/database": "^5.5",
-        "Illuminate/Pagination": "^5.5",
-        "robmorgan/phinx": "^0.9.1",
-        "slim/flash": "^0.2.0",
-        "slim/csrf": "^0.8.1",
-        "respect/validation": "^1.1",
-        "league/fractal": "^0.17.0",
-        "firebase/php-jwt": "^5.0",
-        "nesbot/carbon": "^1.22",
-        "symfony/translation": "^3.3",
-        "symfony/twig-bridge": "^3.3",
-        "maximebf/debugbar": "^1.14",
-        "illuminate/events": "^5.5",
-        "aura/session": "^2.1",
-        "symfony/console": "^3.3",
-        "symfony/process": "^3.3"
+        "slim/slim": "3.10.*"
     },
     "autoload": {
         "psr-4": {
             "App\\": "app/",
-            "Simork\\": "simork/"
+            "Slimork\\": "slimork/"
         },
         "files": [
-            "app/functions.php"
+
         ]
     },
     "config": {
