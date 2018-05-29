@@ -16,27 +16,31 @@ class App extends SlimApp {
     }
 
     protected function setupSettings() {
-        $settings = [];
+        $slim_config  = require CONFIG_ROOT.'/slim.php';
+        $final_config = [
+            'settings' => $slim_config
+        ];
 
-        // Merge all settings
+        // Merge all config in settings namespace
         foreach(glob(CONFIG_ROOT."/*.php") as $file_path) {
-            $file_name    = basename($file_path, ".php");
-            $setting_name = $file_name === 'slim' ? 'settings' : $file_name;
+            $file_name = basename($file_path, ".php");
 
-            $settings[$setting_name] = require_once $file_path;
+            if ($file_name !== 'slim') {
+                $final_config['settings'][$file_name] = require_once $file_path;
+            }
         }
 
-        // Make the slim settings in global with `settings` prefix
-        foreach($settings['settings'] as $name => $value) {
-            $settings['settings.'.$name] = $value;
+        // Make the slim config in global with `settings` prefix
+        foreach($slim_config as $name => $value) {
+            $final_config['settings.'.$name] = $value;
         }
 
-        $this->settings = $settings;
+        $this->settings = $final_config;
     }
 
     protected function setupEnvironments() {
         // Timezoom
-        date_default_timezone_set($this->settings['app']['timezone']);
+        date_default_timezone_set($this->settings['settings']['app']['timezone']);
     }
 
     protected function configureContainer(ContainerBuilder $builder) {
