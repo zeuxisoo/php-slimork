@@ -1,4 +1,2 @@
 <?php
-$app->get('/', function($request, $response) {
-    return $response->write("Hello world");
-});
+$app->get('/', 'App\Controllers\HomeController:index')->setName('home.index');
