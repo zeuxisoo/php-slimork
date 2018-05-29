@@ -1,2 +1,2 @@
 <?php
-$app->get('/', 'App\Controllers\HomeController:index')->setName('home.index');
+$app->get('/', ['App\Controllers\HomeController', 'index'])->setName('home.index');

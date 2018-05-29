@@ -5,7 +5,7 @@ use Slimork\Contracts\Controller;
 
 class HomeController extends Controller {
 
-    public function index($request, $response) {
+    public function index($response) {
         return $response->write('Hello world');
     }
 

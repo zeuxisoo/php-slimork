@@ -10,27 +10,11 @@ define('APP_ROOT', BASE_ROOT.'/app');
 // Composer auto loader
 require_once VENDOR_ROOT.'/autoload.php';
 
-// Application configs
-$settings = [];
-foreach(glob(CONFIG_ROOT."/*.php") as $file_path) {
-    $file_name = basename($file_path, ".php");
-    if ($file_name !== 'slim') {
-        $settings[$file_name] = require_once $file_path;
-    }
-}
-
-$settings = array_merge(require CONFIG_ROOT.'/slim.php', $settings);
-
-// Base configs
-date_default_timezone_set($settings['app']['timezone']);
-
 // Import class
-use Slim\App;
+use Slimork\Foundation\App;
 
 // Setup slim
-$app = new App([
-    'settings' => $settings
-]);
+$app = new App();
 
 // Slim routes
 require_once APP_ROOT.'/routes.php';
