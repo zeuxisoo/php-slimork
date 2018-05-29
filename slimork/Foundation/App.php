@@ -13,6 +13,8 @@ class App extends SlimApp {
         $this->setupEnvironments();
 
         parent::__construct();
+
+        $this->setupServiceProviders();
     }
 
     protected function setupSettings() {
@@ -39,8 +41,22 @@ class App extends SlimApp {
     }
 
     protected function setupEnvironments() {
-        // Timezoom
         date_default_timezone_set($this->settings['settings']['app']['timezone']);
+    }
+
+    protected function setupServiceProviders() {
+        $providers = [];
+
+        foreach($this->getSetting('app')['providers'] as $provider) {
+            $provider = new $provider($this);
+            $provider->register();
+
+            array_push($providers, $provider);
+        }
+
+        foreach($providers as $provider) {
+            $provider->boot();
+        }
     }
 
     // Implementation

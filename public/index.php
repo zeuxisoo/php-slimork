@@ -18,18 +18,6 @@ use Slimork\Foundation\App;
 // Setup slim
 $app = new App();
 
-// Slim service providers
-$providers = [];
-foreach($app->getSetting('app')['providers'] as $provider) {
-    $provider = new $provider($app);
-    $provider->register();
-    array_push($providers, $provider);
-}
-
-foreach($providers as $provider) {
-    $provider->boot();
-}
-
 // Slim routes
 require_once APP_ROOT.'/routes.php';
 
