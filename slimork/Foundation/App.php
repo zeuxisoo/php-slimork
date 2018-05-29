@@ -43,8 +43,20 @@ class App extends SlimApp {
         date_default_timezone_set($this->settings['settings']['app']['timezone']);
     }
 
+    // Implementation
     protected function configureContainer(ContainerBuilder $builder) {
         $builder->addDefinitions($this->settings);
+    }
+
+    // Function
+    public function getSetting($name) {
+        $settings = $this->getContainer()->get('settings');
+
+        if (array_key_exists($name, $settings) === true) {
+            return $settings[$name];
+        }else{
+            return [];
+        }
     }
 
 }

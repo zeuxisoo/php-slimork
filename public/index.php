@@ -16,12 +16,11 @@ require_once VENDOR_ROOT.'/autoload.php';
 use Slimork\Foundation\App;
 
 // Setup slim
-$app      = new App();
-$settings = $app->getContainer()->get('settings');
+$app = new App();
 
 // Slim service providers
 $providers = [];
-foreach($settings['app']['providers'] as $provider) {
+foreach($app->getSetting('app')['providers'] as $provider) {
     $provider = new $provider($app);
     $provider->register();
     array_push($providers, $provider);
