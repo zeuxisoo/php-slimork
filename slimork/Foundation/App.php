@@ -17,6 +17,7 @@ class App extends SlimApp {
         $this->setupServiceProviders();
     }
 
+    // Setup settings
     protected function setupSettings() {
         $slim_config  = require CONFIG_ROOT.'/slim.php';
         $final_config = [
@@ -40,10 +41,17 @@ class App extends SlimApp {
         $this->settings = $final_config;
     }
 
+    // Setup enviroments
     protected function setupEnvironments() {
         date_default_timezone_set($this->settings['settings']['app']['timezone']);
     }
 
+    // Implementation
+    protected function configureContainer(ContainerBuilder $builder) {
+        $builder->addDefinitions($this->settings);
+    }
+
+    // Setup service providers
     protected function setupServiceProviders() {
         $providers = [];
 
@@ -59,12 +67,7 @@ class App extends SlimApp {
         }
     }
 
-    // Implementation
-    protected function configureContainer(ContainerBuilder $builder) {
-        $builder->addDefinitions($this->settings);
-    }
-
-    // Function
+    // Functions
     public function getSetting($name) {
         $settings = $this->getContainer()->get('settings');
 
