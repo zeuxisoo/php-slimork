@@ -13,8 +13,8 @@ abstract class ServiceProvider {
         $this->container = $app->getContainer();
     }
 
+    // Optional, After service provider was registered, this method will triggered
     public function boot() {
-
     }
 
     abstract function register();
