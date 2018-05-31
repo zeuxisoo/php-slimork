@@ -10,8 +10,8 @@ function storage_path($path) {
     return STORAGE_ROOT.$path;
 }
 
-function resource_path($path) {
-    return RESOURCE_ROOT.$path;
+function resources_path($path) {
+    return RESOURCES_ROOT.$path;
 }
 
 function render_template($template_path, $template_name, $variables = []) {
@@ -31,5 +31,5 @@ function render_template($template_path, $template_name, $variables = []) {
 }
 
 function render_error($template_name, $variables = []) {
-    return render_template(resource_path('/view/errors'), $template_name, $variables);
+    return render_template(resources_path('/views/errors'), $template_name, $variables);
 }

@@ -21,8 +21,8 @@ class ViewServiceProvider extends ServiceProvider {
             $request  = $container->get('request');
             $router   = $container->get('router');
 
-            $view_path  = RESOURCE_ROOT.'/view';
-            $cache_path = STORAGE_ROOT.'/cache/view';
+            $view_path  = RESOURCES_ROOT.'/views';
+            $cache_path = STORAGE_ROOT.'/cache/views';
             $base_path  = rtrim(str_ireplace('index.php', '', $request->getUri()->getBasePath()), '/');
 
             $view = new Twig($view_path, array_merge([

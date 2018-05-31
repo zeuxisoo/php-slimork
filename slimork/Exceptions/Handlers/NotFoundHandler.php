@@ -6,7 +6,7 @@ use Slimork\Contracts\ExceptionHandler;
 class NotFoundHandler extends ExceptionHandler {
 
     public function register() {
-        $this->container->set('notFoundHandler', function ($c) {
+        $this->container->set('notFoundHandler', function($c) {
             return function($request, $response) use ($c) {
                 $content = render_error('404.html');
 

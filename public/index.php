@@ -5,7 +5,7 @@ error_reporting(E_ALL);
 define('BASE_ROOT', dirname(__DIR__));
 define('VENDOR_ROOT', BASE_ROOT.'/vendor');
 define('CONFIG_ROOT', BASE_ROOT.'/config');
-define('RESOURCE_ROOT', BASE_ROOT.'/resource');
+define('RESOURCES_ROOT', BASE_ROOT.'/resources');
 define('STORAGE_ROOT', BASE_ROOT.'/storage');
 define('APP_ROOT', BASE_ROOT.'/app');
 
