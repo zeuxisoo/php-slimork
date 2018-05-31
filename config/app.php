@@ -8,6 +8,7 @@ return [
 
     'handlers' => [
         Slimork\Exceptions\Handlers\NotFoundHandler::class,
+        Slimork\Exceptions\Handlers\NotAllowedHandler::class,
     ],
 
     'providers' => [
