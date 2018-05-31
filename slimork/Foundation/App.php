@@ -14,6 +14,7 @@ class App extends SlimApp {
 
         parent::__construct();
 
+        $this->setupMiddlewares();
         $this->setupServiceProviders();
     }
 
@@ -49,6 +50,13 @@ class App extends SlimApp {
     // Implementation
     protected function configureContainer(ContainerBuilder $builder) {
         $builder->addDefinitions($this->settings);
+    }
+
+    // Setup middlewares
+    protected function setupMiddlewares() {
+        foreach($this->getSetting('app')['middlewares'] as $middleware) {
+            $this->add(new $middleware($this));
+        }
     }
 
     // Setup service providers
