@@ -6,6 +6,10 @@ return [
         Slimork\Middlewares\Route\DefaultMiddleware::class,
     ],
 
+    'handlers' => [
+        Slimork\Exceptions\Handlers\NotFoundHandler::class,
+    ],
+
     'providers' => [
         Slimork\Providers\View\ViewServiceProvider::class
     ]
