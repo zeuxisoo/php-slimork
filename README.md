@@ -8,7 +8,7 @@ A smallest skeleton application integrated slim and some packages
 ## Providers
 
 - [X] View
-- [ ] Logger
+- [X] Logger
 - [ ] Cookie
 - [ ] Session
 - [ ] CSRF
