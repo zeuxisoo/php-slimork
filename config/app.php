@@ -14,6 +14,7 @@ return [
     ],
 
     'providers' => [
-        Slimork\Providers\View\ViewServiceProvider::class
+        Slimork\Providers\View\ViewServiceProvider::class,
+        Slimork\Providers\Log\LogServiceProvider::class,
     ]
 ];
