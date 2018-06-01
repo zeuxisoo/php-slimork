@@ -15,8 +15,8 @@
             "Slimork\\": "slimork/"
         },
         "files": [
-            "slimork/helpers.php",
-            "app/helpers.php"
+            "app/helpers.php",
+            "slimork/helpers.php"
         ]
     },
     "config": {
