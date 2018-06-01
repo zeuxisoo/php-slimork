@@ -2,7 +2,6 @@
     "name": "zeuxisoo/php-slimork",
     "description": "PHP Slim Framework skeleton application",
     "keywords": ["framework", "microframework", "slim", "skeleton", "rest"],
-    "license": "MIT",
     "type": "project",
     "homepage": "https://github.com/zeuxisoo/php-slimork",
     "require": {
