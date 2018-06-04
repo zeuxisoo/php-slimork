@@ -36,5 +36,5 @@ The project tree maybe like:
 - `docs`    : The documentation of the Slimork
 - `public`  : The public directory for everyone access such as assets and download files
 - `resource`: The resources directory for the project such as assets and view sources
-- `slimork` : The project library
+- `slimork` : The project library ***(Note: Please don't modify this directory/files)***
 - `storage` : The storage directory for user or program to store the generated file such as upload file, system logs.
