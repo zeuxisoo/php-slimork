@@ -18,7 +18,7 @@ This service provider can provider `Twig` template engine in the application
 
 3. Edit the default view config like default charset, auto reload status and so on
 
-        view config/view.php
+        vim config/view.php
 
 ## Usage
 
