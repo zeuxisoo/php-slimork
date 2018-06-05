@@ -20,6 +20,8 @@ This service provider can provider `Twig` template engine in the application
 
         vim config/view.php
 
+    - default cache path: `/storage/cache/views`
+
 ## Usage
 
 You can access the view service provider by the following code

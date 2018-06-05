@@ -16,9 +16,11 @@ This service provider can provider `Monolog` logging service in the application
             ...
         ]
 
-3. Edit the default logger config like log path, level and so on
+3. Edit the default logger config like store log path, level and so on
 
         vim config/logger.php
+
+    - default store log path: `/storage/logs`
 
 ## Usage
 
