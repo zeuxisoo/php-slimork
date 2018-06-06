@@ -14,6 +14,7 @@ return [
     ],
 
     'providers' => [
+        Slimork\Providers\Cookie\CookieServiceProvider::class,
         Slimork\Providers\View\ViewServiceProvider::class,
         Slimork\Providers\Log\LogServiceProvider::class,
     ]
