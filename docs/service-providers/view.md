@@ -26,7 +26,7 @@ This service provider can provider `Twig` template engine in the application
 
 You can access the view service provider by the following code
 
-    $this->view->render($response, 'view.html';
+    $this->view->render($response, 'view.html');
     $this->view->render($response, 'view.html', compact('variable'));
 
 In the controller, it can access by the following code
