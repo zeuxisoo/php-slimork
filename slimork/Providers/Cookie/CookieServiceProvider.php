@@ -20,7 +20,7 @@ use Slimork\Contracts\ServiceProvider;
  *      $this->cookie->remove('name');
  *
  *      # Is value exists or not
- *      $this->session->has('name');
+ *      $this->cookie->has('name');
  */
 class CookieServiceProvider extends ServiceProvider {
 
