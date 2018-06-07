@@ -10,7 +10,7 @@ A smallest skeleton application integrated slim and some packages
 - [X] View
 - [X] Logger
 - [X] Cookie
-- [ ] Session
+- [X] Session
 - [ ] CSRF
 - [ ] Flash
 - [ ] Mail
