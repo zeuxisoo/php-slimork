@@ -25,8 +25,8 @@ use Slimork\Contracts\ServiceProvider;
 class CookieServiceProvider extends ServiceProvider {
 
     public function register() {
-        $this->container->set('cookie', function($c) {
-            return new Cookie($c);
+        $this->container->set('cookie', function($container) {
+            return new Cookie($container);
         });
     }
 

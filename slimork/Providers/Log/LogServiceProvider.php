@@ -23,8 +23,8 @@ use Slimork\Contracts\ServiceProvider;
 class LogServiceProvider extends ServiceProvider {
 
     public function register() {
-        $this->container->set('log', function($c) {
-            $settings = $c->get('settings');
+        $this->container->set('log', function($container) {
+            $settings = $container->get('settings');
 
             return new Logger('slimork', $settings['logger']);
         });
