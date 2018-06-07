@@ -9,7 +9,8 @@
         "php-di/slim-bridge": "2.0.*",
         "slim/twig-view": "2.4.*",
         "symfony/var-dumper": "4.0.*",
-        "monolog/monolog": "1.23.*"
+        "monolog/monolog": "1.23.*",
+        "aura/session": "2.1.*"
     },
     "autoload": {
         "psr-4": {
