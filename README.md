@@ -11,7 +11,7 @@ A smallest skeleton application integrated slim and some packages
 - [X] Logger
 - [X] Cookie
 - [X] Session
-- [ ] CSRF
+- [X] CSRF
 - [ ] Flash
 - [ ] Mail
 - [ ] Hash
