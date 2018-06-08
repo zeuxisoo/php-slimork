@@ -16,6 +16,7 @@ return [
     'providers' => [
         Slimork\Providers\Session\SessionServiceProvider::class,
         Slimork\Providers\Cookie\CookieServiceProvider::class,
+        Slimork\Providers\Csrf\CsrfServiceProvider::class,
         Slimork\Providers\View\ViewServiceProvider::class,
         Slimork\Providers\Log\LogServiceProvider::class,
     ]
