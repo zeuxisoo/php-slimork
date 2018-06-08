@@ -51,8 +51,8 @@ use Slimork\Contracts\ServiceProvider;
 class CsrfServiceProvider extends ServiceProvider {
 
     public function register() {
-        $this->container->set('csrf', function() {
-            $settings = $this->container->get('settings');
+        $this->container->set('csrf', function($container) {
+            $settings = $container->get('settings');
             $csrf     = $settings['csrf'];
 
             $guard = new Csrf($csrf['prefix']);
