@@ -42,4 +42,8 @@ class SessionServiceProvider extends ServiceProvider {
         });
     }
 
+    public function boot() {
+        $this->app->add(new Middleware\Session($this->app));
+    }
+
 }
