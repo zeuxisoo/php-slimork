@@ -27,40 +27,40 @@ This service provider provided basic session management function in the applicat
 
 You can access the session service provider by the following code
 
-- Set key and value
+**Set key and value**
 
-        $this->session->set('key', 'value')
+    $this->session->set('key', 'value')
 
-- Get value
+**Get value**
 
-        $this->session->get('key')
+    $this->session->get('key')
 
-- Is value exists or not
+**Check the value is or not exists**
 
-        $this->session->has('key2')
+    $this->session->has('key2')
 
-- Remove value
+**Remove value**
 
-    > remove this value first before retrieve and reutrn value
+remove this value first before retrieve and reutrn value
 
-        $this->session->remove('key')
+    $this->session->remove('key')
 
-- Pop value
+**Pop value**
 
-    > retrieve this value first, then delete it and return the retrieved value
+retrieve this value first, then delete it and return the retrieved value
 
-        $this->session->pop('key');
+    $this->session->pop('key');
 
-- Push value to array item
+**Push value to array item**
 
-    > the key must not exist
+the key must not exist
 
-        $this->session->push('key3', 'a'); // return value: ['a']
-        $this->session->push('key3', 'b'); // return value: ['a', 'b']
-        $this->session->push('key3', 'c'); // return value: ['a', 'b', 'c']
+    $this->session->push('key3', 'a'); // return value: ['a']
+    $this->session->push('key3', 'b'); // return value: ['a', 'b']
+    $this->session->push('key3', 'c'); // return value: ['a', 'b', 'c']
 
-- Pull value from array item
+**Pull value from array item**
 
-        $this->session->pull('key3'); // return value: c
-        $this->session->pull('key3'); // return value: b
-        $this->session->pull('key3'); // return value: a
+    $this->session->pull('key3'); // return value: c
+    $this->session->pull('key3'); // return value: b
+    $this->session->pull('key3'); // return value: a
