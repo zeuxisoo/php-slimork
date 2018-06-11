@@ -26,21 +26,21 @@ The `cookie` service provider was provided easy way to control the cookie status
 
 You can access the cookie service provider by the following code
 
-- Set cookie
+**Set cookie**
 
-        $this->cookie->set('name', 'value');
-        $this->cookie->set('name', 'value', [
-            // Optional, This argument can overwrite the default cookie option when value was provided
-        ]);
+    $this->cookie->set('name', 'value');
+    $this->cookie->set('name', 'value', [
+        // Optional, This argument can overwrite the default cookie option when value was provided
+    ]);
 
-- Get cookie
+**Get cookie**
 
-        $this->cookie->get('name');
+    $this->cookie->get('name');
 
-- Remove cookie
+**Remove cookie**
 
-        $this->cookie->remove('name');
+    $this->cookie->remove('name');
 
-- Is value exists or not
+**Check the value is or not exists**
 
-        $this->cookie->has('name');
+    $this->cookie->has('name');
