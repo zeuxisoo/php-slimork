@@ -12,7 +12,7 @@ A smallest skeleton application integrated slim and some packages
 - [X] Cookie
 - [X] Session
 - [X] CSRF
-- [ ] Flash
+- [X] Flash
 - [ ] Mail
 - [ ] Hash
 - [ ] Database
