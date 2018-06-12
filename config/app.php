@@ -19,6 +19,7 @@ return [
         Slimork\Providers\Flash\FlashServiceProvider::class,
         Slimork\Providers\Csrf\CsrfServiceProvider::class,
         Slimork\Providers\View\ViewServiceProvider::class,
+        Slimork\Providers\Mail\MailServiceProvider::class,
         Slimork\Providers\Log\LogServiceProvider::class,
     ]
 ];

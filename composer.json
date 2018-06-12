@@ -12,7 +12,8 @@
         "php-di/slim-bridge": "2.0.*",
         "symfony/var-dumper": "4.0.*",
         "monolog/monolog": "1.23.*",
-        "aura/session": "2.1.*"
+        "aura/session": "2.1.*",
+        "swiftmailer/swiftmailer": "6.0.*"
     },
     "autoload": {
         "psr-4": {
