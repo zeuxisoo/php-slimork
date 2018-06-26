@@ -1,7 +1,10 @@
 <?php
 namespace Slimork\Providers\Hash;
 
-use Slimork\Providers\Hash\Hasher\BCryptHasher;
+use Slimork\Providers\Hash\Hasher\{
+    BCryptHasher,
+    Argon2Hasher
+};
 
 class HashManager {
 
@@ -20,6 +23,9 @@ class HashManager {
         switch($driver) {
             case 'bcrypt':
                 return new BCryptHasher($settings);
+                break;
+            case 'argon2':
+                return new Argon2Hasher($settings);
                 break;
         }
     }
