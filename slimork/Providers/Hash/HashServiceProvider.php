@@ -9,9 +9,31 @@ use Slimork\Contracts\ServiceProvider;
  *
  * Hash
  *
- *      echo $this->hash->make('string');
- *      echo $this->hash->check('string', 'hashed_string');
- *      echo $this->hash->needsRehash('hashed_string');
+ * Base Usage
+ *
+ *      $this->hash->make('string');
+ *      $this->hash->check('string', 'hashed_string');
+ *      $this->hash->needsRehash('hashed_string');
+ *
+ * Overwrite default bcrypt options
+ *
+ *      $this->hash->make('string', ['cost' => 10]);
+ *      $this->hash->needsRehash('hashed_string', ['cost' => 10]);
+ *
+ * Overwrite default argon2 options
+ *
+ *      $this->hash->make('string', [
+ *          'memory_cost' => 2046,
+ *          'threads'     => 4,
+ *          'time_cost'   => 4,
+ *      ]);
+ *
+ *      $this->hash->needsRehash('hashed_string', [
+ *          'memory_cost' => 2046,
+ *          'threads'     => 4,
+ *          'time_cost'   => 4,
+ *      ]);
+ *
  */
 class HashServiceProvider extends ServiceProvider {
 
