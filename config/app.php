@@ -20,6 +20,7 @@ return [
         Slimork\Providers\Csrf\CsrfServiceProvider::class,
         Slimork\Providers\View\ViewServiceProvider::class,
         Slimork\Providers\Mail\MailServiceProvider::class,
+        Slimork\Providers\Hash\HashServiceProvider::class,
         Slimork\Providers\Log\LogServiceProvider::class,
     ]
 ];
