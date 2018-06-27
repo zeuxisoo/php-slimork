@@ -15,3 +15,4 @@
     * [Csrf](service-providers/csrf.md)
     * [Flash](service-providers/flash.md)
     * [Mail](service-providers/mail.md)
+    * [Hash](service-providers/hash.md)
