@@ -15,6 +15,11 @@ A smallest skeleton application integrated slim and some packages
 - [X] Flash
 - [X] Mail
 - [X] Hash
-- [ ] Database
-- [ ] Redirection
 - [ ] Validation
+- [ ] Redirection
+- [ ] Database
+
+## Others
+
+- [X] PHP-DI
+- [ ] Facade
