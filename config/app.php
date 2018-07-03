@@ -18,6 +18,7 @@ return [
         Slimork\Providers\Cookie\CookieServiceProvider::class,
         Slimork\Providers\Flash\FlashServiceProvider::class,
         Slimork\Providers\Csrf\CsrfServiceProvider::class,
+        Slimork\Providers\Validation\ValidationServiceProvider::class,
         Slimork\Providers\View\ViewServiceProvider::class,
         Slimork\Providers\Mail\MailServiceProvider::class,
         Slimork\Providers\Hash\HashServiceProvider::class,
