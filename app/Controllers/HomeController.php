@@ -5,7 +5,7 @@ use Slimork\Contracts\Controller;
 
 class HomeController extends Controller {
 
-    public function index($response) {
+    public function index() {
         return $this->view('index.html');
     }
 
