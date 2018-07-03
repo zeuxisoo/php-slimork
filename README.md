@@ -15,7 +15,7 @@ A smallest skeleton application integrated slim and some packages
 - [X] Flash
 - [X] Mail
 - [X] Hash
-- [ ] Validation
+- [X] Validation
 - [ ] Redirection
 - [ ] Database
 
