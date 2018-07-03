@@ -56,13 +56,9 @@ class Validator {
     }
 
     public function firstError() {
-        foreach($this->errors() as $key => $errors) {
-            foreach($errors as $error) {
-                return $error;
-            }
-        }
+        $errors = $this->errors();
 
-        return null;
+        return current(array_shift($errors));
     }
 
 }
