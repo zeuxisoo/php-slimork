@@ -16,3 +16,4 @@
     * [Flash](service-providers/flash.md)
     * [Mail](service-providers/mail.md)
     * [Hash](service-providers/hash.md)
+    * [Validation](service-providers/validation.md)
