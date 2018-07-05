@@ -23,5 +23,6 @@ return [
         Slimork\Providers\Mail\MailServiceProvider::class,
         Slimork\Providers\Hash\HashServiceProvider::class,
         Slimork\Providers\Log\LogServiceProvider::class,
+        Slimork\Providers\Redirection\RedirectionServiceProvider::class,
     ]
 ];
