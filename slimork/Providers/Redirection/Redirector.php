@@ -5,7 +5,8 @@ use RuntimeException;
 
 class Redirector {
 
-    use Traits\RedirectFormRequest;
+    use Traits\RedirectorBackRequest;
+    use Traits\RedirectorFormRequest;
 
     protected $container;
     protected $request;
@@ -41,33 +42,6 @@ class Redirector {
             $status,
             $headers
         );
-    }
-
-    public function back($status = 302, $headers = null) {
-        $referer_url = $this->getHttpReferer();
-        $back_url    = empty($referer_url) === false ? $referer_url : $this->getPreviousUrlFromSession();
-
-        return $this->createRedirect(
-            empty($back_url) === false ? $back_url : '/',
-            $status
-        );
-    }
-
-    //
-    public function getHttpReferer() {
-        $headers  = $this->request->getHeaders();
-        $referers = array_key_exists('HTTP_REFERER', $headers) === true ? $headers['HTTP_REFERER'] : [];
-        $referer  = empty($referers) === true ? '' : current($referers);
-
-        return $referer;
-    }
-
-    public function getPreviousUrlFromSession() {
-        if ($this->container->has('session') === true) {
-            return $this->session->previousUrl();
-        }else{
-            return '';
-        }
     }
 
     public function createRedirect($path, $status = 302, $headers = null) {

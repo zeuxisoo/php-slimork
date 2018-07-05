@@ -1,15 +1,7 @@
 <?php
 namespace Slimork\Providers\Redirection\Traits;
 
-trait RedirectFormRequest {
-
-    public function setPreviousUrl($url) {
-        $this->session->set('_redirector.form.previous_url', $url);
-    }
-
-    public function previousUrl() {
-        return $this->session->get('_redirector.form.previous_url');
-    }
+trait RedirectorFormRequest {
 
     public function setRequestParams($params) {
         $this->session->set('_redirector.form.request_params', $params);
