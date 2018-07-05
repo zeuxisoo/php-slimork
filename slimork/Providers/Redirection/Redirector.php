@@ -5,8 +5,7 @@ use RuntimeException;
 
 class Redirector {
 
-    const PREVIOUS_URL_NAME   = "_redirector.previous_url";
-    const REQUEST_PARAMS_NAME = "_redirector.request_params";
+    use Traits\RedirectFormRequest;
 
     protected $container;
     protected $request;
@@ -80,39 +79,6 @@ class Redirector {
         }
 
         return $response->setRequest($this->request)->withRedirect($path);
-    }
-
-    //
-    public function setPreviousUrl($url) {
-        $this->session->set(self::PREVIOUS_URL_NAME, $url);
-    }
-
-    public function previousUrl() {
-        return $this->session->get(self::PREVIOUS_URL_NAME);
-    }
-
-    public function setRequestParams($params) {
-        $this->session->set(self::REQUEST_PARAMS_NAME, $params);
-    }
-
-    public function getRequestParam($key, $default = null) {
-        if ($this->session->has(self::REQUEST_PARAMS_NAME) === true) {
-            $params = $this->session->get(self::REQUEST_PARAMS_NAME);
-
-            if (array_key_exists($key, $params) === true) {
-                $value = $params[$key];
-
-                unset($params[$key]);
-
-                $this->setRequestParams($params);
-
-                return $value;
-            }else{
-                return $default;
-            }
-        }else{
-            return "";
-        }
     }
 
 }
