@@ -7,7 +7,7 @@ use Slimork\Contracts\ServiceProvider;
  * Usage
  * =====
  *
- * Validator:
+ * Validation:
  *
  *      # Import validator namespace for create rule
  *      use Slimork\Providers\Validation\Rule;
