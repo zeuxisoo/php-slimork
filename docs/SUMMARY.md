@@ -17,3 +17,4 @@
     * [Mail](service-providers/mail.md)
     * [Hash](service-providers/hash.md)
     * [Validation](service-providers/validation.md)
+    * [Redirection](service-providers/redirection.md)
