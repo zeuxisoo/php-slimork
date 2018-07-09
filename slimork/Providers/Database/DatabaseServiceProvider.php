@@ -9,7 +9,9 @@ use Slimork\Contracts\ServiceProvider;
  * Usage
  * =====
  *
- * Query:
+ * Database:
+ *
+ *  Query:
  *
  *      # Default connection
  *      $user = $this->db->table('user')->find(1);
@@ -17,12 +19,12 @@ use Slimork\Contracts\ServiceProvider;
  *      # Other connection
  *      $this->db->getConnection('connection')->table('user')->find(1)
  *
- * Model:
+ *  Model:
  *
  *      $user = User::find(1);
  *      $user = User::on('connection')->find(1);
  *
- * Paginate:
+ *  Paginate:
  *
  *      $user = User::paginate(1);
  *
