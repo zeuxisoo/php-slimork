@@ -17,7 +17,7 @@ A smallest skeleton application integrated slim and some packages
 - [X] Hash
 - [X] Validation
 - [X] Redirection
-- [ ] Database
+- [X] Database
 
 ## Others
 
