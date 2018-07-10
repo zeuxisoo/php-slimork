@@ -80,8 +80,8 @@ class DatabaseServiceProvider extends ServiceProvider {
         Paginator::defaultView($settings['database']['pagination']['view']['default']);
         Paginator::defaultSimpleView($settings['database']['pagination']['view']['simple']);
 
-        Paginator::viewFactoryResolver(function() {
-            return new PaginatorView($this->container);
+        Paginator::viewFactoryResolver(function() use ($settings) {
+            return new $settings['database']['pagination']['resolver']['view']($this->container);
         });
 
         Paginator::currentPathResolver(function () use ($current_url) {

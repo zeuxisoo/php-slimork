@@ -13,6 +13,9 @@ return [
     ],
 
     'pagination' => [
+        'resolver' => [
+            'view' => Slimork\Providers\Database\DefaultPaginatorView::class,
+        ],
         'view' => [
             'default' => 'pagination::default',
             'simple'  => 'pagination::default.simple'
