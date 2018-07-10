@@ -59,6 +59,7 @@ class DatabaseServiceProvider extends ServiceProvider {
         // Get container object
         $view     = $this->container->get('view');
         $request  = $this->container->get('request');
+        $settings = $this->container->get('settings');
 
         // Get current full url but without &page=xx / ?page=xx keyword
         $query_pairs = [];
@@ -76,8 +77,8 @@ class DatabaseServiceProvider extends ServiceProvider {
         $current_page = $request->getParam('page');
 
         // Setup paginator
-        Paginator::defaultView('pagination::default');
-        Paginator::defaultSimpleView('pagination::default.simple');
+        Paginator::defaultView($settings['database']['pagination']['view']['default']);
+        Paginator::defaultSimpleView($settings['database']['pagination']['view']['simple']);
 
         Paginator::viewFactoryResolver(function() {
             return new PaginatorView($this->container);

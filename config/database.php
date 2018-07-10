@@ -8,7 +8,14 @@ return [
         'password'  => '',
         'charset'   => 'utf8',
         'collation' => 'utf8_general_ci',
-        'prefix'    => '',
+        'prefix'    => 'sw_',
         'engine'    => 'MyISAM',    // MySQL Only
+    ],
+
+    'pagination' => [
+        'view' => [
+            'default' => 'pagination::default',
+            'simple'  => 'pagination::default.simple'
+        ]
     ]
 ];
