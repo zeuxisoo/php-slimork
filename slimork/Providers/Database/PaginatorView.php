@@ -36,6 +36,9 @@ class PaginatorView {
         $this->view = $twig;
     }
 
+    /*
+     * Reference: https://github.com/laravel/framework/blob/5.6/src/Illuminate/Pagination/Paginator.php#L108
+     */
     public function make($view, $data = [], $merge_data = []) {
         $view_file_path = str_replace('::', '/', $view).'.html';
 
@@ -45,7 +48,10 @@ class PaginatorView {
         return $this;
     }
 
-    public function render($view = null, $data = []) {
+    /*
+     * Reference: https://github.com/laravel/framework/blob/5.6/src/Illuminate/Pagination/Paginator.php#L107-L111
+     */
+    public function render() {
         return $this->template->render($this->variables);
     }
 
