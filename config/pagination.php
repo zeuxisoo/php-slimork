@@ -5,7 +5,5 @@ return [
         'simple'  => 'default.simple.html'
     ],
 
-    'resolver' => [
-        'view' => Slimork\Providers\Pagination\DefaultPaginatorView::class,
-    ],
+    'paginator' => Slimork\Providers\Pagination\DefaultPaginatorView::class,
 ];

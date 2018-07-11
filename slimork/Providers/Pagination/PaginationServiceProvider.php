@@ -35,18 +35,11 @@ class PaginationServiceProvider extends ServiceProvider {
 
         // Setup paginator
         Paginator::setDefaultTemplate($settings['pagination']['views']);
-
-        Paginator::viewFactoryResolver(function() use ($settings) {
-            return new $settings['pagination']['resolver']['view']($this->container);
-        });
-
-        Paginator::currentPathResolver(function () use ($current_url) {
-            return $current_url;
-        });
-
-        Paginator::currentPageResolver(function() use ($current_page) {
-            return $current_page;
-        });
+        Paginator::setDefaultResolver(
+            new $settings['pagination']['paginator']($this->container),
+            $current_url,
+            $current_page
+        );
     }
 
 }
