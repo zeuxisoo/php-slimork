@@ -1,6 +1,6 @@
 <?php
 return [
-    'view' => [
+    'views' => [
         'default' => 'default.html',
         'simple'  => 'default.simple.html'
     ],

@@ -1,7 +1,6 @@
 <?php
 namespace Slimork\Providers\Pagination;
 
-use Illuminate\Pagination\Paginator;
 use Slimork\Contracts\ServiceProvider;
 
 /**
@@ -32,13 +31,10 @@ class PaginationServiceProvider extends ServiceProvider {
 
         $query_string = http_build_query($query_pairs);
         $current_url  = (string) $request->getUri()->withQuery($query_string);
-
-        // Get current page no
         $current_page = $request->getParam('page');
 
         // Setup paginator
-        Paginator::defaultView($settings['pagination']['view']['default']);
-        Paginator::defaultSimpleView($settings['pagination']['view']['simple']);
+        Paginator::setDefaultTemplate($settings['pagination']['views']);
 
         Paginator::viewFactoryResolver(function() use ($settings) {
             return new $settings['pagination']['resolver']['view']($this->container);
