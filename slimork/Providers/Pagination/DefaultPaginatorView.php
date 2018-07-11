@@ -1,5 +1,5 @@
 <?php
-namespace Slimork\Providers\Database;
+namespace Slimork\Providers\Pagination;
 
 use Slimork\Contracts\PaginatorView;
 
@@ -12,7 +12,7 @@ class DefaultPaginatorView implements PaginatorView {
     public function __construct($container) {
         $settings = $container->get('settings');
 
-        $loader = new \Twig_Loader_Filesystem(RESOURCES_ROOT.'/views');
+        $loader = new \Twig_Loader_Filesystem(RESOURCES_ROOT.'/views/paginations');
         $twig   = new \Twig_Environment($loader, [
             'charset'          => 'utf-8',
             'cache'            => false,
@@ -39,9 +39,7 @@ class DefaultPaginatorView implements PaginatorView {
     }
 
     public function make($view, $data = [], $merge_data = []) {
-        $view_file_path = str_replace('::', '/', $view).'.html';
-
-        $this->template  = $this->view->load($view_file_path);
+        $this->template  = $this->view->load($view);
         $this->variables = array_merge($data, $merge_data);
 
         return $this;

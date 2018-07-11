@@ -10,15 +10,5 @@ return [
         'collation' => 'utf8_general_ci',
         'prefix'    => 'sw_',
         'engine'    => 'MyISAM',    // MySQL Only
-    ],
-
-    'pagination' => [
-        'resolver' => [
-            'view' => Slimork\Providers\Database\DefaultPaginatorView::class,
-        ],
-        'view' => [
-            'default' => 'pagination::default',
-            'simple'  => 'pagination::default.simple'
-        ]
     ]
 ];

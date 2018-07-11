@@ -55,42 +55,4 @@ class DatabaseServiceProvider extends ServiceProvider {
         });
     }
 
-    public function boot() {
-        // Get container object
-        $view     = $this->container->get('view');
-        $request  = $this->container->get('request');
-        $settings = $this->container->get('settings');
-
-        // Get current full url but without &page=xx / ?page=xx keyword
-        $query_pairs = [];
-
-        parse_str($request->getUri()->getQuery(), $query_pairs);
-
-        if (array_key_exists('page', $query_pairs) === true) {
-            unset($query_pairs['page']);
-        }
-
-        $query_string = http_build_query($query_pairs);
-        $current_url  = (string) $request->getUri()->withQuery($query_string);
-
-        // Get current page no
-        $current_page = $request->getParam('page');
-
-        // Setup paginator
-        Paginator::defaultView($settings['database']['pagination']['view']['default']);
-        Paginator::defaultSimpleView($settings['database']['pagination']['view']['simple']);
-
-        Paginator::viewFactoryResolver(function() use ($settings) {
-            return new $settings['database']['pagination']['resolver']['view']($this->container);
-        });
-
-        Paginator::currentPathResolver(function () use ($current_url) {
-            return $current_url;
-        });
-
-        Paginator::currentPageResolver(function() use ($current_page) {
-            return $current_page;
-        });
-    }
-
 }
