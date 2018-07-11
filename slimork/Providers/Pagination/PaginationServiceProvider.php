@@ -9,6 +9,13 @@ use Slimork\Contracts\ServiceProvider;
  *
  * Pagination:
  *
+ *      $paginator = new \Slimork\Providers\Pagination\Paginator([
+ *          1, 2, 3, 4, 5
+ *      ], $perPage = 1, $currentPage = 2);
+ *
+ *      echo $paginator->render('default.simple.html', [
+ *          'paginator' => $paginator
+ *      ]));
  */
 class PaginationServiceProvider extends ServiceProvider {
 
