@@ -15,7 +15,7 @@ use Slimork\Contracts\ServiceProvider;
  *
  *      echo $paginator->render('default.simple.html', [
  *          'paginator' => $paginator
- *      ]));
+ *      ]);
  */
 class PaginationServiceProvider extends ServiceProvider {
 
