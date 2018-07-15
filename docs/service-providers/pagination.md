@@ -18,9 +18,15 @@ Simple pagination service to automate generate navigation links by `Illuminate/P
 
 ## Usage
 
-This package mainly provides pagination services for database service providers. But you can also use it independently to provide pagination services.
+This package mainly provides pagination services for database service providers.
 
-    $paginator = new \Slimork\Providers\Pagination\Paginator('items', 'per page', 'current page');
+But you can also use it independently to provide pagination services.
+
+Firstly, You need to create the paginator object first by pass the `items`, `per page item` and `current page number` like
+
+    $paginator = $this->paginator->make([1,2,3,4,5], 1, 3);
+
+Now, render the paginatior template with related paginator object
 
     $paginator->render('default.simple.html', [
         'paginator' => $paginator
