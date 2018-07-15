@@ -9,13 +9,39 @@ use Slimork\Contracts\ServiceProvider;
  *
  * Pagination:
  *
- *      $paginator = $this->paginator->make([1,2,3,4,5], 1, 3);
+ *  Create simple paginator
+ *
+ *      $paginator = $this->paginator->items('[items]')->perPage(1)->currentPage(1)->simple();
  *
  *      $paginator->render('default.simple.html', [
  *          'paginator' => $paginator
  *      ]);
  *
- * Other methods like:
+ *  Create default paginator
+ *
+ *      $paginator = $this->paginator->items('[items]')->total(5)->perPage(1)->currentPage(1)->default();
+ *
+ *      $paginator->render('default.html', [
+ *          'paginator' => $paginator
+ *      ]);
+ *
+ *  Directly create simple paginaor
+ *
+ *      $paginator = $this->paginator->createSimplePaginator('[items]', 'per_page', 'current_page');
+ *
+ *      $paginator->render('default.simple.html', [
+ *          'paginator' => $paginator
+ *      ]);
+ *
+ *  Directly create default paginaor
+ *
+ *      $paginator = $this->paginator->createDefaultPaginator('[items]', 'total_items', 'per_page', 'current_page');
+ *
+ *      $paginator->render('default.html', [
+ *          'paginator' => $paginator
+ *      ]);
+ *
+ *  Other methods like:
  *
  *      $paginator->nextPageUrl();
  */
