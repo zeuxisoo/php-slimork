@@ -3,23 +3,27 @@ namespace Slimork\Providers\Pagination;
 
 use Illuminate\Pagination\Paginator as BasePaginator;
 
-class Paginator extends BasePaginator {
+class Paginator {
+
+    public function make($items, $per_page, $current_page = null, array $options = []) {
+        return new BasePaginator($items, $per_page, $current_page, $options);
+    }
 
     public static function setDefaultTemplate($views) {
-        static::defaultView($views['default']);
-        static::defaultSimpleView($views['simple']);
+        BasePaginator::defaultView($views['default']);
+        BasePaginator::defaultSimpleView($views['simple']);
     }
 
     public static function setDefaultResolver($viewFactory, $currentPath, $currentPage) {
-        static::viewFactoryResolver(function() use ($viewFactory) {
+        BasePaginator::viewFactoryResolver(function() use ($viewFactory) {
             return $viewFactory;
         });
 
-        static::currentPathResolver(function() use ($currentPath) {
+        BasePaginator::currentPathResolver(function() use ($currentPath) {
             return $currentPath;
         });
 
-        static::currentPageResolver(function() use ($currentPage) {
+        BasePaginator::currentPageResolver(function() use ($currentPage) {
             return $currentPage;
         });
     }

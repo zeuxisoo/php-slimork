@@ -20,7 +20,9 @@ use Slimork\Contracts\ServiceProvider;
 class PaginationServiceProvider extends ServiceProvider {
 
     public function register() {
-
+        $this->container->set('paginator', function($container) {
+            return new Paginator();
+        });
     }
 
     public function boot() {
