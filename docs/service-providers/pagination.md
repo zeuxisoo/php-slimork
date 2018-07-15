@@ -22,13 +22,35 @@ This package mainly provides pagination services for database service providers.
 
 But you can also use it independently to provide pagination services.
 
-Firstly, You need to create the paginator object first by pass the `items`, `per page item` and `current page number` like
+**Create simple paginator**
 
-    $paginator = $this->paginator->make([1,2,3,4,5], 1, 3);
-
-Now, render the paginatior template with related paginator object
+    $paginator = $this->paginator->items('[items]')->perPage(1)->currentPage(1)->simple();
 
     $paginator->render('default.simple.html', [
+        'paginator' => $paginator
+    ]);
+
+**Create default paginator**
+
+    $paginator = $this->paginator->items('[items]')->total(5)->perPage(1)->currentPage(1)->default();
+
+    $paginator->render('default.html', [
+        'paginator' => $paginator
+    ]);
+
+**Directly create simple pagiantor**
+
+    $paginator = $this->paginator->createSimplePaginator('[items]', 'per_page', 'current_page');
+
+    $paginator->render('default.simple.html', [
+        'paginator' => $paginator
+    ]);
+
+**Directly create default pagiantor**
+
+    $paginator = $this->paginator->createDefaultPaginator('[items]', 'total_item', 'per_page', 'current_page');
+
+    $paginator->render('default.html', [
         'paginator' => $paginator
     ]);
 
