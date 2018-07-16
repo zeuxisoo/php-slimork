@@ -42,7 +42,7 @@ class PaginationServiceProvider extends ServiceProvider {
 
     public function register() {
         $this->container->set('paginator', function($container) {
-            return new Paginator();
+            return new PaginatorManager();
         });
     }
 
@@ -64,8 +64,8 @@ class PaginationServiceProvider extends ServiceProvider {
         $current_page = $request->getParam('page');
 
         // Setup paginator
-        Paginator::setDefaultTemplate($settings['pagination']['views']);
-        Paginator::setDefaultResolver(
+        PaginatorManager::setDefaultTemplate($settings['pagination']['views']);
+        PaginatorManager::setDefaultResolver(
             new $settings['pagination']['paginator']($this->container),
             $current_url,
             $current_page

@@ -1,10 +1,9 @@
 <?php
 namespace Slimork\Providers\Pagination;
 
-use Illuminate\Pagination\Paginator as SimplePaginator;
-use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator as BasePaginator;
 
-class Paginator {
+class PaginatorManager {
 
     protected $items;
     protected $per_page;
@@ -53,29 +52,29 @@ class Paginator {
 
     // Initial default or simple paginator
     public function createDefaultPaginator($items, $total, $per_page, $current_page = null, array $options = []) {
-        return new LengthAwarePaginator($items, $total, $per_page, $current_page, $options);
+        return new Paginator\LengthAwarePaginator($items, $total, $per_page, $current_page, $options);
     }
 
     public function createSimplePaginator($items, $per_page, $current_page = null, array $options = []) {
-        return new SimplePaginator($items, $per_page, $current_page, $options);
+        return new Paginator\SimplePaginator($items, $per_page, $current_page, $options);
     }
 
     // Initial parent paginator default views and resolver
     public static function setDefaultTemplate($views) {
-        SimplePaginator::defaultView($views['default']);
-        SimplePaginator::defaultSimpleView($views['simple']);
+        BasePaginator::defaultView($views['default']);
+        BasePaginator::defaultSimpleView($views['simple']);
     }
 
     public static function setDefaultResolver($viewFactory, $currentPath, $currentPage) {
-        SimplePaginator::viewFactoryResolver(function() use ($viewFactory) {
+        BasePaginator::viewFactoryResolver(function() use ($viewFactory) {
             return $viewFactory;
         });
 
-        SimplePaginator::currentPathResolver(function() use ($currentPath) {
+        BasePaginator::currentPathResolver(function() use ($currentPath) {
             return $currentPath;
         });
 
-        SimplePaginator::currentPageResolver(function() use ($currentPage) {
+        BasePaginator::currentPageResolver(function() use ($currentPage) {
             return $currentPage;
         });
     }
