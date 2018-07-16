@@ -63,6 +63,11 @@ class PaginatorManager {
         ], $options));
     }
 
+    // Other helpers
+    public function getOffset($per_page, $current_page) {
+        return ($current_page - 1) * $per_page;
+    }
+
     // Initial parent paginator default views and resolver
     public static function setDefaultTemplate($views) {
         BasePaginator::defaultView($views['default']);
