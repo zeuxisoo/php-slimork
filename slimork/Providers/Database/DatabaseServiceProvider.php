@@ -57,8 +57,10 @@ class DatabaseServiceProvider extends ServiceProvider {
 
     public function boot() {
         if ($this->container->has('paginator') === false) {
-            // Find current url and page no
-            $request     = $this->container->get('request');
+            $settings = $this->container->get('settings');
+            $request  = $this->container->get('request');
+
+            // Get current url and page no
             $query_pairs = [];
 
             parse_str($request->getUri()->getQuery(), $query_pairs);
@@ -71,13 +73,20 @@ class DatabaseServiceProvider extends ServiceProvider {
             $current_url  = (string) $request->getUri()->withQuery($query_string);
             $current_page = $request->getParam('page');
 
+            // Get template name
+            $default_template = empty($settings['pagination']['views']['default']) === false ? $settings['pagination']['views']['default'] : 'default.html';
+            $simple_template  = empty($settings['pagination']['views']['simple']) === false ? $settings['pagination']['views']['simple'] : 'default.simple.html';
+
+            // Get paginator view object
+            $pagiantor_view = empty($settings['pagination']['paginator']) === false ? $settings['pagination']['paginator'] : PaginatorView::class;
+
             // Setup paginator template
-            Paginator::defaultView('default.html');
-            Paginator::defaultSimpleView('default.simple.html');
+            Paginator::defaultView($default_template);
+            Paginator::defaultSimpleView($simple_template);
 
             // Setup paginator resolver
-            Paginator::viewFactoryResolver(function() {
-                return new PaginatorView($this->container);
+            Paginator::viewFactoryResolver(function() use ($pagiantor_view) {
+                return new $pagiantor_view($this->container);
             });
 
             Paginator::currentPathResolver(function () use ($current_url) {
