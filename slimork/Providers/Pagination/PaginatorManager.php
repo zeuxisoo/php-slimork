@@ -52,11 +52,15 @@ class PaginatorManager {
 
     // Initial default or simple paginator
     public function createDefaultPaginator($items, $total, $per_page, $current_page = null, array $options = []) {
-        return new Paginator\LengthAwarePaginator($items, $total, $per_page, $current_page, $options);
+        return new Paginator\LengthAwarePaginator($items, $total, $per_page, $current_page, array_merge([
+            'path' => BasePaginator::resolveCurrentPath(),
+        ], $options));
     }
 
     public function createSimplePaginator($items, $per_page, $current_page = null, array $options = []) {
-        return new Paginator\SimplePaginator($items, $per_page, $current_page, $options);
+        return new Paginator\SimplePaginator($items, $per_page, $current_page, array_merge([
+            'path' => BasePaginator::resolveCurrentPath(),
+        ], $options));
     }
 
     // Initial parent paginator default views and resolver
