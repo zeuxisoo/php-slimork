@@ -52,7 +52,7 @@ class PaginatorManager {
 
     // Initial default or simple paginator
     public function createDefaultPaginator($items, $total, $per_page, $current_page = null, array $options = []) {
-        return new Paginator\LengthAwarePaginator($items, $total, $per_page, $current_page, array_merge([
+        return new Paginator\DefaultPaginator($items, $total, $per_page, $current_page, array_merge([
             'path' => BasePaginator::resolveCurrentPath(),
         ], $options));
     }
