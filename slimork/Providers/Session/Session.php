@@ -59,6 +59,10 @@ class Session {
         $this->segment = new Segment($this->segment);
     }
 
+    public function segment($name) {
+        return new Segment($name);
+    }
+
     public function __call($name, array $arguments) {
         if (method_exists($this->segment, $name) === false) {
             throw new BadMethodCallException(sprintf(
