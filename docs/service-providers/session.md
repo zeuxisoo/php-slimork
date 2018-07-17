@@ -64,3 +64,8 @@ the key must not exist
     $this->session->pull('key3'); // return value: c
     $this->session->pull('key3'); // return value: b
     $this->session->pull('key3'); // return value: a
+
+**Custom segment scope, like**
+
+    $this->session->segment('scope')->set('key', 'value');
+    $this->session->segment('scope')->get('key');
