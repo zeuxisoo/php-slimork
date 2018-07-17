@@ -6,4 +6,9 @@ return [
     'domain'   => null,
     'secure'   => false,
     'httponly' => true,
+    'handler'  => null,
+    'ini_sets' => [
+        'cache_limiter' => 'nocache',
+        'cache_expire'  => 180
+    ]
 ];

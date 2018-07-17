@@ -14,8 +14,8 @@ class Session extends Middleware {
 
         $session = $this->container->get('session');
 
-        if ($session->instance()->isStarted() === false) {
-            $session->instance()->start();
+        if ($session->isStarted() === false) {
+            $session->start();
         }
 
         $this->session = $session;
