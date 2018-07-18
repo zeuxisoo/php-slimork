@@ -64,7 +64,7 @@ class PaginatorManager {
     }
 
     // Other helpers
-    public function getOffset($per_page, $current_page) {
+    public function findOffset($per_page, $current_page) {
         return ($current_page - 1) * $per_page;
     }
 
