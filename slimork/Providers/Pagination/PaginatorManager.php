@@ -2,6 +2,7 @@
 namespace Slimork\Providers\Pagination;
 
 use Illuminate\Pagination\Paginator as BasePaginator;
+use Illuminate\Database\Query\Builder;
 
 class PaginatorManager {
 
@@ -43,10 +44,24 @@ class PaginatorManager {
 
     // Create default or simple pagiantor
     public function default() {
+        // Calculate the items range when this item is builder object
+        if ($this->items instanceof Builder) {
+            $this->items = $this->items->skip(
+                $this->findOffset($this->per_page, $this->current_page)
+            )->take($this->per_page)->get();
+        }
+
         return $this->createDefaultPaginator($this->items, $this->total, $this->per_page, $this->current_page, $this->options);
     }
 
     public function simple() {
+        // Calculate the items range when this item is builder object (+1 for first page can show the next links)
+        if ($this->items instanceof Builder) {
+            $this->items = $this->items->skip(
+                $this->findOffset($this->per_page, $this->current_page)
+            )->take($this->per_page + 1)->get();
+        }
+
         return $this->createSimplePaginator($this->items, $this->per_page, $this->current_page, $this->options);
     }
 
