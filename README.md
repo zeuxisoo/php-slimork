@@ -18,8 +18,10 @@ A smallest skeleton application integrated slim and some packages
 - [X] Validation
 - [X] Redirection
 - [X] Database
+- [X] Pagination
 
 ## Others
 
 - [X] PHP-DI
 - [ ] Facade
+- [ ] Migration
