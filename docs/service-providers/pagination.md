@@ -52,4 +52,41 @@ But you can also use it independently to provide pagination services.
         'name' => 'value'
     ]);
 
-More details or methods, please reference to [API Documentation](https://laravel.com/api/5.6/Illuminate/Pagination/Paginator.html)
+## Example
+
+```php
+// Define the pagination related variables
+$per_page     = 1;
+$current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+
+// Find the offset by pagination variables
+$offset = $this->paginator->findOffset($per_page, $current_page);
+
+// Get total records of the admin table
+$total = $this->db->table('admins')->count();
+
+// Get the admin records within range
+// - generate the default paginator
+// - generate the simple paginator
+$page_default_admins          = $this->db->table('admins')->skip($offset)->take($per_page)->get();
+$page_default_paginate_admins = $this->paginator->items($page_default_admins)->total($total)->perPage($per_page)->currentPage($current_page)->default();
+
+$page_simple_admins          = $this->db->table('admins')->skip($offset)->take($per_page + 1)->get();
+$page_simple_paginate_admins = $this->paginator->items($page_simple_admins)->perPage($per_page)->currentPage($current_page)->simple();
+
+// But you can simplify the above code like this, it will automatically calculate the range value
+$page_default_admins    = $this->db->table('admins');
+$page_default_paginator = $this->paginator->items($page_default_admins)->total($total)->perPage($per_page)->currentPage($current_page)->default();
+
+$page_simple_admins    = $this->db->table('admins');
+$page_simple_paginator = $this->paginator->items($page_simple_admins)->perPage($per_page)->currentPage($current_page)->simple();
+
+// Finally, you can reading records with loop and render the paginator
+foreach($page_default_admins as $admin) {
+    print_r($admin);
+}
+
+echo $page_simple_paginator->render();
+```
+
+More details or methods, please reference to [`Illuminate/Pagination`](https://laravel.com/api/5.6/Illuminate/Pagination/Paginator.html)
