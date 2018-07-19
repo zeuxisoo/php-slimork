@@ -81,12 +81,12 @@ $page_default_paginator = $this->paginator->items($page_default_admins)->total($
 $page_simple_admins    = $this->db->table('admins');
 $page_simple_paginator = $this->paginator->items($page_simple_admins)->perPage($per_page)->currentPage($current_page)->simple();
 
-// Finally, you can reading records with loop and render the paginator
-foreach($page_default_admins as $admin) {
+// Finally, you can reading records within loop and render the paginator
+foreach($page_default_paginator as $admin) {
     print_r($admin);
 }
 
-echo $page_simple_paginator->render();
+echo $page_default_paginator->render();
 ```
 
 More details or methods, please reference to [`Illuminate/Pagination`](https://laravel.com/api/5.6/Illuminate/Pagination/Paginator.html)
