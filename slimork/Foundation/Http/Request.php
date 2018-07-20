@@ -120,6 +120,15 @@ abstract class Request extends SlimRequest {
         return $this->getParams();
     }
 
+    public function only($keys) {
+        $keys = is_array($keys) === true ? $keys : func_get_args();
+
+        return array_intersect_key(
+            $this->getParams(),
+            array_flip($keys)
+        );
+    }
+
     //
     public function rules() {
         throw new \RuntimeException('The FormRequest object must implement rules method.');
