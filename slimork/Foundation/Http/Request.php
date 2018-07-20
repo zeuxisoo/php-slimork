@@ -12,6 +12,39 @@ use Slim\Http\{
     UploadedFile
 };
 
+/*
+ * Example
+ *
+ *  File: app\Requests\LoginRequest.php
+ *
+ *      class LoginRequest extends Request {
+ *
+ *          public function rules() {
+ *              return [
+ *                  'username' => Rule::notEmpty()->noWhitespace()->length(4, 30),
+ *                  'password' => Rule::notEmpty()->length(8, 30),
+ *              ];
+ *          }
+ *
+ *          public function messages() {
+ *              return [];
+ *          }
+ *
+ *      }
+ *
+ *  File: app\Controllers\HomeController.php
+ *
+ *      class HomeController extends Controller {
+ *
+ *          public function test(LoginRequest $loginRequest) {
+ *              dd(
+ *                  $loginRequest->getParams()
+ *              );
+ *          }
+ *
+ *      }
+ *
+ */
 abstract class Request extends SlimRequest {
 
     protected $container;
