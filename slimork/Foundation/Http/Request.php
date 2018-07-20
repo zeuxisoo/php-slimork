@@ -116,6 +116,11 @@ abstract class Request extends SlimRequest {
     }
 
     //
+    public function all() {
+        return $this->getParams();
+    }
+
+    //
     public function rules() {
         throw new \RuntimeException('The FormRequest object must implement rules method.');
     }
