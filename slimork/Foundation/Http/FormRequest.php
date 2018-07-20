@@ -17,7 +17,7 @@ use Slim\Http\{
  *
  *  File: app\Requests\LoginRequest.php
  *
- *      class LoginRequest extends Request {
+ *      class LoginRequest extends FormRequest {
  *
  *          public function rules() {
  *              return [
@@ -45,7 +45,7 @@ use Slim\Http\{
  *      }
  *
  */
-abstract class Request extends SlimRequest {
+abstract class FormRequest extends SlimRequest {
 
     protected $container;
 
