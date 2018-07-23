@@ -3,6 +3,7 @@ namespace Slimork\Foundation;
 
 use DI\Bridge\Slim\App as SlimApp;
 use DI\ContainerBuilder;
+use Slimork\Facades\Facade;
 
 class App extends SlimApp {
 
@@ -14,6 +15,7 @@ class App extends SlimApp {
 
         parent::__construct();
 
+        $this->setupFacades();
         $this->setupHandlers();
         $this->setupMiddlewares();
         $this->setupServiceProviders();
@@ -51,6 +53,13 @@ class App extends SlimApp {
     // Implementation
     protected function configureContainer(ContainerBuilder $builder) {
         $builder->addDefinitions($this->settings);
+    }
+
+    // Setup facades
+    protected function setupFacades() {
+        Facade::setFacadeApplication($this);
+
+        AliasLoader::getInstance($this->getSetting('app')['aliases'])->register();
     }
 
     // Setup handlers
