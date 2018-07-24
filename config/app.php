@@ -31,5 +31,6 @@ return [
     'aliases' => [
         'Container' => Slimork\Facades\Container::class,
         'Router'  => Slimork\Facades\Router::class,
+        'Request' => Slimork\Facades\Request::class,
     ],
 ];
