@@ -29,6 +29,6 @@ return [
     ],
 
     'aliases' => [
-
+        'Container' => Slimork\Facades\Container::class,
     ],
 ];
