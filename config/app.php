@@ -32,5 +32,6 @@ return [
         'Container' => Slimork\Facades\Container::class,
         'Router'  => Slimork\Facades\Router::class,
         'Request' => Slimork\Facades\Request::class,
+        'Response' => Slimork\Facades\Response::class,
     ],
 ];
