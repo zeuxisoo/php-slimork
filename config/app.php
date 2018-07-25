@@ -35,5 +35,7 @@ return [
         'Request' => Slimork\Facades\Request::class,
         'Response' => Slimork\Facades\Response::class,
         'Settings' => Slimork\Facades\Settings::class,
+
+        'Session' => Slimork\Facades\Session::class,
     ],
 ];
