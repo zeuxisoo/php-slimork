@@ -24,4 +24,8 @@ class Settings extends Facade {
         return array_key_exists($key, $settings) === true ? $settings[$key] : $default;
     }
 
+    public static function all() {
+        return static::$app->getContainer()->get('settings');
+    }
+
 }
