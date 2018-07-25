@@ -37,5 +37,6 @@ return [
         'Settings' => Slimork\Facades\Settings::class,
 
         'Session' => Slimork\Facades\Session::class,
+        'Cookie' => Slimork\Facades\Cookie::class,
     ],
 ];
