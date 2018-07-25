@@ -34,5 +34,6 @@ return [
         'Router' => Slimork\Facades\Router::class,
         'Request' => Slimork\Facades\Request::class,
         'Response' => Slimork\Facades\Response::class,
+        'Settings' => Slimork\Facades\Settings::class,
     ],
 ];
