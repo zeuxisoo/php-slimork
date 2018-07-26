@@ -38,5 +38,6 @@ return [
 
         'Session' => Slimork\Facades\Session::class,
         'Cookie' => Slimork\Facades\Cookie::class,
+        'Paginator' => Slimork\Facades\Paginator::class,
     ],
 ];
