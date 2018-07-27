@@ -4,14 +4,15 @@ In slimork, we have provided basic service providers for users to easily obtain 
 
 ## Built-in
 
-- View
-- Logger
-- Cookie
 - Session
-- CSRF
+- Cookie
+- Pagination
+- Database
 - Flash
+- CSRF
+- Validation
+- View
 - Mail
 - Hash
-- Database
+- Logger
 - Redirection
-- Validation
