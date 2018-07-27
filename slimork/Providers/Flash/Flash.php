@@ -51,4 +51,8 @@ class Flash extends Messages {
         $this->setSuccess($message);
     }
 
+    public function has($type) {
+        return empty($this->getMessage($type)) === false;
+    }
+
 }
