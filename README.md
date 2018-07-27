@@ -5,23 +5,55 @@ A smallest skeleton application integrated slim and some packages
 ![Develop Status](https://img.shields.io/badge/status-developing-yellowgreen.svg)
 ![Slim version](https://img.shields.io/badge/slim-3.x-green.svg)
 
-## Providers
-
-- [X] View
-- [X] Logger
-- [X] Cookie
-- [X] Session
-- [X] CSRF
-- [X] Flash
-- [X] Mail
-- [X] Hash
-- [X] Validation
-- [X] Redirection
-- [X] Database
-- [X] Pagination
-
-## Others
+## Container
 
 - [X] PHP-DI
-- [ ] Facade
-- [ ] Migration
+
+## Providers
+
+- [X] Session
+- [X] Cookie
+- [X] Pagination
+- [X] Database
+- [X] Flash
+- [X] CSRF
+- [X] Validation
+- [X] View
+- [X] Mail
+- [X] Hash
+- [X] Logger
+- [X] Redirection
+
+## Facades
+
+Application
+
+- [X] App
+- [X] Container
+- [X] Router
+- [X] Request
+- [X] Response
+- [X] Settings
+
+Service Provider
+
+- [X] Session
+- [X] Cookie
+- [X] Paginator
+- [X] DB
+- [X] Flash
+- [X] CSRF
+- [ ] Validation
+- [ ] View
+- [ ] Mail
+- [ ] Hash
+- [ ] Logger
+- [ ] Redirection
+
+## Migration
+
+- [ ] Phpmig
+
+## Other
+
+- [X] FormRequest
