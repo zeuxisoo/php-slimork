@@ -29,6 +29,12 @@ use Slimork\Contracts\ServiceProvider;
  *      $user = User::paginate(1);
  *
  *      echo $paginate->render();
+ *
+ *  Other:
+ *
+ *      # Return the first row like { total: 1 }
+ *      $this->db->fetchOneRaw("SELECT COUNT(*) AS total FROM table");
+ *
  */
 class DatabaseServiceProvider extends ServiceProvider {
 
