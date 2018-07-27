@@ -35,6 +35,11 @@ use Slimork\Contracts\ServiceProvider;
  *      # otehr methods
  *      $this->flash->getTypeMessage('type');
  *
+ * Other methods
+ *
+ *      # check the type of message is or not exists
+ *      $this->flash->has('type');
+ *
  * In view like:
  *
  *     {% if has_flash('error') %}
