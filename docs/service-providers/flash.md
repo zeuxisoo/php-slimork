@@ -48,6 +48,12 @@ get custom message by type
 
     $this->flash->getTypeMessage('type');
 
+**Other methods**
+
+check the message is or not exists
+
+	$this->flash->has('type');
+
 **Get the message in view**
 
 This service provider was provided two view functions were named
