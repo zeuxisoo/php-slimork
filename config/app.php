@@ -40,5 +40,6 @@ return [
         'Cookie' => Slimork\Facades\Cookie::class,
         'Paginator' => Slimork\Facades\Paginator::class,
         'DB' => Slimork\Facades\Database::class,
+        'Flash' => Slimork\Facades\Flash::class,
     ],
 ];
