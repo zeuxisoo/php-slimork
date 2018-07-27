@@ -46,5 +46,10 @@ Pagination for data
     $user = User::paginate(1);
 
     echo $paginate->render();
+    
+Other methods
+
+	// Return object like: { total: 1 }
+	$this->db->fetchOneRaw("SELECT COUNT(*) AS total FROM table");
 
 More information you can reference to [this package](https://laravel.com/docs/master/queries)
