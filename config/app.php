@@ -42,5 +42,6 @@ return [
         'DB' => Slimork\Facades\Database::class,
         'Flash' => Slimork\Facades\Flash::class,
         'Csrf' => Slimork\Facades\Csrf::class,
+        'Validator' => Slimork\Facades\Validator::class,
     ],
 ];
