@@ -62,7 +62,13 @@ return the csrf serivce provider, like
 
 **Validation**
 
+return the validation service provider, like
 
+    $validator = Validator::validators(['username' => ''], [
+        'username' => Slimork\Providers\Validation\Rule::stringType()->notEmpty()
+    ]);
+
+    $validator->fails();
 
 **View**
 
