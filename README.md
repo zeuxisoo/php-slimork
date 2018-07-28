@@ -43,7 +43,7 @@ Service Provider
 - [X] DB
 - [X] Flash
 - [X] CSRF
-- [ ] Validation
+- [X] Validator
 - [ ] View
 - [ ] Mail
 - [ ] Hash
