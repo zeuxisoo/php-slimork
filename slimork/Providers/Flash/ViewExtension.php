@@ -28,7 +28,7 @@ class ViewExtension extends SimorkViewExtension {
      *     {% endif %}
      */
     public function hasFlash($type) {
-        return $this->container->get('flash')->getMessage($type);
+        return $this->container->get('flash')->has($type);
     }
 
     public function flash($type) {
