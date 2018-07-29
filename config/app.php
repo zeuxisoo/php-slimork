@@ -43,5 +43,6 @@ return [
         'Flash' => Slimork\Facades\Flash::class,
         'Csrf' => Slimork\Facades\Csrf::class,
         'Validator' => Slimork\Facades\Validator::class,
+        'View' => Slimork\Facades\View::class,
     ],
 ];
