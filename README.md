@@ -44,7 +44,7 @@ Service Provider
 - [X] Flash
 - [X] CSRF
 - [X] Validator
-- [ ] View
+- [X] View
 - [ ] Mail
 - [ ] Hash
 - [ ] Logger
