@@ -72,7 +72,9 @@ return the validation service provider, like
 
 **View**
 
+return the view service provider, like
 
+    View::render(Container::get('response'), 'index.html');
 
 **Mail**
 
