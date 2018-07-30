@@ -46,7 +46,7 @@ Service Provider
 - [X] Validator
 - [X] View
 - [X] Mail
-- [ ] Hash
+- [X] Hash
 - [ ] Logger
 - [ ] Redirection
 
