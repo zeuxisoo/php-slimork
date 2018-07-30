@@ -84,7 +84,11 @@ return the mail service provider, like
 
 **Hash**
 
+return the hash service provider, like
 
+    Hash::make('string')
+    Hash::check('string', 'hashed_string')
+    Hash::needsRehash('hashed_string')
 
 **Logger**
 
