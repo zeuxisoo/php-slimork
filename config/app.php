@@ -46,5 +46,6 @@ return [
         'View' => Slimork\Facades\View::class,
         'Mail' => Slimork\Facades\Mail::class,
         'Hash' => Slimork\Facades\Hash::class,
+        'Log' => Slimork\Facades\Log::class,
     ],
 ];
