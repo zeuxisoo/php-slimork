@@ -44,5 +44,6 @@ return [
         'Csrf' => Slimork\Facades\Csrf::class,
         'Validator' => Slimork\Facades\Validator::class,
         'View' => Slimork\Facades\View::class,
+        'Mail' => Slimork\Facades\Mail::class,
     ],
 ];
