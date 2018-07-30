@@ -45,7 +45,7 @@ Service Provider
 - [X] CSRF
 - [X] Validator
 - [X] View
-- [ ] Mail
+- [X] Mail
 - [ ] Hash
 - [ ] Logger
 - [ ] Redirection
