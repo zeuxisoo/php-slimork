@@ -74,11 +74,13 @@ return the validation service provider, like
 
 return the view service provider, like
 
-    View::render(Container::get('response'), 'index.html');
+    View::render(Container::get('response'), 'index.html')
 
 **Mail**
 
+return the mail service provider, like
 
+    Mail::subject('subject')->from('email')->to('email')->body('content')->send()
 
 **Hash**
 
