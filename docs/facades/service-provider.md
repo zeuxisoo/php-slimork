@@ -92,6 +92,8 @@ return the hash service provider, like
 
 **Logger**
 
+return the logger service provider, like
 
+    Log::info('message')
 
 **Redirection**
