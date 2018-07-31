@@ -97,3 +97,9 @@ return the logger service provider, like
     Log::info('message')
 
 **Redirection**
+
+return the redirection service provider, like
+
+    Redirect::to('/home/index');
+    Redirect::route('home.index');
+    Redirect::away('http://hk.yahoo.com');
