@@ -48,7 +48,7 @@ Service Provider
 - [X] Mail
 - [X] Hash
 - [X] Log
-- [ ] Redirection
+- [X] Redirection
 
 ## Migration
 
