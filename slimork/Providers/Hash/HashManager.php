@@ -17,7 +17,7 @@ class HashManager {
     }
 
     public function driver() {
-        $driver   = $this->getDefaultDreiver();
+        $driver   = $this->getDefaultDriver();
         $settings = array_key_exists($driver, $this->settings['hash']) ? $this->settings['hash'][$driver] : [];
 
         switch($driver) {
@@ -42,7 +42,7 @@ class HashManager {
         return $this->driver()->needsRehash($hashed_value, $options);
     }
 
-    public function getDefaultDreiver() {
+    public function getDefaultDriver() {
         return $this->settings['hash']['driver'] ?? 'bcrypt';
     }
 
