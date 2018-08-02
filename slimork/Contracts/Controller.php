@@ -25,8 +25,7 @@ abstract class Controller {
      *     $this->view('template.html', compact('variable1', 'variable2'));
      */
     protected function view($view, array $arguments = []) {
-        $response = $this->response;
-        $response = $this->view->render($response, $view, $arguments);
+        $response = $this->view->render($view, $arguments);
 
         return $response;
     }
