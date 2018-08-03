@@ -9,7 +9,7 @@ class Migration extends AbstractMigration {
     protected $schema;
 
     public function init() {
-        $this->schema  = Capsule::schema();
+        $this->schema = Capsule::schema();
     }
 
 }

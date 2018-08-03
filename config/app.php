@@ -48,5 +48,7 @@ return [
         'Hash' => Slimork\Facades\Hash::class,
         'Log' => Slimork\Facades\Log::class,
         'Redirect' => Slimork\Facades\Redirect::class,
+
+        'Schema' => Slimork\Facades\Schema::class,
     ],
 ];
