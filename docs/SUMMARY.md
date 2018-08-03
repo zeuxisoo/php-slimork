@@ -25,3 +25,5 @@
     * [Service Provider](facades/service-provider.md)
 * [Foundations](foundations/README.md)
     * [FormRequest](foundations/form-request.md)
+* [Migrations](migrations/README.md)
+    * [Migration](migrations/migration.md)
