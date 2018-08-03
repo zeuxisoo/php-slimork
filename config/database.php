@@ -10,5 +10,9 @@ return [
         'collation' => 'utf8_general_ci',
         'prefix'    => 'sw_',
         'engine'    => 'MyISAM',    // MySQL Only
+    ],
+
+    'migration' => [
+        'table' => 'migrations',
     ]
 ];
