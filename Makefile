@@ -1,10 +1,11 @@
 all:
 	@echo
-	@echo "Commands      : Description"
-	@echo "------------- : ------------------"
-	@echo "make composer : Download the composer.phar into current directory"
-	@echo "make vendor   : Download the required packages into vendor directory"
-	@echo "make server   : Run the dev server"
+	@echo "Commands       : Description"
+	@echo "-------------- : ------------------"
+	@echo "make composer  : Download the composer.phar into current directory"
+	@echo "make vendor    : Download the required packages into vendor directory"
+	@echo "make server    : Run the dev server"
+	@echo "make migration : Install the migration table to related database"
 	@echo
 
 composer:
@@ -16,3 +17,6 @@ vendor:
 
 server:
 	@php -S localhost:8080 -t ./public
+
+migration:
+	@php ./vendor/bin/phinx migrate
