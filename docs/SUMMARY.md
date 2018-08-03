@@ -23,5 +23,5 @@
 * [Facades](facades/README.md)
     * [Application](facades/application.md)
     * [Service Provider](facades/service-provider.md)
-* [Others](others/README.md)
-    * [FormRequest](others/form-request.md)
+* [Foundations](foundations/README.md)
+    * [FormRequest](foundations/form-request.md)
