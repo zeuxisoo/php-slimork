@@ -1,14 +1,18 @@
 <?php
 define('BASE_ROOT', dirname(__FILE__));
+define('VENDOR_ROOT', BASE_ROOT.'/vendor');
+define('CONFIG_ROOT', BASE_ROOT.'/config');
+define('RESOURCES_ROOT', BASE_ROOT.'/resources');
+define('STORAGE_ROOT', BASE_ROOT.'/storage');
+define('APP_ROOT', BASE_ROOT.'/app');
 
 // Import
 use Illuminate\Database\Capsule\Manager as Capsule;
+use Slimork\Foundation\App;
 
 // Config
-$config = [
-    'app'      => require BASE_ROOT.'/config/app.php',
-    'database' => require BASE_ROOT.'/config/database.php'
-];
+$app    = new App();
+$config = $app->getContainer()->get('settings');
 
 // Initial
 date_default_timezone_set($config['app']['timezone']);
