@@ -1,8 +1,8 @@
 <?php
 return [
-    'type'     => 'sendmail', // smtp, sendmail
+    'type'     => 'sendmail',   // smtp, sendmail
     'server'   => '',
-    'port'     => 587,
+    'port'     => 25,           // 25, 587 etc
     'username' => '',
     'password' => ''
 ];
