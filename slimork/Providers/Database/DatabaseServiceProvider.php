@@ -41,9 +41,12 @@ class DatabaseServiceProvider extends ServiceProvider {
     public function register() {
         // Setup capsule manager
         $settings = $this->container->get('settings');
-        $capsule  = new DatabaseManager;
 
-        foreach($settings['database'] as $name => $database) {
+        //
+        $capsule  = new DatabaseManager;
+        $capsule->setDefaultConnection($settings['database']['default']);
+
+        foreach($settings['database']['connections'] as $name => $database) {
             $capsule->addConnection($database, $name);
         }
 
