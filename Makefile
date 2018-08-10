@@ -13,8 +13,10 @@ all:
 	@echo "make docker-stop                  : Stop the docker service"
 	@echo "make docker-clean-tmp             : Clean the tmp data"
 	@echo "make docker-clean-mysql           : Clean the mysql data"
+	@echo "make docker-remove-containers     : Remove slimork only docker containers"
 	@echo "make docker-remove-all-containers : Remove all docker containers"
 	@echo "make docker-remove-all-images     : Remove all docker images"
+	@echo "make docker-refresh               : Remove the containers and images, then re-start the docker compose"
 	@echo
 
 composer:
@@ -45,6 +47,9 @@ docker-clean-tmp:
 
 docker-clean-mysql:
 	@rm -rf ./docker/var/mysql/data
+
+docker-remove-containers:
+	@bash ./docker/scripts.sh remove-containers
 
 docker-remove-all-containers:
 	@bash ./docker/scripts.sh remove-all-containers

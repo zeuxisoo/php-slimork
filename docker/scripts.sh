@@ -34,6 +34,18 @@ function remove_all_images {
     fi
 }
 
+function remove_containers {
+    containers=$(docker ps -a | grep slimork | awk '{ print $1 }')
+
+    if [ -z "$containers" ]; then
+        echo "The slimork containers is not exists"
+    else
+        echo "Deleting the slimork containers"
+
+        docker rm $containers
+    fi
+}
+
 COMMAND=${@:$OPTIND:1}
 
 case $COMMAND in
@@ -52,6 +64,10 @@ case $COMMAND in
 
     remove-all-images)
         remove_all_images
+    ;;
+
+    remove-containers)
+        remove_containers
     ;;
 
     *)
