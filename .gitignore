@@ -5,6 +5,9 @@
 /storage/cache/view
 /storage/logs
 
+/docker/var/mysql/data
+/docker/tmp/php
+
 /storage/database.sqlite
 
 composer.phar
