@@ -29,3 +29,4 @@
     * [Migration](migrations/migration.md)
 * [Others](others/README.md)
     * [XDebug](others/xdebug.md)
+    * [MailDev](others/maildev.md)
