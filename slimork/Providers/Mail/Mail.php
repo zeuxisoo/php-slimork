@@ -22,9 +22,9 @@ class Mail {
         $settings = $container->get('settings')['mail'];
 
         $transport = null;
-        switch($settings['type']) {
+        switch($settings['driver']) {
             case 'smtp':
-                $transport = new Swift_SmtpTransport($settings['server'], $settings['port']);
+                $transport = new Swift_SmtpTransport($settings['host'], $settings['port']);
                 $transport->setUsername($settings['username']);
                 $transport->setPassword($settings['password']);
                 break;
