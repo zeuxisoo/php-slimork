@@ -2,6 +2,10 @@
 
 XDebug for the Editor / IDE
 
+## Requirement
+
+The docker service must started
+
 ## VsCode
 
 **Installation**
