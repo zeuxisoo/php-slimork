@@ -27,3 +27,5 @@
     * [FormRequest](foundations/form-request.md)
 * [Migrations](migrations/README.md)
     * [Migration](migrations/migration.md)
+* [Others](others/README.md)
+    * [XDebug](others/xdebug.md)
