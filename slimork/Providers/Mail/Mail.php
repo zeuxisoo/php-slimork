@@ -29,7 +29,7 @@ class Mail {
                 $transport->setPassword($settings['password']);
                 break;
             default:
-                $transport = new Swift_SendmailTransport();
+                $transport = new Swift_SendmailTransport($settings['sendmail']);
                 break;
         }
 

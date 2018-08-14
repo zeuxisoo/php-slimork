@@ -6,4 +6,6 @@ return [
     'port'     => 25,             // 25, 587 etc
     'username' => '',
     'password' => '',
+
+    'sendmail' => '/usr/sbin/sendmail -bs',
 ];
