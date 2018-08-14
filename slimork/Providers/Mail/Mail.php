@@ -25,6 +25,7 @@ class Mail {
         switch($settings['driver']) {
             case 'smtp':
                 $transport = new Swift_SmtpTransport($settings['host'], $settings['port']);
+                $transport->setEncryption($settings['encryption']);
                 $transport->setUsername($settings['username']);
                 $transport->setPassword($settings['password']);
                 break;
