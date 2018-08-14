@@ -16,6 +16,6 @@ RUN echo "localhost localhost.localdomain" >> /etc/hosts
 
 WORKDIR /slimork
 
-CMD ["php-fpm"]
-
 EXPOSE 9000
+
+CMD ["php-fpm"]
