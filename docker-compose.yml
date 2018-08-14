@@ -46,5 +46,7 @@ services:
     maildev:
         image: djfarrelly/maildev
         container_name: slimork-maildev
+        expose:
+            - "25"
         ports:
             - "8081:80"
