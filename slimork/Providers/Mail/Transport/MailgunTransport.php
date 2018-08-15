@@ -22,28 +22,36 @@ class MailgunTransport extends Transport {
         })->values()->implode(',');
     }
 
+    // Reference to new doc: https://github.com/mailgun/mailgun-php/blob/master/doc/attachments.md
+    protected function formatAttachments(array $attachments) {
+        return collect($attachments)->map(function($attachment) {
+            return [
+                'filename'    => $attachment->getFilename(),
+                'fileContent' => $attachment->getBody()
+            ];
+        })->toArray();
+    }
+
     // Implementation
     public function send(Swift_Mime_SimpleMessage $message, &$failedRecipients = null) {
         if (empty($this->key) === true) {
             throw new \RuntimeException('Mailgun secret key cannot be empty');
         }
 
-        $from    = $this->formatEmailAddress($message->getFrom());
-        $to      = $this->formatEmailAddress($message->getTo());
-        $subject = $message->getSubject();
-        $body    = $message->getBody();
+        $from        = $this->formatEmailAddress($message->getFrom());
+        $to          = $this->formatEmailAddress($message->getTo());
+        $subject     = $message->getSubject();
+        $body        = $message->getBody();
+        $attachments = $this->formatAttachments($message->getChildren());
 
         $params = [
-            'from'    => $from,
-            'to'      => $to,
-            'subject' => $subject,
+            'from'       => $from,
+            'to'         => $to,
+            'subject'    => $subject,
+            'text'       => $body,
+            'html'       => $body,
+            'attachment' => $attachments,
         ];
-
-        if ($message->getContentType() === 'text/html') {
-            $params = array_merge($params, ['html' => $body]);
-        }else{
-            $params = array_merge($params, ['text' => $body]);
-        }
 
         $mailgun  = Mailgun::create($this->key, $this->endpoint);
         $response = $mailgun->messages()->send($this->domain, $params);
