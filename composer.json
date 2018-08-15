@@ -19,7 +19,9 @@
         "illuminate/database": "5.6.*",
         "illuminate/pagination": "5.6.*",
         "illuminate/events": "5.6.*",
-        "robmorgan/phinx": "0.10.*"
+        "robmorgan/phinx": "0.10.*",
+        "mailgun/mailgun-php": "2.6.*",
+        "php-http/guzzle6-adapter": "1.1.*"
     },
     "autoload": {
         "psr-4": {

@@ -9,7 +9,6 @@ use Swift_Mailer;
 
 class Mail {
 
-    protected $settings;
     protected $transport;
     protected $subject;
     protected $from_emails;
@@ -19,22 +18,29 @@ class Mail {
     protected $attachments = [];
 
     public function __construct($container) {
-        $settings = $container->get('settings')['mail'];
+        $mail     = $container->get('settings')['mail'];
+        $services = $container->get('settings')['services'];
 
         $transport = null;
-        switch($settings['driver']) {
+        switch($mail['driver']) {
             case 'smtp':
-                $transport = new Swift_SmtpTransport($settings['host'], $settings['port']);
-                $transport->setEncryption($settings['encryption']);
-                $transport->setUsername($settings['username']);
-                $transport->setPassword($settings['password']);
+                $transport = new Swift_SmtpTransport($mail['host'], $mail['port']);
+                $transport->setEncryption($mail['encryption']);
+                $transport->setUsername($mail['username']);
+                $transport->setPassword($mail['password']);
+                break;
+            case 'mailgun':
+                $transport = new Transport\MailgunTransport(
+                    $services['mailgun']['secret'],
+                    $services['mailgun']['domain'],
+                    $services['mailgun']['endpoint'] ?? null
+                );
                 break;
             default:
-                $transport = new Swift_SendmailTransport($settings['sendmail']);
+                $transport = new Swift_SendmailTransport($mail['sendmail']);
                 break;
         }
 
-        $this->settings  = $settings;
         $this->transport = $transport;
     }
 

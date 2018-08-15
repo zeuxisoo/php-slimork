@@ -1,6 +1,6 @@
 <?php
 return [
-    'driver'   => 'sendmail',     // smtp, sendmail
+    'driver'   => 'sendmail',     // smtp, sendmail, mailgun
 
     // Smtp
     'host'       => '',
