@@ -22,6 +22,13 @@ This service provider provided basic send mail function in the application
 
     - default send mail method: `sendmail`
 
+## Prerequisites
+
+If you are using the `mailgun` driver, you must install the Mailgun related package first, Please add the following lines to your `compose.json` file
+
+    "mailgun/mailgun-php": "2.6.*",
+    "php-http/guzzle6-adapter": "1.1.*"
+
 ## Usage
 
 You can access the mail service provider by the following code
