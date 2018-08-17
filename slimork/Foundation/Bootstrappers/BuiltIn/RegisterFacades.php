@@ -1,5 +1,5 @@
 <?php
-namespace Slimork\Foundation\Bootstrappers;
+namespace Slimork\Foundation\Bootstrappers\BuiltIn;
 
 use Slimork\Foundation\App;
 use Slimork\Foundation\AliasLoader;

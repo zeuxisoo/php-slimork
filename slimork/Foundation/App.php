@@ -8,52 +8,23 @@ class App extends SlimApp {
 
     protected $settings;
 
-    protected $afterAppBootstrappers = [
-        Bootstrappers\RegisterFacades::class,
-        Bootstrappers\RegisterHandlers::class,
-        Bootstrappers\RegisterMiddlewares::class,
-        Bootstrappers\RegisterServiceProviders::class,
+    protected $baseBootstrappers = [
+        Bootstrappers\Base\LoadSettings::class,
+    ];
+
+    protected $builtInBootstrappers = [
+        Bootstrappers\BuiltIn\RegisterFacades::class,
+        Bootstrappers\BuiltIn\RegisterHandlers::class,
+        Bootstrappers\BuiltIn\RegisterMiddlewares::class,
+        Bootstrappers\BuiltIn\RegisterServiceProviders::class,
     ];
 
     public function __construct() {
-        $this->setupSettings();
-
-        parent::__construct();
-
-        $this->setupAfterAppBootstrappers();
-    }
-
-    // Setup settings
-    protected function setupSettings() {
-        $slim_config  = require CONFIG_ROOT.'/slim.php';
-        $final_config = [
-            'settings' => $slim_config
-        ];
-
-        // Merge all config in settings namespace
-        foreach(glob(CONFIG_ROOT."/*.php") as $file_path) {
-            $file_name = basename($file_path, ".php");
-
-            if ($file_name !== 'slim') {
-                $final_config['settings'][$file_name] = require_once $file_path;
-            }
-        }
-
-        // Make the slim config in global with `settings` prefix
-        foreach($slim_config as $name => $value) {
-            $final_config['settings.'.$name] = $value;
-        }
-
-        date_default_timezone_set($final_config['settings']['app']['timezone']);
-
-        $this->settings = $final_config;
-    }
-
-    // Setup after app bootstraps
-    protected function setupAfterAppBootstrappers() {
-        foreach($this->afterAppBootstrappers as $bootstrapper) {
+        foreach($this->baseBootstrappers as $bootstrapper) {
             (new $bootstrapper())->bootstrap($this);
         }
+
+        parent::__construct();
     }
 
     // Implementation
@@ -61,7 +32,28 @@ class App extends SlimApp {
         $builder->addDefinitions($this->settings);
     }
 
-    // Functions
+    //
+    public function LoadBuiltInBootstrappers() {
+        foreach($this->builtInBootstrappers as $bootstrapper) {
+            (new $bootstrapper())->bootstrap($this);
+        }
+    }
+
+    public function loadRoutes() {
+        // expose the $app object
+        $app = $this;
+
+        require_once APP_ROOT.'/routes.php';
+    }
+
+    public function setSettings(array $settings) {
+        $this->settings = $settings;
+    }
+
+    public function getSettings() {
+        return $this->settings;
+    }
+
     public function getSetting($name) {
         $settings = $this->getContainer()->get('settings');
 
@@ -70,6 +62,14 @@ class App extends SlimApp {
         }else{
             return [];
         }
+    }
+
+    public function getBuiltInBootstrappers() {
+        return $this->builtInBootstrappers;
+    }
+
+    public function setBuiltInBootstrappers(array $bootstrappers) {
+        $this->builtInBootstrappers = $bootstrappers;
     }
 
 }

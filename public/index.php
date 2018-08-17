@@ -17,8 +17,6 @@ use Slimork\Foundation\App;
 
 // Setup slim
 $app = new App();
-
-// Slim routes
-require_once APP_ROOT.'/routes.php';
-
+$app->LoadBuiltInBootstrappers();
+$app->loadRoutes();
 $app->run();
