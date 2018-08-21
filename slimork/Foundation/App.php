@@ -19,8 +19,8 @@ class App extends SlimApp {
         Bootstrappers\BuiltIn\RegisterServiceProviders::class,
     ];
 
-    public function __construct() {
-        foreach($this->baseBootstrappers as $bootstrapper) {
+    public function __construct(array $base_bootstrappers = []) {
+        foreach(array_merge($this->baseBootstrappers, $base_bootstrappers) as $bootstrapper) {
             (new $bootstrapper())->bootstrap($this);
         }
 
