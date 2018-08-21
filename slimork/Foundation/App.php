@@ -32,7 +32,7 @@ class App extends SlimApp {
         $builder->addDefinitions($this->settings);
     }
 
-    //
+    // Loading function after app initial
     public function loadBuiltInBootstrappers() {
         foreach($this->builtInBootstrappers as $bootstrapper) {
             (new $bootstrapper())->bootstrap($this);
@@ -46,6 +46,7 @@ class App extends SlimApp {
         require_once APP_ROOT.'/routes.php';
     }
 
+    // Help methods
     public function setSettings(array $settings) {
         $this->settings = $settings;
     }
