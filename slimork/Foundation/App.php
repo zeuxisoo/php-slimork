@@ -19,20 +19,26 @@ class App extends SlimApp {
         Bootstrappers\BuiltIn\RegisterServiceProviders::class,
     ];
 
-    public function __construct(array $base_bootstrappers = []) {
-        foreach(array_merge($this->baseBootstrappers, $base_bootstrappers) as $bootstrapper) {
-            (new $bootstrapper())->bootstrap($this);
-        }
-
-        parent::__construct();
+    // Overwrite the constructor to clear the original initialization and initialize it later
+    public function __construct() {
     }
 
-    // Implementation
+    // Implementation for build the app container
     protected function configureContainer(ContainerBuilder $builder) {
         $builder->addDefinitions($this->settings);
     }
 
-    // Loading function after app initial
+    // Loaders
+    public function loadBaseBootstrappers() {
+        foreach($this->baseBootstrappers as $bootstrapper) {
+            (new $bootstrapper())->bootstrap($this);
+        }
+    }
+
+    public function loadAppCore() {
+        parent::__construct();
+    }
+
     public function loadBuiltInBootstrappers() {
         foreach($this->builtInBootstrappers as $bootstrapper) {
             (new $bootstrapper())->bootstrap($this);
@@ -46,7 +52,7 @@ class App extends SlimApp {
         require_once APP_ROOT.'/routes.php';
     }
 
-    // Help methods
+    // Helpers
     public function setSettings(array $settings) {
         $this->settings = $settings;
     }
@@ -63,6 +69,14 @@ class App extends SlimApp {
         }else{
             return [];
         }
+    }
+
+    public function getBaseBootstrappers() {
+        return $this->baseBootstrappers;
+    }
+
+    public function setBaseBootstrappers(array $bootstrappers) {
+        $this->baseBootstrappers = $bootstrappers;
     }
 
     public function getBuiltInBootstrappers() {
