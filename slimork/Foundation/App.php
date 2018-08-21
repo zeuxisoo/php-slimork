@@ -33,7 +33,7 @@ class App extends SlimApp {
     }
 
     //
-    public function LoadBuiltInBootstrappers() {
+    public function loadBuiltInBootstrappers() {
         foreach($this->builtInBootstrappers as $bootstrapper) {
             (new $bootstrapper())->bootstrap($this);
         }
