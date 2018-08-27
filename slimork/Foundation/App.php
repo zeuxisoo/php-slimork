@@ -8,11 +8,11 @@ class App extends SlimApp {
 
     protected $settings;
 
-    protected $baseBootstrappers = [
+    protected $beforeBootstrappers = [
         Bootstrappers\Base\LoadSettings::class,
     ];
 
-    protected $builtInBootstrappers = [
+    protected $afterBootstrappers = [
         Bootstrappers\BuiltIn\RegisterFacades::class,
         Bootstrappers\BuiltIn\RegisterHandlers::class,
         Bootstrappers\BuiltIn\RegisterMiddlewares::class,
@@ -29,8 +29,8 @@ class App extends SlimApp {
     }
 
     // Loaders
-    public function loadBaseBootstrappers() {
-        foreach($this->baseBootstrappers as $bootstrapper) {
+    public function loadBeforeBootstrappers() {
+        foreach($this->beforeBootstrappers as $bootstrapper) {
             (new $bootstrapper())->bootstrap($this);
         }
     }
@@ -39,8 +39,8 @@ class App extends SlimApp {
         parent::__construct();
     }
 
-    public function loadBuiltInBootstrappers() {
-        foreach($this->builtInBootstrappers as $bootstrapper) {
+    public function loadAfterBootstrappers() {
+        foreach($this->afterBootstrappers as $bootstrapper) {
             (new $bootstrapper())->bootstrap($this);
         }
     }
@@ -71,20 +71,20 @@ class App extends SlimApp {
         }
     }
 
-    public function getBaseBootstrappers() {
-        return $this->baseBootstrappers;
+    public function getBeforeBootstrappers() {
+        return $this->beforeBootstrappers;
     }
 
-    public function setBaseBootstrappers(array $bootstrappers) {
-        $this->baseBootstrappers = $bootstrappers;
+    public function setBeforeBootstrappers(array $bootstrappers) {
+        $this->beforeBootstrappers = $bootstrappers;
     }
 
-    public function getBuiltInBootstrappers() {
-        return $this->builtInBootstrappers;
+    public function getAfterBootstrappers() {
+        return $this->afterBootstrappers;
     }
 
-    public function setBuiltInBootstrappers(array $bootstrappers) {
-        $this->builtInBootstrappers = $bootstrappers;
+    public function setAfterBootstrappers(array $bootstrappers) {
+        $this->afterBootstrappers = $bootstrappers;
     }
 
 }

@@ -17,8 +17,8 @@ use Slimork\Foundation\App;
 
 // Setup slim
 $app = new App();
-$app->loadBaseBootstrappers();
+$app->loadBeforeBootstrappers();
 $app->loadAppCore();
-$app->loadBuiltInBootstrappers();
+$app->loadAfterBootstrappers();
 $app->loadRoutes();
 $app->run();
