@@ -9,6 +9,7 @@ class App extends SlimApp {
     protected $settings;
 
     protected $beforeBootstrappers = [
+        Bootstrappers\Base\LoadEnvironmentVariables::class,
         Bootstrappers\Base\LoadSettings::class,
     ];
 
