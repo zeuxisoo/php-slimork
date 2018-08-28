@@ -20,6 +20,9 @@ class App extends SlimApp {
         Bootstrappers\BuiltIn\RegisterServiceProviders::class,
     ];
 
+    protected $environment_path;
+    protected $environment_file = '.env';
+
     // Overwrite the constructor to clear the original initialization and initialize it later
     public function __construct() {
     }
@@ -86,6 +89,22 @@ class App extends SlimApp {
 
     public function setAfterBootstrappers(array $bootstrappers) {
         $this->after_bootstrappers = $bootstrappers;
+    }
+
+    public function getEnvironmentPath() {
+        return $this->environment_path ?? BASE_ROOT;
+    }
+
+    public function setEnvironmentPath($path) {
+        $this->environment_path = $path;
+    }
+
+    public function getEnvironmentFile() {
+        return $this->environment_file ?? '.env';
+    }
+
+    public function setEnvironmentFile($file) {
+        $this->environment_file = $file;
     }
 
 }
