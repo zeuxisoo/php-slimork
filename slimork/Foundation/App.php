@@ -8,12 +8,12 @@ class App extends SlimApp {
 
     protected $settings;
 
-    protected $beforeBootstrappers = [
+    protected $before_bootstrappers = [
         Bootstrappers\Base\LoadEnvironmentVariables::class,
         Bootstrappers\Base\LoadSettings::class,
     ];
 
-    protected $afterBootstrappers = [
+    protected $after_bootstrappers = [
         Bootstrappers\BuiltIn\RegisterFacades::class,
         Bootstrappers\BuiltIn\RegisterHandlers::class,
         Bootstrappers\BuiltIn\RegisterMiddlewares::class,
@@ -31,7 +31,7 @@ class App extends SlimApp {
 
     // Loaders
     public function loadBeforeBootstrappers() {
-        foreach($this->beforeBootstrappers as $bootstrapper) {
+        foreach($this->before_bootstrappers as $bootstrapper) {
             (new $bootstrapper())->bootstrap($this);
         }
     }
@@ -41,7 +41,7 @@ class App extends SlimApp {
     }
 
     public function loadAfterBootstrappers() {
-        foreach($this->afterBootstrappers as $bootstrapper) {
+        foreach($this->after_bootstrappers as $bootstrapper) {
             (new $bootstrapper())->bootstrap($this);
         }
     }
@@ -73,19 +73,19 @@ class App extends SlimApp {
     }
 
     public function getBeforeBootstrappers() {
-        return $this->beforeBootstrappers;
+        return $this->before_bootstrappers;
     }
 
     public function setBeforeBootstrappers(array $bootstrappers) {
-        $this->beforeBootstrappers = $bootstrappers;
+        $this->before_bootstrappers = $bootstrappers;
     }
 
     public function getAfterBootstrappers() {
-        return $this->afterBootstrappers;
+        return $this->after_bootstrappers;
     }
 
     public function setAfterBootstrappers(array $bootstrappers) {
-        $this->afterBootstrappers = $bootstrappers;
+        $this->after_bootstrappers = $bootstrappers;
     }
 
 }
