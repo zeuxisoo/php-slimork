@@ -5,12 +5,13 @@
 
 /.vscode
 
-/vendor
-/storage/cache/view
-/storage/logs
-
 /docker/var/mysql/data
 /docker/tmp/php
+/node_modules
+/public/storage
+/storage/cache/view
+/storage/logs
+/vendor
 
 /storage/database.sqlite
 
