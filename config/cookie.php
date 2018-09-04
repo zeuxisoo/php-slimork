@@ -1,8 +1,8 @@
 <?php
 return [
     'expires'   => new DateTime('+3 hours'),
-    'path'      => '/',
-    'domain'    => null,
+    'path'      => env('COOKIE_PATH', '/'),
+    'domain'    => env('COOKIE_DOMAIN', null),
     'secure'    => false,
     'http_only' => true,
 ];

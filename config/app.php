@@ -1,6 +1,6 @@
 <?php
 return [
-    'timezone' => 'Asia/Hong_Kong',
+    'timezone' => env('APP_TIMEZONE', 'Asia/Hong_Kong'),
 
     'middlewares' => [
         Slimork\Middlewares\Route\DefaultMiddleware::class,

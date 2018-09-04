@@ -12,7 +12,7 @@ return [
         'rotate' => [
             'handler' => Slimork\Providers\Log\Handlers\RotatingFileHandler::class,
             'options' => [
-                'max_file' => 5
+                'max_file' => env('LOGGER_ROTATE_MAX_FILE', 5)
             ]
         ]
     ],

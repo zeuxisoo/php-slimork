@@ -1,14 +1,14 @@
 <?php
 return [
-    'default' => 'mysql',
+    'default' => env('DB_CONNECTION', 'mysql'),
 
     'connections' => [
         'mysql' => [
             'driver'    => 'mysql',
-            'host'      => 'mysqldb',   // IP or Host name or Docker service name
-            'database'  => 'slimork',
-            'username'  => 'slimork',
-            'password'  => '12345678',
+            'host'      => env('DB_HOST', 'mysqldb'),   // IP or Host name or Docker service name
+            'database'  => env('DB_DATABASE', 'slimork'),
+            'username'  => env('DB_USERNAME', 'slimork'),
+            'password'  => env('DB_PASSWORD', '12345678'),
             'charset'   => 'utf8',
             'collation' => 'utf8_general_ci',
             'prefix'    => 'sw_',
@@ -17,10 +17,10 @@ return [
 
         'sqlite' => [
             'driver'    => 'sqlite',
-            'host'      => 'localhost',
-            'database'  => dirname(__DIR__).'/storage/database.sqlite',
-            'username'  => 'root',
-            'password'  => '',
+            'host'      => env('DB_HOST', 'sqlite'),
+            'database'  => env('DB_DATABASE', dirname(__DIR__).'/storage/database.sqlite'),
+            'username'  => env('DB_USERNAME', 'slimork'),
+            'password'  => env('DB_PASSWORD', '12345678'),
             'charset'   => 'utf8',
             'collation' => 'utf8_general_ci',
             'prefix'    => 'sw_',

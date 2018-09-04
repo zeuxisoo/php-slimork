@@ -1,8 +1,8 @@
 <?php
 return [
     'views' => [
-        'default' => 'default.html',
-        'simple'  => 'default.simple.html'
+        'default' => env('PAGINATION_VIEWS_DEFAULT', 'default.html'),
+        'simple'  => env('PAGINATION_VIEWS_SIMPLE', 'default.simple.html')
     ],
 
     'paginator' => Slimork\Providers\Pagination\DefaultPaginatorView::class,

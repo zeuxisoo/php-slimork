@@ -1,6 +1,6 @@
 <?php
 return [
     'global'   => true,
-    'prefix'   => 'csrf',
-    'strength' => 16,
+    'prefix'   => env('CSRF_PREFIX', 'csrf'),
+    'strength' => env('CSRF_STRENGTH', 16),
 ];

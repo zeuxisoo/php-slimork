@@ -1,9 +1,9 @@
 <?php
 return [
-    'name'     => '_sk',
-    'lifetime' => 7200, // 2 hour
-    'path'     => '/',
-    'domain'   => null,
+    'name'     => env('SESSION_NAME', '_sk'),
+    'lifetime' => env('SESSION_LIFETIME', 7200), // 2 hour
+    'path'     => env('SESSION_PATH', '/'),
+    'domain'   => env('SESSION_DOMAIN', null),
     'secure'   => false,
     'httponly' => true,
     'handler'  => null,
