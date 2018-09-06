@@ -4,6 +4,7 @@ A smallest skeleton application integrated slim and some packages
 
 ![Develop Status](https://img.shields.io/badge/status-beta-%230088FF.svg)
 ![Slim version](https://img.shields.io/badge/slim-3.x-green.svg)
+![Slimork version](https://img.shields.io/badge/slimork-3.0.0-%23f330bd.svg)
 
 ## Container
 
