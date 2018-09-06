@@ -2,7 +2,7 @@
 
 A smallest skeleton application integrated slim and some packages
 
-![Develop Status](https://img.shields.io/badge/status-developing-yellowgreen.svg)
+![Develop Status](https://img.shields.io/badge/status-beta-%230088FF.svg)
 ![Slim version](https://img.shields.io/badge/slim-3.x-green.svg)
 
 ## Container
@@ -52,7 +52,7 @@ Service Provider
 
 ## Migration
 
-- [ ] Phpmig
+- [X] Phpmig
 
 ## Other
 
