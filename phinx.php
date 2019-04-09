@@ -11,17 +11,29 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 use Slimork\Foundation\App;
 
 // Config
-$app    = new App();
+$app = new App();
+$app->loadBeforeBootstrappers();
+$app->loadAppCore();
+$app->loadAfterBootstrappers();
+$app->loadRoutes();
+
 $config = $app->getContainer()->get('settings');
 
 // Initial
 date_default_timezone_set($config['app']['timezone']);
 
 // Database
+$databaseConfig      = $config['database'];
+$databaseConnections = $databaseConfig['connections'];
+$defaultConnection   = $databaseConnections[$databaseConfig['default']];
+
 $capsule = new Capsule;
 
-foreach($config['database'] as $name => $database) {
-    $capsule->addConnection($database, $name);
+foreach($databaseConnections as $name => $connection) {
+    $capsule->addConnection(
+        $connection,
+        (strtolower($databaseConfig['default']) == $name) ? "default" : $name
+    );
 }
 
 $capsule->setAsGlobal();
@@ -35,12 +47,12 @@ return [
     ],
     'migration_base_class' => Simork\Contracts\Migration::class,
     'environments' => [
-        'default_migration_table' => $config['database']['default']['prefix'].$config['database']['migration']['table'],
+        'default_migration_table' => $defaultConnection['prefix'].$databaseConfig['migration']['table'],
         'default_database' => 'default',
         'default' => [
             'connection'   => $capsule->getConnection()->getPdo(),
-            'name'         => $config['database']['default']['database'],
-            'table_prefix' => $config['database']['default']['prefix']
+            'name'         => $defaultConnection['database'],
+            'table_prefix' => $defaultConnection['prefix']
         ]
     ],
 ];

@@ -12,7 +12,7 @@ class LoadEnvironmentVariables {
         $this->setSpecificEnvironmentFile($app);
 
         try {
-            (new Dotenv(
+            (Dotenv::create(
                 $app->getEnvironmentPath(),
                 $app->getEnvironmentFile()
             ))->load();
