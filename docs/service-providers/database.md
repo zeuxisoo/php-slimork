@@ -26,7 +26,8 @@ If you have used `Illuminate/Database`, you can use similar code to achieve what
 
 Base query in collector without define related model
 
-    $user = $this->db->table('user')->find(1);
+    $user = $this->db->table('users')->find(1);
+    $users = $this->db->table('users')->get();
 
 Using other connection in query
 
@@ -46,7 +47,7 @@ Pagination for data
     $user = User::paginate(1);
 
     echo $paginate->render();
-    
+
 Other methods
 
 	// Return object like: { total: 1 }

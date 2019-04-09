@@ -41,8 +41,8 @@ return the pagination service provider, like
 
 return the database service provider, like
 
-    DB::table('table')->count()
-    DB::table('table')->skip('offset')->take('per_page')->get()
+    DB::table('names')->count()
+    DB::table('names')->skip('offset')->take('per_page')->get()
 
 **Flash**
 
